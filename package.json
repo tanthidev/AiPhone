@@ -10,16 +10,6 @@
     "build:css": "npx tailwindcss-cli -i src/resources/tailwindcss/tailwind.css -o src/public/css/tailwind.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tanthidev/nodejsblog.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/tanthidev/nodejsblog/issues"
-  },
-  "homepage": "https://github.com/tanthidev/nodejsblog#readme",
   "dependencies": {
     "express": "^4.18.2",
     "express-handlebars": "^7.1.2",
