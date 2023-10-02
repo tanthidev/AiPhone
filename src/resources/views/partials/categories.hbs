@@ -1,0 +1,165 @@
+<div class="w-64 bg-white h-screen pt-2 text-base pl-2">
+    {{!-- Logo --}}
+    <div class="sticky">
+        <a href="/">
+            <img 
+            class="w-20 rounded m-auto" 
+            src="/images/logo.png"/> 
+        </a>         
+    </div>
+
+    {{!-- Category --}}
+    <div class="overflow-scroll overflow-x-hidden category-custom-height">
+        {{!-- Sale --}}
+        <div class="border-b mb-3">
+            <h6 class="font-semibold">Sale</h6>
+            <ul>
+                {{!-- POS --}}
+                <li class="pl-3 py-2 font-normal cursor-pointer rounded-sm hover:bg-gray-400 hover:text-white">
+                    <a href="/pos" class="flex">
+                        <div class="w-1/5 text-xl">
+                            <i class="fa-solid fa-inbox"></i>
+                        </div>
+                        <span>POS</span>
+                    </a>
+                </li>
+                
+                {{!-- Invoices --}}
+                <li class="pl-3 py-2 font-normal cursor-pointer rounded-sm hover:bg-gray-400 hover:text-white">
+                    <div class="flex">
+                        <div class="w-1/5 text-xl">
+                            <i class="fa-solid fa-file-lines"></i>
+                        </div>
+                        <span>Invoices</span>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+        {{!-- Products --}}
+        <div class="border-b mb-3">
+            <h6 class="font-semibold">Products</h6>
+
+            {{!-- Products --}}
+            <ul>
+                <li class="pl-3 py-2 font-normal cursor-pointer rounded-sm hover:bg-gray-400 hover:text-white">
+                    <div class="flex">
+                        <div class="w-1/5 text-xl">
+                            <i class="fa-solid fa-box"></i>
+                        </div>
+                        <span>Products</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        {{!-- Peoples --}}
+        <div class="border-b mb-3">
+            <h6 class="font-semibold">Peoples</h6>
+
+            <ul>
+                {{!-- Customers --}}
+                <li class="pl-3 py-2 font-normal cursor-pointer rounded-sm hover:bg-gray-400 hover:text-white">
+                    <div class="flex">
+                        <div class="w-1/5 text-xl">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <span>Customers</span>
+                    </div>
+                </li>
+
+                {{!-- Supliers --}}
+                <li class="pl-3 py-2 font-normal cursor-pointer rounded-sm hover:bg-gray-400 hover:text-white">
+                    <div class="flex">
+                        <div class="w-1/5 text-xl">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <span>Supliers</span>
+                    </div>
+                </li>
+
+                {{!-- Employees --}}
+                <li class="pl-3 py-2 font-normal cursor-pointer rounded-sm hover:bg-gray-400 hover:text-white">
+                    <div class="flex">
+                        <div class="w-1/5 text-xl">
+                            <i class="fa-solid fa-user-check"></i>
+                        </div>
+                        <span>Employees</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        {{!-- Reports --}}
+        <div class="border-b mb-3">
+            <h6 class="font-semibold">Reports</h6>
+            <ul>
+                {{!-- Sales report --}}
+                <li class="pl-3 py-2 font-normal cursor-pointer rounded-sm hover:bg-gray-400 hover:text-white">
+                    <div class="flex">
+                        <div class="w-1/5 text-xl">
+                            <i class="fa-solid fa-chart-simple"></i>
+                        </div>
+                        <span>Sales Report</span>
+                    </div>
+                </li>
+
+                {{!-- Invoice Report --}}
+                <li class="pl-3 py-2 font-normal cursor-pointer rounded-sm hover:bg-gray-400 hover:text-white">
+                    <div class="flex">
+                        <div class="w-1/5 text-xl">
+                            <i class="fa-regular fa-file-lines"></i>
+                        </div>
+                        <span>Invoice Report</span>
+                    </div>
+                </li>
+
+                {{!-- Employees --}}
+                <li class="pl-3 py-2 font-normal cursor-pointer rounded-sm hover:bg-gray-400 hover:text-white">
+                    <div class="flex">
+                        <div class="w-1/5 text-xl">
+                            <i class="fa-solid fa-user-check"></i>
+                        </div>
+                        <span>Employees</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        
+
+
+    </div>
+    {{!-- Setting --}}
+    <div class="border-b mb-3">
+            <h6 class="font-semibold">Setting</h6>
+            <ul>
+                {{!-- Setting --}}
+                <li class="pl-3 py-2 font-normal cursor-pointer rounded-sm hover:bg-gray-400 hover:text-white">
+                    <div class="flex">
+                        <div class="w-1/5 text-xl">
+                            <i class="fa-solid fa-gear"></i>
+                        </div>
+                        <span>Setting</span>
+                    </div>
+                </li>
+                
+                {{!-- Logout --}}
+                <li class="px-3 py-2 font-normal cursor-pointer rounded-sm hover:bg-gray-400 hover:text-white">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-1/5 text-xl rounded-full overflow-hidden">
+                                <img src="images/user_sample.png" />
+                            </div>
+                            <span>John</span>
+                        </div>
+                        <div class="w-1/5 text-xl">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+    </div>     
+
+
+</div> 

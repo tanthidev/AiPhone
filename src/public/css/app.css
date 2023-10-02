@@ -3,3 +3,20 @@
 html{
   font-family: 'Montserrat' , sans-serif !important
 }
+
+html *::-webkit-scrollbar {
+  border-radius: 0;
+  width: 5px;
+}
+html *::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(22, 24, 35, .06);
+}
+html *::-webkit-scrollbar-track {
+  border-radius: 0;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.category-custom-height{
+  height: calc(100vh - 80px - 127px);
+}

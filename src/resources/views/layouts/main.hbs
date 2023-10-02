@@ -10,15 +10,31 @@
     <title>AiPhone</title>
 </head>
 <body>
-    <div class="app bg-gray-100 h-screen">
-        {{> header}}
+    <div class="app bg-gray-100 h-screen cursor-default">
+        <div class="flex">
+            {{> categories}}
 
-        <div class="container">
-           {{{body}}} 
+            <div class="w-full">
+                {{> header}}
+                {{{body}}} 
+            </div>
         </div>
 
-        {{> footer}}
 
     </div>
+    <script>
+        const fullscreenButton = document.getElementById('fullscreenButton');
+        fullscreenButton.addEventListener('click', function() {
+            if (document.fullscreenElement) {
+                document.exitFullscreen().catch((err) => {
+                    console.error(`Error attempting to exit full-screen mode: ${err.message}`);
+                });
+            } else {
+                document.documentElement.requestFullscreen().catch((err) => {
+                    console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+                });
+            }
+        });
+    </script>
 </body>
 </html>
