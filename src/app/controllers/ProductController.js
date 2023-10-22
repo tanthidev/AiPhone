@@ -1,7 +1,7 @@
-class NewController {
+class ProductController {
     //GET /news
     index(req, res) {
-        res.render('news');
+        res.render('pages/productlist');
     }
 
     show(req, res) {
@@ -9,4 +9,4 @@ class NewController {
     }
 }
 
-module.exports = new NewController();
+module.exports = new ProductController();
