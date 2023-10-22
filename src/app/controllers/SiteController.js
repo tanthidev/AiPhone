@@ -15,7 +15,7 @@ class SiteController {
 
     //search
     search(req, res) {
-        res.render('search');
+        res.render('pages/search');
     }
 }
 
