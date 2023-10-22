@@ -14,9 +14,11 @@
         <div class="flex">
             {{> categories}}
 
-            <div class="w-full">
+            <div class="w-full flex flex-col">
                 {{> header}}
-                {{{body}}} 
+                <div class="flex-1">
+                    {{{body}}} 
+                </div>
             </div>
         </div>
 

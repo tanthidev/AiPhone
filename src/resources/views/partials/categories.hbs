@@ -1,4 +1,4 @@
-<div class="w-64 bg-white h-screen pt-2 text-base pl-2">
+<div class="w-64 bg-white h-screen pt-2 text-base pl-2 flex flex-col">
     {{!-- Logo --}}
     <div class="sticky">
         <a href="/">
@@ -9,7 +9,7 @@
     </div>
 
     {{!-- Category --}}
-    <div class="overflow-scroll overflow-x-hidden category-custom-height">
+    <div class="overflow-scroll overflow-x-hidden flex-1">
         {{!-- Sale --}}
         <div class="border-b mb-3">
             <h6 class="font-semibold">Sale</h6>
@@ -130,6 +130,8 @@
 
 
     </div>
+
+
     {{!-- Setting --}}
     <div class="border-b mb-3">
             <h6 class="font-semibold">Setting</h6>
@@ -149,7 +151,7 @@
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-3">
                             <div class="w-1/5 text-xl rounded-full overflow-hidden">
-                                <img src="images/user_sample.png" />
+                                <img src="images/user_sample.png"/>
                             </div>
                             <span>John</span>
                         </div>

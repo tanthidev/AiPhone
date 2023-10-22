@@ -18,7 +18,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //Template Engine
-app.engine('hbs', handlebars.engine({ extname: 'hbs' }));
+app.engine('hbs', handlebars.engine({ 
+    extname: 'hbs',
+}));
 
 //config source static
 app.use(express.static(path.join(__dirname, 'public')));
