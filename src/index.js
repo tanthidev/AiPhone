@@ -10,6 +10,7 @@ const route = require('./routes');
 //Connect database
 // db.connect()
 
+
 //Morgan quest HTTP
 const morgan = require('morgan');
 app.use(morgan('combined'));
