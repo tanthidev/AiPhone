@@ -9,8 +9,9 @@ const db = require("./config/database")
 const route = require('./routes');
 require('dotenv').config();
 
+
 //Connect database
-db.connect()
+// db.connect()
 
 
 //Morgan quest HTTP

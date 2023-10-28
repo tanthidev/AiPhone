@@ -1,12 +1,42 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId;
+require('dotenv').config();
+const axios = require('axios');
 
-const User = new Schema({
-  name: { type: String,},
-  phone: { type: String,},
-  createdAt: {type: Date, default: Date.now},
-  updatedAt: {type: Date, default: Date.now},
-});
+class User {
+  constructor() {
+    this.CLIENT_APP_ID = process.env.MONGODB_CLIENT_APP_ID; // Replace with your actual Client App ID
+    this.API_KEY = process.env.MONGODB_API_KEY;
+  }
 
-module.exports = mongoose.model('User', User);
+  async getUsers() {
+    try {
+      const apiUrl = `https://data.mongodb-api.com/app/${this.CLIENT_APP_ID}/endpoint/data/v1/action/find`;
+      
+      const data = JSON.stringify({
+        "collection": "users",
+        "database": "AiPhoneStore",
+        "dataSource": "AiPhone",
+        "filter": {
+        },
+      });
+
+      const config = {
+        method: 'post',
+        url: apiUrl,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Request-Headers': '*',
+          'api-key': this.API_KEY,
+        },
+        data: data
+      };
+
+      const response = await axios(config);
+
+      return JSON.stringify(response.data);
+    } catch (error) {
+      return error;
+    }
+  }
+}
+
+module.exports = new User();
