@@ -5,10 +5,12 @@ const port = 3000;
 const handlebars = require('express-handlebars');
 
 const db = require("./config/database")
+
 const route = require('./routes');
+require('dotenv').config();
 
 //Connect database
-// db.connect()
+db.connect()
 
 
 //Morgan quest HTTP
@@ -33,5 +35,5 @@ app.set('views', path.join(__dirname, 'resources', 'views'));
 route(app);
 
 app.listen(port, () => {
-    console.log(`App listening on port ${port}`);
+    console.log(`App listening on localhost:${port}`);
 });
