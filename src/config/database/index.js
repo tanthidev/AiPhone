@@ -1,41 +1,40 @@
-const mongoose = require('mongoose');
+const axios = require('axios');
 
-function connect(params) {
-    const mongoURI = 'mongodb+srv://aiphone:aiphone@aiphone.fpwmwom.mongodb.net/?retryWrites=true&w=majority';
-    mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
-    const db = mongoose.connection;
-    db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-    db.once('open', () => {
-        console.log('Connected to MongoDB Atlas');
+const connect = () => {
+    const CLIENT_APP_ID = 'data-wxhuv'; // Replace with your actual Client App ID
+    const API_KEY = 'rmzcpHHrojvBlBtUreORp7wSach6jbYlAoQgPVtalXax8jO9E7IyaqlCEoqZ3YJK' // Replace with your actual API Key
+    // const apiUrl = `https://data.mongodb-api.com/app/${CLIENT_APP_ID}/endpoint/data/v1/action/insertMany`;
+    const apiUrl = `https://data.mongodb-api.com/app/${CLIENT_APP_ID}/endpoint/data/v1/action/find`
+
+    var data = JSON.stringify({
+        "collection": "users",
+        "database": "AiPhoneStore",
+        "dataSource": "AiPhone",
+        "filter": {
+            "status": "complete"
+          },
+          "limit": 10
     });
+
+    var config = {
+        method: 'post',
+        url: apiUrl,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Request-Headers': '*',
+          'api-key': API_KEY,
+        },
+        data: data
+    };
+
+    axios(config)
+    .then(function (response) {
+        console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+ 
 }
 
-module.exports = {connect};
-
-
-// const { MongoClient, ServerApiVersion } = require('mongodb');
-// const uri = "mongodb+srv://aiphone:aiphone@aiphone.fpwmwom.mongodb.net/?retryWrites=true&w=majority";
-
-// // Create a MongoClient with a MongoClientOptions object to set the Stable API version
-// const client = new MongoClient(uri, {
-//   serverApi: {
-//     version: ServerApiVersion.v1,
-//     strict: true,
-//     deprecationErrors: true,
-//   }
-// });
-
-// async function connect() {
-//   try {
-//     // Connect the client to the server	(optional starting in v4.7)
-//     await client.connect();
-//     // Send a ping to confirm a successful connection
-//     await client.db("admin").command({ ping: 1 });
-//     console.log("Pinged your deployment. You successfully connected to MongoDB!");
-//   } finally {
-//     // Ensures that the client will close when you finish/error
-//     await client.close();
-//   }
-// }
-
-module.exports = {connect};
+module.exports = {connect}
