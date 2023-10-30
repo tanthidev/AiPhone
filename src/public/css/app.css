@@ -31,10 +31,10 @@ td, th {
 
 
 body{background:#dfe0e0}
-input[type="radio"],input[type="checkbox"]
+/* input[type="radio"],input[type="checkbox"]
 {
   display: none;
-}
+} */
 
 .input-checkbox label,.input-radio label {
   width: auto;
