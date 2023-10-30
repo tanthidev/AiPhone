@@ -1,6 +1,6 @@
 <div class="relative p-2 grid grid-cols-3 gap-2 w-full h-full">
     {{!-- Products --}}
-    <div class="col-span-2 bg-white h-full rounded-lg p-2 overflow-scroll overflow-x-hidden">
+    <div class="col-span-2 bg-white h-full rounded-lg p-2">
         {{!-- Category product --}}
         <div>
             <table class="w-full text-base">
@@ -34,31 +34,24 @@
         </div>
         <br>
         {{!-- Items --}}
-        <div class="grid grid-cols-6 gap-3">
-            {{!-- {{#each loop}} --}}
-                <div class="relative flex justify-center text-center cursor-pointer p-2 border rounded-lg">
-                    <div>
-                        <img src="https://www.apple.com/v/iphone/home/bp/images/overview/compare/compare_iphone_15_pro__c344odaqs5qq_large.png"/>
-                        <h2 class="font-semibold text-xl">Iphone 15 Pro</h2>
-                        <span class="text-base">Từ 28.990.000đ</span>
-                    </div>
-                    <div class="absolute w-full h-full opacity-30 top-0 hover:bg-gray-400 rounded-lg">
+        <div class="overflow-scroll overflow-x-hidden">
+            <div class="grid grid-cols-6 gap-3 ">
+                {{#each data}}
+                    <div class="relative flex justify-center text-center cursor-pointer p-2 border rounded-lg">
+                        <div>
+                            <img src="https://www.apple.com/v/iphone/home/bp/images/overview/compare/compare_iphone_15_pro__c344odaqs5qq_large.png"/>
+                            <h2 class="font-semibold text-xl">Iphone 15 Pro</h2>
+                            <span class="text-base">Từ 28.990.000đ</span>
+                        </div>
+                        <div class="absolute w-full h-full opacity-30 top-0 hover:bg-gray-400 rounded-lg">
 
+                        </div>
                     </div>
-                </div>
-                                <div class="relative flex justify-center text-center cursor-pointer p-2 border rounded-lg">
-                    <div>
-                        <img src="https://www.apple.com/v/iphone/home/bp/images/overview/compare/compare_iphone_15_pro__c344odaqs5qq_large.png"/>
-                        <h2 class="font-semibold text-xl">Iphone 15 Pro</h2>
-                        <span class="text-base">Từ 28.990.000đ</span>
-                    </div>
-                    <div class="absolute w-full h-full opacity-30 top-0 hover:bg-gray-400 rounded-lg">
+                                    
 
-                    </div>
-                </div>
+                {{/each}}
 
-            {{!-- {{/each}} --}}
-
+            </div>
         </div>
     </div>
 
