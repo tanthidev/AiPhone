@@ -3,7 +3,6 @@ const EmployeeModel = require('../models/employee.model')
 class HomeController {
         // GET /home
         async home(req, res, next) {
-<<<<<<< HEAD
             try{
                 const users = await User.getUsers()
                 // res.send(JSON.parse(users).documents);
@@ -16,7 +15,6 @@ class HomeController {
                 console.log(error);
                 res.render("pages/home")
             }
-=======
             // console.log('render..');
             // res.render("pages/home")
             let employee;
@@ -33,7 +31,6 @@ class HomeController {
                 employee
             })
 
->>>>>>> 352c4015ef01264c204a5cd88f6eb9a8d7f60c8a
         }
 }
 

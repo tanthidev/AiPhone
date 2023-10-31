@@ -17,8 +17,8 @@ html *::-webkit-scrollbar-track {
   background-color: rgba(0, 0, 0, 0);
 }
 
-td, th {
-  border: 1px solid #151414;
+th,td {
+  /* border: 1px solid #151414; */
   text-align: left;
   padding: 8px;
 }
