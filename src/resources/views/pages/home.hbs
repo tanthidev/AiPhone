@@ -1,10 +1,93 @@
-<<<<<<< HEAD
-{{#each data}}
+{{!-- {{#each data}}
 <h1>{{this.name}}</h1>
 {{/each}}
     <h1>{{{data.[2].name}}}</h1>
 <h1>Homeeeeee</h1>
-=======
 
-<h1>Homeeeeee</h1>
->>>>>>> 352c4015ef01264c204a5cd88f6eb9a8d7f60c8a
+<h1>Homeeeeee</h1> --}}
+<div class="m-6 dark:bg-white p-5 pt-1 rounded-lg">
+    <table class="w-full text-base" id="menu_iphone">
+        <tr class="grid grid-cols-4">
+            <td>
+                <button class="w-60 h-40 mt-3 mx-3 px-3 py-3 text-3xl font-large cursor-pointer rounded-lg hover:bg-gray-400 hover:text-white dark:bg-yellow-100">
+                    <a href="/pos" class="flex">
+                        <div class="w-2/5 text-4xl">
+                            <i class="fa-solid fa-inbox"></i>
+                        </div>
+                        <span>POS</span>
+                    </a>
+                </button>
+            </td>
+            <td>
+                <button class="w-60 h-40 mt-3 mx-3 px-3 py-3 text-3xl font-large cursor-pointer rounded-lg hover:bg-gray-400 hover:text-white dark:bg-yellow-100">
+                    <a href="/invoice" class="flex">
+                        <div class="w-2/5 text-4xl">
+                            <i class="fa-solid fa-file-lines"></i>
+                        </div>
+                        <span>Invoices</span>
+                    </a>
+                </button>
+            </td>
+            <td>
+                <button class="w-60 h-40 mt-3 mx-3 px-3 py-3 text-3xl font-large cursor-pointer rounded-lg hover:bg-gray-400 hover:text-white dark:bg-yellow-100">
+                    <a href="/customer" class="flex">
+                        <div class="w-2/5 text-4xl">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <span>Customers</span>
+                    </a>
+                </button>                    
+            </td>
+            <td>
+                <button class="w-60 h-40 mt-3 mx-3 px-3 py-3 text-3xl font-large cursor-pointer rounded-lg hover:bg-gray-400 hover:text-white dark:bg-yellow-100">
+                    <a href="/employee" class="flex">
+                        <div class="w-2/5 text-4xl">
+                            <i class="fa-solid fa-user-check"></i>
+                        </div>
+                        <span>Employees</span>
+                    </a>
+                </button>
+            </td>
+            <td>
+                <button class="text-base w-60 h-40 mt-3 mx-3 px-3 py-3 text-3xl font-large cursor-pointer rounded-lg hover:bg-gray-400 hover:text-white dark:bg-yellow-100">
+                    <a href="/invoice_report" class="flex">
+                        <div class="w-2/5 text-4xl">
+                            <i class="fa-solid fa-file-lines"></i>
+                        </div>
+                        <span>Invoice Report</span>
+                    </a>
+                </button>
+            </td>
+            <td>
+                <button class="w-60 h-40 mt-3 mx-3 px-3 py-3 text-3xl font-large cursor-pointer rounded-lg hover:bg-gray-400 hover:text-white dark:bg-yellow-100">
+                    <a href="/productlist" class="flex">
+                        <div class="w-2/5 text-4xl">
+                            <i class="fa-solid fa-box"></i>
+                        </div>
+                        <span>Products</span>
+                    </a>
+                </button>
+            </td>
+            <td>
+                <button class="w-60 h-40 mt-3 mx-3 px-3 py-3 text-3xl font-large cursor-pointer rounded-lg hover:bg-gray-400 hover:text-white dark:bg-yellow-100">
+                    <a href="/sale_report" class="flex">
+                        <div class="w-2/5 text-4xl">
+                            <i class="fa-solid fa-chart-simple"></i>
+                        </div>
+                        <span>Sales Report</span>
+                    </a>
+                </button>
+            </td>
+            <td>
+                <button class="w-60 h-40 mt-3 mx-3 px-3 py-3 text-3xl font-large cursor-pointer rounded-lg hover:bg-gray-400 hover:text-white dark:bg-yellow-100">
+                    <a href="/suplier" class="flex">
+                        <div class="w-2/5 text-4xl">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <span>Supliers</span>
+                    </a>
+                </button>
+            </td>
+        </tr>
+    </table>
+</div>
