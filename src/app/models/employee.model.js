@@ -10,6 +10,8 @@ let requestData = {
 };
 
 const EmployeeModel = {
+
+  // Get all employee
   getEmployees: async () => {
     try {
       // API 
@@ -38,6 +40,7 @@ const EmployeeModel = {
     }
   },
 
+  // Find by name employee
   findByEmployeeName: async (name) => {
     try {
       // API 

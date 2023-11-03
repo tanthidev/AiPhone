@@ -11,12 +11,12 @@
 </head>
 <body>
     <div class="app bg-gray-100 h-screen cursor-default">
-        <div class="flex">
+        <div class="flex h-full">
             {{> categories}}
 
-            <div class="w-full flex flex-col">
+            <div class="w-full h-screen flex flex-col">
                 {{> header}}
-                <div class="flex-1">
+                <div class="flex-auto overflow-y-scroll relative">
                     {{{body}}} 
                 </div>
             </div>
