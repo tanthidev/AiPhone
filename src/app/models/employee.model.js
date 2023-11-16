@@ -74,6 +74,36 @@ const EmployeeModel = {
     }
   },
 
+  // Get password, username for auth
+  findAccount: async (username) => {
+    try {
+      // API 
+      const apiUrl = `https://data.mongodb-api.com/app/${CLIENT_APP_ID}/endpoint/data/v1/action/findOne`;
+      requestData.filter= {
+        "username": username
+      }
+
+
+      const config = {
+        method: 'post',
+        url: apiUrl,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Request-Headers': '*',
+          'api-key': API_KEY,
+        },
+        data: JSON.stringify(requestData)
+      };
+
+      // get data from api
+      const response = await axios(config);
+        return (response.data.document);
+
+    } catch (error) {
+      throw error;
+    }
+  },
+
   // Create Employee
   createEmployee: async (employee) => {
     try {
@@ -81,23 +111,29 @@ const EmployeeModel = {
       const apiUrl = `https://data.mongodb-api.com/app/${CLIENT_APP_ID}/endpoint/data/v1/action/insertOne`;
 
       const {
-        employee_id,
         employee_name,
         employee_phone,
         employee_email,
-        active, 
+        account_status, 
         hire_date,
-        authentication,
+        is_admin,
+        login_link_expiration,
+        username,
+        password,
+        profile_picture
         } = employee
       
       requestData.document= {
-        employee_id,
         employee_name,
         employee_phone,
         employee_email,
-        active, 
+        account_status, 
         hire_date,
-        authentication,
+        is_admin,
+        login_link_expiration,
+        username,
+        password,
+        profile_picture
       }
 
 
@@ -128,13 +164,16 @@ const EmployeeModel = {
       const apiUrl = `https://data.mongodb-api.com/app/${CLIENT_APP_ID}/endpoint/data/v1/action/updateOne`;
 
       const {
-        employee_id,
         employee_name,
         employee_phone,
         employee_email,
-        active, 
+        account_status, 
         hire_date,
-        authentication,
+        is_admin,
+        login_link_expiration,
+        username,
+        password,
+        profile_picture
         } = employee
 
       requestData.filter= {
@@ -146,9 +185,13 @@ const EmployeeModel = {
           employee_name,
           employee_phone,
           employee_email,
-          active, 
+          account_status, 
           hire_date,
-          authentication,
+          is_admin,
+          login_link_expiration,
+          username,
+          password,
+          profile_picture
         }
       }
 

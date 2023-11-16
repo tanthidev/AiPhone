@@ -3,12 +3,18 @@ const path = require('path');
 const app = express();
 const port = 3000;
 const handlebars = require('express-handlebars');
-
-const db = require("./config/database")
-
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const route = require('./routes');
 require('dotenv').config();
 
+
+app.use(cookieParser());
+app.use(session({
+  secret: 'aiphone',
+  resave: false,
+  saveUninitialized: true,
+}));
 
 //Connect database
 // db.connect()
@@ -34,6 +40,8 @@ app.set('views', path.join(__dirname, 'resources', 'views'));
 
 //Routes 
 route(app);
+
+
 
 app.listen(port, () => {
     console.log(`App listening on localhost:${port}`);
