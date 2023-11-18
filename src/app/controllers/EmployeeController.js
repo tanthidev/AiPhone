@@ -1,11 +1,20 @@
-
+const EmployeeModel = require('../models/employee.model')
 const nodemailer = require('nodemailer');
 require('dotenv').config
 
 class EmployeeController {
     //GET /home
     employee(req, res) {
-        res.render("pages/employee/listEmployee")
+        EmployeeModel.getEmployees()
+            .then(data =>{
+                // res.send(data)
+                res.render("pages/employee/listEmployee", {data})
+
+            })
+            .catch(error =>{
+
+            })
+        // res.render("pages/employee/listEmployee")
     }
 
 

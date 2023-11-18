@@ -1,8 +1,19 @@
+const ProductModel = require('../models/product.model')
+
 class PosController {
+
     //GET /pos
     pos(req, res) {
-        res.render("pages/pos",{data: [1,2,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9]})
-    }
+        ProductModel.getProducts()
+            .then(data =>{
+                // res.send(data)
+                res.render("pages/pos", {data})
+
+            })
+            .catch(error =>{
+
+            })
+        }
 
     //more
     show(req, res) {
