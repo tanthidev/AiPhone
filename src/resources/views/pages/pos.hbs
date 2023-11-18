@@ -39,9 +39,9 @@
                 {{#each data}}
                     <div class="relative flex justify-center text-center cursor-pointer p-2 border rounded-lg">
                         <div>
-                            <img src="https://www.apple.com/v/iphone/home/bp/images/overview/compare/compare_iphone_15_pro__c344odaqs5qq_large.png"/>
-                            <h2 class="font-semibold text-xl">Iphone 15 Pro</h2>
-                            <span class="text-base">Từ 28.990.000đ</span>
+                            <img src={{this.link_image}} alt="image"/>
+                            <h2 class="font-semibold text-xl">{{this.product_name}}</h2>
+                            <span class="text-base">{{this.retail_price.64GB}}</span>
                         </div>
                         <div class="absolute w-full h-full opacity-30 top-0 hover:bg-gray-400 rounded-lg">
 
