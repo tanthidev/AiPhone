@@ -22,32 +22,35 @@ class EmployeeController {
 
 
             // Create token login
-            const login = []
-            login[token] = Math.random().toString(36).slice(-6);
-            const loginLink = `${process.env.DOMAIN}/login/${login[token]}`;
-            console.log(loginLink);
-            // Create link login
-            // const transporter = nodemailer.createTransport({
-            //   service: 'gmail',
-            //   auth: {
-            //     user: process.env.EMAIL, // your Gmail address
-            //     pass: process.env.PASSWORD_EMAIL, // your Gmail app password
-            //   },
-            // });
+            const login = {
+                token: '',
+                expiration: Date.now()
+            }
+            login.token = Math.random().toString(36).slice(-6);
+            const loginLink = `${process.env.DOMAIN}/login/${login.token}`;
+            
+            // Config nodemailer
+            const transporter = nodemailer.createTransport({
+              service: 'gmail',
+              auth: {
+                user: process.env.EMAIL, // your Gmail address
+                pass: process.env.PASSWORD_EMAIL, // your Gmail app password
+              },
+            });
         
-            // // Send email
-            // const info = await transporter.sendMail({
-            //   from: process.env.EMAIL,
-            //   to: email_address,
-            //   subject: 'Account Created',
-            //   text: `Dear ${full_name},\n\nYour account has been created. Please click on the following link to log in: http://your-app-url/login`,
-            // });
+            // Send email
+            const info = await transporter.sendMail({
+              from: process.env.EMAIL,
+              to: email_address,
+              subject: 'Account Created',
+              text: `Dear ${full_name},\n\nYour account has been created. Please click on the following link to log in: ${loginLink}`,
+            });
         
-            // // Send result
-            // res.status(200).json({
-            //   success: true,
-            //   message: 'Account created successfully. Check your email for the login link.',
-            // });
+            // Send result
+            res.status(200).json({
+              success: true,
+              message: 'Account created successfully. Check your email for the login link.',
+            });
         } catch (error) {
             console.error('Error sending email:', error);
             res.status(500).json({
