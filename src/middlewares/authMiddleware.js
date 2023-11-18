@@ -1,6 +1,8 @@
 // authMiddleware.js
 const jwt = require('jsonwebtoken');
+const { ObjectId } = require('mongodb');
 require('dotenv').config();
+const EmployeeModel = require('../app/models/employee.model')
 
 const checkLogin = (req, res, next) => {
   const token = req.cookies.token; // Lấy token từ cookie
@@ -21,6 +23,23 @@ const checkLogin = (req, res, next) => {
       next();
   });
 };
+
+const checkAdmin = (req, res, next) => {
+    //Get user from database
+    EmployeeModel.findByEmployeeId(req.user.userId)
+        .then(data =>{
+            if(!data[0].is_admin){
+                return res.status(403).send('Access Denied');
+            } else {
+                next()
+            }
+        })
+        .catch(error => {
+            return res.status(403).send('Access Denied');
+        })
+    
+
+}
   
 const logout = (req, res, next) => {
     // Xóa thông tin người dùng khỏi session
@@ -36,5 +55,6 @@ const logout = (req, res, next) => {
 module.exports = {
     checkLogin,
     logout,
+    checkAdmin
 };
   

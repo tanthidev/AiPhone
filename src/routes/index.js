@@ -10,15 +10,15 @@ const customerRouter = require('./customer');
 const employeeRouter = require('./employee');
 const suplierRouter = require('./suplier');
 const reportRouter = require('./report');
-const {checkLogin, logout} = require('../middlewares/authMiddleware')
+const {checkLogin, logout, checkAdmin} = require('../middlewares/authMiddleware')
 
 function route(app) {
     app.use('/productlist',checkLogin, productsRouter);
     app.use('/pos',checkLogin, posRouter);
-    app.use('/login',checkLogin, loginRouter);
+    app.use('/login', loginRouter);
     app.use('/invoice',checkLogin, invoiceRouter);
     app.use('/customer',checkLogin, customerRouter);
-    app.use('/employee',checkLogin, employeeRouter);
+    app.use('/employee',checkLogin, checkAdmin, employeeRouter);
     app.use('/report',checkLogin, reportRouter);
     app.use('/suplier',checkLogin, suplierRouter);
     app.get('/logout', logout);

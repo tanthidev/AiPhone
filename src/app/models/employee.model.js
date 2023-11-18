@@ -74,6 +74,37 @@ const EmployeeModel = {
     }
   },
 
+
+  // Find by employee id
+  findByEmployeeId: async (id) => {
+    try {
+      // API 
+      const apiUrl = `https://data.mongodb-api.com/app/${CLIENT_APP_ID}/endpoint/data/v1/action/find`;
+      requestData.filter= {
+        "_id": {"$oid": id}
+      }
+
+
+      const config = {
+        method: 'post',
+        url: apiUrl,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Request-Headers': '*',
+          'api-key': API_KEY,
+        },
+        data: JSON.stringify(requestData)
+      };
+
+      // get data from api
+      const response = await axios(config);
+        return (response.data.documents);
+
+    } catch (error) {
+      throw error;
+    }
+  },
+
   // Get password, username for auth
   findAccount: async (username) => {
     try {
@@ -117,7 +148,7 @@ const EmployeeModel = {
         account_status, 
         hire_date,
         is_admin,
-        login_link_expiration,
+        login,
         username,
         password,
         profile_picture
@@ -130,7 +161,7 @@ const EmployeeModel = {
         account_status, 
         hire_date,
         is_admin,
-        login_link_expiration,
+        login,
         username,
         password,
         profile_picture
@@ -170,7 +201,6 @@ const EmployeeModel = {
         account_status, 
         hire_date,
         is_admin,
-        login_link_expiration,
         username,
         password,
         profile_picture
@@ -188,7 +218,6 @@ const EmployeeModel = {
           account_status, 
           hire_date,
           is_admin,
-          login_link_expiration,
           username,
           password,
           profile_picture

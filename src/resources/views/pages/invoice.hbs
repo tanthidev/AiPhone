@@ -1,174 +1,175 @@
-<div class = "h-full flex flex-col mx-8 dark:bg-white px-5 pb-5 pt-1 rounded-lg">
-    <div class="relative">
-        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="none" viewBox="0 0 20 20">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-            </svg>
-        </div>
-        <input type="search" id="search_invoice" class="block w-full p-4 pl-10 text-sm text-gray-900 border rounded-lg my-5 focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for" required>
-        <button type="submit" class="text-black absolute right-2.5 bottom-2.5  hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-gray-300 dark:hover:bg-gray-500 dark:focus:ring-blue-800">Search</button>
+<div class = "h-full flex flex-col dark:bg-white px-5 pb-5 pt-1 rounded-lg">
+    <div class="container mx-auto py-4">
+    <form class="group relative">
+        <svg width="20" height="20" fill="currentColor" class="absolute left-3 top-1/2 -mt-2.5 text-slate-400 pointer-events-none group-focus-within:text-gray-500" aria-hidden="true">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
+        </svg>
+        <input class="focus:ring-2 focus:ring-gray-500 focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2  pl-10 pr-4 ring-1 ring-slate-200 shadow-sm truncate" type="text" aria-label="Filter projects" placeholder="Search name...">
+    </form>
     </div>
-    <table class="min-w-full text-sm">
-        <thead>
-        <tr class = "dark:bg-gray-100">
-            <th class="w-10 ">
-                <input id="select_all" type="checkbox" value="">
-            </th>
-            <th class="w-10">ID User</th>
-            <th class="w-40">User Name</th>
-            <th class="w-20">Due Date</th>
-            <th class="w-10">Paid</th>
-            <th class="w-10">Status</th>
-        </tr>
-        </thead>
+    <div>
+        <table class="min-w-full text-sm">
+            <thead>
+            <tr class = "dark:bg-gray-100">
+                <th class="w-10 ">
+                    <input id="select_all" type="checkbox" value="">
+                </th>
+                <th class="w-10">ID User</th>
+                <th class="w-40">User Name</th>
+                <th class="w-20">Due Date</th>
+                <th class="w-10">Paid</th>
+                <th class="w-10">Status</th>
+            </tr>
+            </thead>
 
-        <tbody>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>000001</td>
-                <td>Nguyen Duc Minh Thuan</td>
-                <td>2023-10-30</td>
-                <td>Yes</td>
-                <td>Active</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>000002</td>
-                <td>Le Nguyen Tan Thi</td>
-                <td>2023-10-31</td>
-                <td>No</td>
-                <td>Inactive</td>
-            </tr>
-                        <tr>
-                <td><input type="checkbox"></td>
-                <td>000002</td>
-                <td>Le Nguyen Tan Thi</td>
-                <td>2023-10-31</td>
-                <td>No</td>
-                <td>Inactive</td>
-            </tr>
-                        <tr>
-                <td><input type="checkbox"></td>
-                <td>000002</td>
-                <td>Le Nguyen Tan Thi</td>
-                <td>2023-10-31</td>
-                <td>No</td>
-                <td>Inactive</td>
-            </tr>
-                        <tr>
-                <td><input type="checkbox"></td>
-                <td>000002</td>
-                <td>Le Nguyen Tan Thi</td>
-                <td>2023-10-31</td>
-                <td>No</td>
-                <td>Inactive</td>
-            </tr>
-                        <tr>
-                <td><input type="checkbox"></td>
-                <td>000002</td>
-                <td>Le Nguyen Tan Thi</td>
-                <td>2023-10-31</td>
-                <td>No</td>
-                <td>Inactive</td>
-            </tr>
-                        <tr>
-                <td><input type="checkbox"></td>
-                <td>000002</td>
-                <td>Le Nguyen Tan Thi</td>
-                <td>2023-10-31</td>
-                <td>No</td>
-                <td>Inactive</td>
-            </tr>
-                        <tr>
-                <td><input type="checkbox"></td>
-                <td>000002</td>
-                <td>Le Nguyen Tan Thi</td>
-                <td>2023-10-31</td>
-                <td>No</td>
-                <td>Inactive</td>
-            </tr>
-                        <tr>
-                <td><input type="checkbox"></td>
-                <td>000002</td>
-                <td>Le Nguyen Tan Thi</td>
-                <td>2023-10-31</td>
-                <td>No</td>
-                <td>Inactive</td>
-            </tr>
-                        <tr>
-                <td><input type="checkbox"></td>
-                <td>000002</td>
-                <td>Le Nguyen Tan Thi</td>
-                <td>2023-10-31</td>
-                <td>No</td>
-                <td>Inactive</td>
-            </tr>
-                        <tr>
-                <td><input type="checkbox"></td>
-                <td>000002</td>
-                <td>Le Nguyen Tan Thi</td>
-                <td>2023-10-31</td>
-                <td>No</td>
-                <td>Inactive</td>
-            </tr>
-                        <tr>
-                <td><input type="checkbox"></td>
-                <td>000002</td>
-                <td>Le Nguyen Tan Thi</td>
-                <td>2023-10-31</td>
-                <td>No</td>
-                <td>Inactive</td>
-            </tr>
-                        <tr>
-                <td><input type="checkbox"></td>
-                <td>000002</td>
-                <td>Le Nguyen Tan Thi</td>
-                <td>2023-10-31</td>
-                <td>No</td>
-                <td>Inactive</td>
-            </tr>
-                        <tr>
-                <td><input type="checkbox"></td>
-                <td>000002</td>
-                <td>Le Nguyen Tan Thi</td>
-                <td>2023-10-31</td>
-                <td>No</td>
-                <td>Inactive</td>
-            </tr>
-                        <tr>
-                <td><input type="checkbox"></td>
-                <td>000002</td>
-                <td>Le Nguyen Tan Thi</td>
-                <td>2023-10-31</td>
-                <td>No</td>
-                <td>Inactive</td>
-            </tr>
-                        <tr>
-                <td><input type="checkbox"></td>
-                <td>000002</td>
-                <td>Le Nguyen Tan Thi</td>
-                <td>2023-10-31</td>
-                <td>No</td>
-                <td>Inactive</td>
-            </tr>
-                        <tr>
-                <td><input type="checkbox"></td>
-                <td>000002</td>
-                <td>Le Nguyen Tan Thi</td>
-                <td>2023-10-31</td>
-                <td>No</td>
-                <td>Inactive</td>
-            </tr>
-                        <tr>
-                <td><input type="checkbox"></td>
-                <td>000002</td>
-                <td>Le Nguyen Tan Thi</td>
-                <td>2023-10-31</td>
-                <td>No</td>
-                <td>Inactive</td>
-            </tr>
-        </tbody>
-    </table>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>000001</td>
+                    <td>Nguyen Duc Minh Thuan</td>
+                    <td>2023-10-30</td>
+                    <td>Yes</td>
+                    <td>Active</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>000002</td>
+                    <td>Le Nguyen Tan Thi</td>
+                    <td>2023-10-31</td>
+                    <td>No</td>
+                    <td>Inactive</td>
+                </tr>
+                            <tr>
+                    <td><input type="checkbox"></td>
+                    <td>000002</td>
+                    <td>Le Nguyen Tan Thi</td>
+                    <td>2023-10-31</td>
+                    <td>No</td>
+                    <td>Inactive</td>
+                </tr>
+                            <tr>
+                    <td><input type="checkbox"></td>
+                    <td>000002</td>
+                    <td>Le Nguyen Tan Thi</td>
+                    <td>2023-10-31</td>
+                    <td>No</td>
+                    <td>Inactive</td>
+                </tr>
+                            <tr>
+                    <td><input type="checkbox"></td>
+                    <td>000002</td>
+                    <td>Le Nguyen Tan Thi</td>
+                    <td>2023-10-31</td>
+                    <td>No</td>
+                    <td>Inactive</td>
+                </tr>
+                            <tr>
+                    <td><input type="checkbox"></td>
+                    <td>000002</td>
+                    <td>Le Nguyen Tan Thi</td>
+                    <td>2023-10-31</td>
+                    <td>No</td>
+                    <td>Inactive</td>
+                </tr>
+                            <tr>
+                    <td><input type="checkbox"></td>
+                    <td>000002</td>
+                    <td>Le Nguyen Tan Thi</td>
+                    <td>2023-10-31</td>
+                    <td>No</td>
+                    <td>Inactive</td>
+                </tr>
+                            <tr>
+                    <td><input type="checkbox"></td>
+                    <td>000002</td>
+                    <td>Le Nguyen Tan Thi</td>
+                    <td>2023-10-31</td>
+                    <td>No</td>
+                    <td>Inactive</td>
+                </tr>
+                            <tr>
+                    <td><input type="checkbox"></td>
+                    <td>000002</td>
+                    <td>Le Nguyen Tan Thi</td>
+                    <td>2023-10-31</td>
+                    <td>No</td>
+                    <td>Inactive</td>
+                </tr>
+                            <tr>
+                    <td><input type="checkbox"></td>
+                    <td>000002</td>
+                    <td>Le Nguyen Tan Thi</td>
+                    <td>2023-10-31</td>
+                    <td>No</td>
+                    <td>Inactive</td>
+                </tr>
+                            <tr>
+                    <td><input type="checkbox"></td>
+                    <td>000002</td>
+                    <td>Le Nguyen Tan Thi</td>
+                    <td>2023-10-31</td>
+                    <td>No</td>
+                    <td>Inactive</td>
+                </tr>
+                            <tr>
+                    <td><input type="checkbox"></td>
+                    <td>000002</td>
+                    <td>Le Nguyen Tan Thi</td>
+                    <td>2023-10-31</td>
+                    <td>No</td>
+                    <td>Inactive</td>
+                </tr>
+                            <tr>
+                    <td><input type="checkbox"></td>
+                    <td>000002</td>
+                    <td>Le Nguyen Tan Thi</td>
+                    <td>2023-10-31</td>
+                    <td>No</td>
+                    <td>Inactive</td>
+                </tr>
+                            <tr>
+                    <td><input type="checkbox"></td>
+                    <td>000002</td>
+                    <td>Le Nguyen Tan Thi</td>
+                    <td>2023-10-31</td>
+                    <td>No</td>
+                    <td>Inactive</td>
+                </tr>
+                            <tr>
+                    <td><input type="checkbox"></td>
+                    <td>000002</td>
+                    <td>Le Nguyen Tan Thi</td>
+                    <td>2023-10-31</td>
+                    <td>No</td>
+                    <td>Inactive</td>
+                </tr>
+                            <tr>
+                    <td><input type="checkbox"></td>
+                    <td>000002</td>
+                    <td>Le Nguyen Tan Thi</td>
+                    <td>2023-10-31</td>
+                    <td>No</td>
+                    <td>Inactive</td>
+                </tr>
+                            <tr>
+                    <td><input type="checkbox"></td>
+                    <td>000002</td>
+                    <td>Le Nguyen Tan Thi</td>
+                    <td>2023-10-31</td>
+                    <td>No</td>
+                    <td>Inactive</td>
+                </tr>
+                            <tr>
+                    <td><input type="checkbox"></td>
+                    <td>000002</td>
+                    <td>Le Nguyen Tan Thi</td>
+                    <td>2023-10-31</td>
+                    <td>No</td>
+                    <td>Inactive</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <script>
