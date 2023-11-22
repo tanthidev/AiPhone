@@ -30,6 +30,9 @@ app.use(express.json());
 //Template Engine
 app.engine('hbs', handlebars.engine({ 
     extname: 'hbs',
+    helpers: {
+      sum: (a, b) => a + b,
+    },
 }));
 
 //config source static
