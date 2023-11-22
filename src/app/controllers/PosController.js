@@ -8,7 +8,6 @@ class PosController {
             .then(data =>{
                 // res.send(data)
                 res.render("pages/pos", {data})
-
             })
             .catch(error =>{
 
