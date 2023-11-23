@@ -18,7 +18,7 @@ function route(app) {
     app.use('/login' ,loginRouter);
     app.use('/invoice',invoiceRouter);
     app.use('/customer',customerRouter);
-    app.use('/employee', checkAdmin ,employeeRouter);
+    app.use('/employee',employeeRouter);
     app.use('/report',reportRouter);
     app.use('/admin', adminRouter);
     app.get('/logout', logout);
