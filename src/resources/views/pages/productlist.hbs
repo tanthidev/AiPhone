@@ -11,7 +11,7 @@
         </form>
     </div>
     <div class="relative shadow-md sm:rounded-lg  overflow-auto dark:bg-white " >
-        <table class=" text-left rtl:text-right">
+        <table class=" text-left rtl:text-right w-full">
             <thead class="text-xm text-gray-700  uppercase bg-gray-200 dark:bg-gray-700">
                 <tr >
                     <th scope="col" class="p-4" >
@@ -54,10 +54,6 @@
                     <th scope="col" class="py-3 px-2">
                         Release Date
                     </th>
-                    <th scope="col" class="py-3 px-2">
-                        Action
-                    </th>
-                    
                 </tr>
             </thead>
             <tbody>
@@ -87,15 +83,6 @@
                             {{/each}}
                         </td>
                         <td>{{this.created_at}}</td>
-
-                        <td class="flex gap-2">
-                            <button class="bg-gray-200 text-red-500 py-2 px-4 rounded flex items-center hover:bg-gray-300">
-                                    <i class="fa-regular fa-trash-can"></i>
-                            </button>
-                            <button class="bg-gray-200 text-green-500 py-2 px-4 rounded flex items-center hover:bg-gray-300">
-                                    <i class="fa-solid fa-pen"></i>
-                            </button>
-                        </td>
                     </tr>
                 {{/each}}
             </tbody>

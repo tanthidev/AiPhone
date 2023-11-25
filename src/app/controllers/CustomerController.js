@@ -1,17 +1,16 @@
 const CustomerModel = require('../models/customer.model')
+const Customer = require('../model_mongoose/customer');
+const { mulToObject } = require('../util/mongoose');
 
 class CustomerController {
     //GET /home
-    customer(req, res) {
-        CustomerModel.getCustomers()
-            .then(data =>{
-                // res.send(data)
-                res.render("pages/customer", {data})
-                
-            })
-            .catch(error =>{
-
-            })
+    async customer(req, res) {
+        try {
+            const customers = await Customer.find();
+            res.render('pages/customer', { data: mulToObject(customers)});
+          } catch {
+            res.send('Error');
+          }
     }
 }
 

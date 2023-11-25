@@ -3,12 +3,17 @@ const path = require('path');
 const app = express();
 const port = 3000;
 const handlebars = require('express-handlebars');
+const db = require("./config/db");
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const route = require('./routes');
+const methodOverride = require('method-override');
 require('dotenv').config();
 
+//Connect database
+db.connect()
 
+app.use(methodOverride('_method'));
 app.use(cookieParser());
 app.use(session({
   secret: 'aiphone',
@@ -16,8 +21,6 @@ app.use(session({
   saveUninitialized: true,
 }));
 
-//Connect database
-// db.connect()
 
 
 //Morgan quest HTTP

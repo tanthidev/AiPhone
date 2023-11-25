@@ -13,7 +13,7 @@ const connect = () => {
         "filter": {
             "status": "complete"
           },
-          "limit": 10
+        "limit": 20
     });
 
     var config = {

@@ -35,9 +35,6 @@
                     <th scope="col" class="px-6 py-3">
                         Account Created
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        Action
-                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -48,15 +45,7 @@
                         <td>{{this.customer_name}}</td>
                         <td>{{this.customer_email}}</td>
                         <td>{{this.customer_phone}}</td>
-                        <td>{{this.created_at}}</td>
-                        <td class="flex gap-2">
-                            <button class="bg-gray-200 text-red-500 py-2 px-4 rounded flex items-center hover:bg-gray-300">
-                                    <i class="fa-regular fa-trash-can"></i>
-                            </button>
-                            <button class="bg-gray-200 text-green-500 py-2 px-4 rounded flex items-center hover:bg-gray-300">
-                                    <i class="fa-solid fa-pen"></i>
-                            </button>
-                        </td>
+                        <td>{{this.createdAt}}</td>
                     </tr>
                 {{/each}}
             </tbody>

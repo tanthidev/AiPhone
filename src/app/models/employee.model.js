@@ -251,13 +251,12 @@ const EmployeeModel = {
       // API 
       const apiUrl = `https://data.mongodb-api.com/app/${CLIENT_APP_ID}/endpoint/data/v1/action/deleteOne`;
 
-
       requestData.filter= {
-        "employee_id": employee_id
+        "_id": employee_id
       }
 
       const config = {
-        method: 'post',
+        method: 'delete',
         url: apiUrl,
         headers: {
           'Content-Type': 'application/json',
@@ -272,9 +271,11 @@ const EmployeeModel = {
         return (response.data);
 
     } catch (error) {
-      throw error;
+      // Handle the error appropriately
+      console.error('Error in model employee:', error);
+      throw error; // Rethrow the error or handle it according to your needs
     }
-  },
+  }
 }
 
 
