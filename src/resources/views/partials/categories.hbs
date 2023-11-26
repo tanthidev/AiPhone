@@ -69,14 +69,45 @@
                     </a>
                 </li>
 
-                {{!-- Supliers --}}
-                <li class="pl-3 py-2 font-normal cursor-pointer rounded-sm hover:bg-gray-400 hover:text-white">
+                {{!-- Admin Manage --}}
+                {{!-- <li class="pl-3 py-2 font-normal cursor-pointer rounded-sm hover:bg-gray-400 hover:text-white">
                     <a href="/admin" class="flex">
                         <div class="w-1/5 text-xl">
                             <i class="fa-solid fa-users"></i>
                         </div>
-                        <span>Admin</span>
+                        <span>Admin Manage</span>
                     </a>
+                </li> --}}
+                <li class="pl-3 py-2 font-normal cursor-pointer rounded-sm hover:bg-gray-400 hover:text-white relative">
+                    <a href="#" class="flex items-center" onclick="toggleAdminMenu(event)">
+                        <div class="w-1/5 text-xl">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <span>Admin Manage</span>
+                    </a>
+                    
+                    <!-- Drop-down content -->
+                    <ul id="adminMenu" class="absolute hidden bg-white border rounded-sm mt-2 space-y-1">
+                        <!-- Employee -->
+                        <li class="pl-3 py-2 hover:bg-gray-400 hover:text-white">
+                            <a href="/admin_employee">Employee</a>
+                        </li>
+                        
+                        <!-- Customer -->
+                        <li class="pl-3 py-2 hover:bg-gray-400 hover:text-white">
+                            <a href="/admin_customer">Customer</a>
+                        </li>
+                        
+                        <!-- Invoice -->
+                        <li class="pl-3 py-2 hover:bg-gray-400 hover:text-white">
+                            <a href="/admin_invoice">Invoice</a>
+                        </li>
+                        
+                        <!-- Product -->
+                        <li class="pl-3 py-2 hover:bg-gray-400 hover:text-white">
+                            <a href="/admin_product">Product</a>
+                        </li>
+                    </ul>
                 </li>
 
                 {{!-- Employees --}}
@@ -152,6 +183,11 @@
                 </li>
             </ul>
     </div>     
-
-
 </div> 
+<script>
+    function toggleAdminMenu(event) {
+        event.preventDefault();
+        var adminMenu = document.getElementById("adminMenu");
+        adminMenu.classList.toggle("hidden");
+    }
+</script>

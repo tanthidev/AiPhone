@@ -6,7 +6,7 @@ class ProductController {
         ProductModel.getProducts()
             .then(data =>{
                 // res.send(data)
-                res.render("pages/productlist", {data})
+                res.render("pages/product/productlist", {data})
                 
             })
             .catch(error =>{

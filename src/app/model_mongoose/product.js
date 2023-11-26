@@ -8,45 +8,33 @@ const productSchema = new Schema({
   link_product: String,
   barcode: String,
   import_price: {
-    type: Map,
-    of: String,
-    default: {
-      "64GB": "Updating",
-      "128GB": "Updating",
-      "256GB": "Updating",
-      "512GB": "Updating"    
-    }
-  },
+    64: String,
+    128: String,
+    256: String,
+    512: String
+},
   retail_price: {
-    type: Map,
-    of: String,
-    default: {
-      "64GB": "Updating",
-      "128GB": "Updating",
-      "256GB": "Updating",
-      "512GB": "Updating"
-    }
+    64: String,
+    128: String,
+    256: String,
+    512: String
   },
+  createdAt:{type: Date,default: Date.now},
   colors: {
     type: [String],
     default: ["Updating", "Updating", "Updating"]
   },
   link_image: String,
   configuration: {
-    type: Map,
-    of: String,
-    default: {
-      "screen": "Updating",
-      "OS": "Updating",
-      "camera_font": "Updating",
-      "camera_back": "Updating",
-      "chip": "Updating",
-      "ram": "Updating",
-      "sim": "Updating",
-      "pin": "Updating",
-    }
-  },
-  createdAt:{type: Date,default: Date.now}
+      screen: String,
+      OS: String,
+      camera_font: String,
+      camera_back: String,
+      chip: String,
+      ram: String,
+      sim: String,
+      pin: String
+  }
 });
 
 const Product = mongoose.model('Product', productSchema,'products');

@@ -1,10 +1,12 @@
+
+
 <div id = "employees" class = "flex flex-col px-5 rounded-lg">
-        <div  class = "bg-yellow-200 rounded-b-lg" style="display: flex;justify-content: space-around;  align-items: center; position: sticky; top: 0; z-index: 100;" > 
+        {{!-- <div  class = "bg-yellow-200 rounded-b-lg" style="display: flex;justify-content: space-around;  align-items: center; position: sticky; top: 0; z-index: 100;" > 
                 <a href="#employees" class="px-10 font-bold text-3xl bg-yellow-200 rounded-lg" >Employees</a>
                 <a href="#productlist" class="px-10 font-bold text-3xl bg-yellow-200 rounded-lg"   >Product List</a>
                 <a href="#customers" class="px-10 font-bold text-3xl bg-yellow-200 rounded-lg" >Customers</a>
                 <a href="#invoices" class="px-10 font-bold text-3xl bg-yellow-200 rounded-lg" >Invoices</a>
-        </div>
+        </div> --}}
 
     <h1  class="text-3xl uppercase text-gray-700 pt-10 pb-2  font-bold text-center">Employees</h1>
     <div class="bg-white rounded-lg">
@@ -14,9 +16,8 @@
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
                                     </svg>
                                     <input class="focus:ring-2 focus:ring-gray-500 focus:outline-none appearance-none w-10/12 text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2  pl-10 pr-4 ring-1 ring-slate-200 shadow-sm truncate" type="text" aria-label="Filter projects" placeholder="Search ...">
-                                    <button class="bg-gray-200 ml-4 text-green-500 rounded w-2/12 items-center hover:bg-gray-300">
-                                    <i class="fa-solid fa-add"></i>
-                                    </button>
+                                    <button onclick="location.href='/admin/employee_add'" type="button" class="bg-green-200 w-2/12 mx-2 rounded-lg"><i class="fa-solid fa-add"></i></button>
+
                         </form>
             </div>
             <div class="relative shadow-md sm:rounded-lg  overflow-auto" style="max-height: 850px; ">
@@ -91,9 +92,7 @@
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
                         </svg>
                         <input class="focus:ring-2 focus:ring-gray-500 focus:outline-none appearance-none w-10/12 text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2  pl-10 pr-4 ring-1 ring-slate-200 shadow-sm truncate" type="text" aria-label="Filter projects" placeholder="Search ...">
-                        <button class="bg-gray-200 mx-4 text-green-500 rounded w-2/12 items-center hover:bg-gray-300">
-                        <i class="fa-solid fa-add"></i>
-                        </button>
+                        <button onclick="location.href='/admin/product_add'" type="button" class="bg-green-200 w-2/12 mx-2 rounded-lg"><i class="fa-solid fa-add"></i></button>
             </form>
             </div>
             <div class="relative shadow-md sm:rounded-lg overflow-auto dark:bg-white " style="max-height: 850px;">
@@ -151,7 +150,11 @@
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <td><input type="checkbox"></td>
                                     <td>{{sum @index 1}}</td>
-                                    <td>{{this.product_name}}</td>
+                                    <td>
+                                        <a href="/admin/product_detail/{{this.product_name}}" class="text-green-800 font-bold">
+                                                {{this.product_name}}
+                                        </a>
+                                    </td>
                                     <td>{{this.series}}</td>
                                     <td>
                                     {{#each this.colors}}
@@ -173,13 +176,12 @@
                                     {{/each}}
                                     </td>
                                     <td>{{this.created_at}}</td>
-
                                     <td class="flex gap-2">
-                                    <button class="bg-gray-200 text-red-500 py-2 px-4 rounded flex items-center hover:bg-gray-300">
-                                                <i class="fa-regular fa-trash-can"></i>
+                                    <button onclick="location.href='/admin/product_delete'" type="button" class="bg-gray-200 text-red-500 py-2 px-4 rounded flex items-center hover:bg-gray-300">
+                                        <i class="fa-regular fa-trash-can"></i>                                    
                                     </button>
-                                    <button class="bg-gray-200 text-green-500 py-2 px-4 rounded flex items-center hover:bg-gray-300">
-                                                <i class="fa-solid fa-pen"></i>
+                                    <button onclick="location.href='/admin/product_update'" type="button" class="bg-gray-200 text-green-500 py-2 px-4 rounded flex items-center hover:bg-gray-300">
+                                        <i class="fa-solid fa-pen"></i>
                                     </button>
                                     </td>
                         </tr>
@@ -191,12 +193,20 @@
     <h1 id = "customers" class="text-3xl uppercase text-gray-700 pt-16 pb-2 font-bold text-center">Customer</h1>
     <div class="bg-white rounded-lg">   
             <div class=" container mx-auto py-4">
-            <form class=" flex group relative">
-                        <svg width="20" height="20" fill="currentColor" class="absolute left-3 top-1/2 -mt-2.5 text-slate-400 pointer-events-none group-focus-within:text-gray-500" aria-hidden="true">
+            <form class=" flex group relative" action="/admin/customer_search" method="get">
+                        {{!-- <svg width="20" height="20" fill="currentColor" class="absolute left-3 top-1/2 -mt-2.5 text-slate-400 pointer-events-none group-focus-within:text-gray-500" aria-hidden="true">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
-                        </svg>
-                        <input class="focus:ring-2 focus:ring-gray-500 focus:outline-none appearance-none w-10/12 text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2  pl-10 pr-4 ring-1 ring-slate-200 shadow-sm truncate" type="text" aria-label="Filter projects" placeholder="Search ...">
-                        <a href="/admin/customer_add" class="px-5"><i class="fa-solid fa-add"></i></a>
+                        </svg> --}}
+                        <input id="customer_search" name="customer_search" class="focus:ring-2 ml-2 focus:ring-gray-500 focus:outline-none appearance-none w-10/12 text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2  pl-10 pr-4 ring-1 ring-slate-200 shadow-sm truncate" type="text" aria-label="Filter projects" placeholder="Search ...">
+                        <button type="submit" class="font-bold bg-gray-200 w-1/12 mx-2 rounded-lg">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <button onclick="location.href='/admin/customer_seacrh_{{customer._id}}'" type="button" class=" font-bold bg-gray-200 text-green-600 w-1/12 mx-2 rounded-lg">
+                                 All
+                        </button>
+                        <button onclick="location.href='/admin/customer_add'" type="button" class="bg-green-200 w-2/12 mx-2 rounded-lg font-bold">
+                                <i class="fa-solid fa-add"></i>
+                        </button>
             </form>
             </div>
             <div class="relative shadow-md sm:rounded-lg  overflow-y-auto dark:bg-white " style="max-height: 850px;">
@@ -234,17 +244,23 @@
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <td><input type="checkbox"></td>
                                     <td>{{sum @index 1}}</td>
-                                    <td>{{this.customer_name}}</td>
+                                    <td>                  
+                                        <a href="/admin/customer_detail/{{this.customer_name}}" class="text-green-800 font-bold">
+                                                {{this.customer_name}}
+                                        </a>
+                                    </td>
                                     <td>{{this.customer_email}}</td>
                                     <td>{{this.customer_phone}}</td>
                                     <td>{{this.createdAt}}</td>
                                     <td class="flex gap-2">
-                                    <button class="bg-gray-200 text-red-500 py-2 px-4 rounded flex items-center hover:bg-gray-300">
-                                                <i class="fa-regular fa-trash-can"></i>
-                                    </button>
-                                    <button class="bg-gray-200 text-green-500 py-2 px-4 rounded flex items-center hover:bg-gray-300">
+                                        <form method="post" action="/admin/customer_delete/{{this._id}}?_method=DELETE">
+                                                <button type="submit" class="bg-gray-200 text-red-500 w-full mx-3 rounded-lg" data-toggle="modal" data-target="#deleteModal">
+                                                        <i class="fa-regular fa-trash-can"></i>
+                                                </button>
+                                        </form>
+                                        <button onclick="location.href='/admin/customer_{{this._id}}'" type="button" class="bg-gray-200 text-yellow-500 w-full mx-2 rounded-lg">
                                                 <i class="fa-solid fa-pen"></i>
-                                    </button>
+                                        </button>
                                     </td>
                         </tr>
                         {{/each}}
@@ -260,9 +276,10 @@
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
                         </svg>
                         <input class="focus:ring-2 focus:ring-gray-500 focus:outline-none appearance-none w-10/12 text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2  pl-10 pr-4 ring-1 ring-slate-200 shadow-sm truncate" type="text" aria-label="Filter projects" placeholder="Search ...">
-                        <button class="bg-gray-200 ml-4 text-green-500 rounded w-2/12 items-center hover:bg-gray-300">
-                        <i class="fa-solid fa-add"></i>
+                        <button onclick="location.href='/admin/invoice_add'" type="button" class="bg-green-200 w-2/12 mx-2 rounded-lg">
+                                <i class="fa-solid fa-add"></i>
                         </button>
+
             </form>
             </div>
             <div class="relative shadow-md sm:rounded-lg dark:bg-white h-100" style="max-height: 850px; ">
