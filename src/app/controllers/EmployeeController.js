@@ -27,39 +27,62 @@ class EmployeeController {
         try {
             // Data from form submit
             const { full_name, phone_number, email_address } = req.body;
-            
+            const employee = {
+                employee_name: full_name,
+                employee_phone: phone_number,
+                employee_email: email_address,
+                account_status: "inactive", 
+                hire_date: Date.now(), 
+                is_admin: false,
+                login: {
+                    token: Math.random().toString(36).slice(-6),
+                    expiration: Date.now()
+                },
+                username: email_address.split('@')[0],
+                password: '',
+                profile_picture: ''
+                } 
 
 
             // Create token login
-            const login = {
-                token: '',
-                expiration: Date.now()
-            }
-            login.token = Math.random().toString(36).slice(-6);
-            const loginLink = `${process.env.DOMAIN}/login/${login.token}`;
+            const loginLink = `${process.env.DOMAIN}/login/${employee.login.token}`;
             
-            // Config nodemailer
-            const transporter = nodemailer.createTransport({
-              service: 'gmail',
-              auth: {
-                user: process.env.EMAIL, // your Gmail address
-                pass: process.env.PASSWORD_EMAIL, // your Gmail app password
-              },
-            });
-        
-            // Send email
-            const info = await transporter.sendMail({
-              from: process.env.EMAIL,
-              to: email_address,
-              subject: 'Account Created',
-              text: `Dear ${full_name},\n\nYour account has been created. Please click on the following link to log in: ${loginLink}`,
-            });
-        
-            // Send result
-            res.status(200).json({
-              success: true,
-              message: 'Account created successfully. Check your email for the login link.',
-            });
+            // Save to database
+            EmployeeModel.createEmployee(employee)
+                .then(async(data) => {
+                    // Config nodemailer
+                    const transporter = nodemailer.createTransport({
+                        service: 'gmail',
+                        auth: {
+                        user: process.env.EMAIL, // your Gmail address
+                        pass: process.env.PASSWORD_EMAIL, // your Gmail app password
+                        },
+                    });
+                
+                    // Send email
+                    const info = await transporter.sendMail({
+                        from: process.env.EMAIL,
+                        to: data.email_address,
+                        subject: 'Account Created',
+                        text: `Dear ${data.full_name},\n\nYour account has been created. Please click on the following link to log in: ${data.loginLink}`,
+                    });
+                
+                    // Send result
+                    res.status(200).json({
+                        success: true,
+                        message: 'Account created successfully. Check your email for the login link.',
+                    });
+                })
+                .catch(error =>{
+                    res.status(500).json({
+                        success: false,
+                        message: '',
+                      });
+                      console.log(error);
+                })
+
+
+            
         } catch (error) {
             console.error('Error sending email:', error);
             res.status(500).json({
@@ -68,6 +91,7 @@ class EmployeeController {
             });
         }
     }
+
 
 }
 
