@@ -2,7 +2,7 @@
 class InvoiceController {
     //GET /home
     invoice(req, res) {
-        res.render("pages/invoice",)
+        res.render("pages/invoice/invoice",)
     }
 }
 

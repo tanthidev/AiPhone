@@ -34,23 +34,25 @@
         </div>
         <br>
         {{!-- Items --}}
-        <div class="overflow-scroll overflow-x-hidden">
-            <div class="grid grid-cols-6 gap-3 ">
+        <div class="overflow-scroll " >
+            <div class="grid grid-cols-4 gap-3 ">
                 {{#each data}}
-                    <div class="relative flex justify-center text-center cursor-pointer p-2 border rounded-lg">
+                    <div class="relative flex justify-center text-left cursor-pointer p-2 border rounded-lg">
                         <div>
-                            <img src={{this.link_image}} alt="image"/>
+                            <img src={{this.link_image}} alt="image" style="height: 220px; object-fit: cover;"/>
                             <h2 class="font-semibold text-xl">{{this.product_name}}</h2>
-                            <span class="text-base">{{this.retail_price.64GB}}</span>
+                            <p class="py-2 font-semibold text-xl text-green-600">{{this.retail_price.64GB}}$</p>
+                            <p class="text-xs font-semibold" style="display: inline;">Screen: <p class="text-xs" style="display: inline;"> {{this.configuration.screen}}</p></p>
+                            <p class="flex text-xs font-semibold" style="display: inline;">Camera font: <p class="text-xs" style="display: inline;"> {{this.configuration.camera_font}}</p></p>
+                            <p class="flex text-xs font-semibold" style="display: inline;">Camera back <p class="text-xs" style="display: inline;"> {{this.configuration.camera_back}}</p></p>
+                            <p class="text-xs font-semibold" style="display: inline;">Chip: <p class="text-xs" style="display: inline;"> {{this.configuration.chip}}</p></p>
+                            <p class="text-xs font-semibold" style="display: inline;">Ram: <p class="text-xs" style="display: inline;"> {{this.configuration.ram}}</p></p>
+                            <p class="text-xs font-semibold" style="display: inline;">Pin: <p class="text-xs" style="display: inline;"> {{this.configuration.pin}}</p></p>
                         </div>
                         <div class="absolute w-full h-full opacity-30 top-0 hover:bg-gray-400 rounded-lg">
-
                         </div>
                     </div>
-                                    
-
                 {{/each}}
-
             </div>
         </div>
     </div>

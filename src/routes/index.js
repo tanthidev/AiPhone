@@ -8,21 +8,27 @@ const loginRouter = require('./login');
 const invoiceRouter = require('./invoice');
 const customerRouter = require('./customer');
 const employeeRouter = require('./employee');
-const suplierRouter = require('./suplier');
+const adminCustomerRouter = require('./admin_customer');
+const adminEmployeeRouter = require('./admin_employee');
+const adminInvoiceRouter = require('./admin_invoice');
+const adminProductRouter = require('./admin_product');
 const reportRouter = require('./report');
 const {checkLogin, logout, checkAdmin} = require('../middlewares/authMiddleware')
 
 function route(app) {
-    app.use('/productlist',checkLogin, productsRouter);
-    app.use('/pos',checkLogin, posRouter);
-    app.use('/login', loginRouter);
-    app.use('/invoice',checkLogin, invoiceRouter);
-    app.use('/customer',checkLogin, customerRouter);
-    app.use('/employee',checkLogin, checkAdmin, employeeRouter);
-    app.use('/report',checkLogin, reportRouter);
-    app.use('/suplier',checkLogin, suplierRouter);
+    app.use('/productlist', productsRouter);
+    app.use('/pos',posRouter);
+    app.use('/login' ,loginRouter);
+    app.use('/invoice',invoiceRouter);
+    app.use('/customer',customerRouter);
+    app.use('/employee',employeeRouter);
+    app.use('/report',reportRouter);
+    app.use('/admin_employee', adminEmployeeRouter);
+    app.use('/admin_customer', adminCustomerRouter);
+    app.use('/admin_invoice', adminInvoiceRouter);
+    app.use('/admin_product', adminProductRouter);
     app.get('/logout', logout);
-    app.use('/',checkLogin, homeRouter);
+    app.use('/', homeRouter);
 }
 
 module.exports = route;

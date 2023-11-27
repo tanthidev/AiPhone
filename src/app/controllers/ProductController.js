@@ -1,12 +1,19 @@
-class ProductController {
-    //GET /news
-    index(req, res) {
-        res.render('pages/productlist');
-    }
+const ProductModel = require('../models/product.model')
 
-    show(req, res) {
-        res.send('Something!!!');
+class ProductController {
+    //GET /home
+    product(req, res) {
+        ProductModel.getProducts()
+            .then(data =>{
+                // res.send(data)
+                res.render("pages/product/productlist", {data})
+                
+            })
+            .catch(error =>{
+
+            })
     }
 }
 
 module.exports = new ProductController();
+ 
