@@ -1,4 +1,4 @@
-<div class = "flex flex-col dark:bg-white px-5 pb-5 pt-1 rounded-lg">
+{{!-- <div class = "flex flex-col dark:bg-white px-5 pb-5 pt-1 rounded-lg">
     <div class=" container mx-auto py-4">
         <form class=" flex group relative">
             <svg width="20" height="20" fill="currentColor" class="absolute left-3 top-1/2 -mt-2.5 text-slate-400 pointer-events-none group-focus-within:text-gray-500" aria-hidden="true">
@@ -88,7 +88,54 @@
             </tbody>
         </table>
     </div>
-</div>
+</div> --}}
+
+<!-- product Table -->
+        <table class="min-w-full bg-white border border-gray-300 rounded-md">
+            <thead>
+                <tr class="bg-gray-100">
+                    <th class="py-2 px-4 border-b">
+                        <input type="checkbox" id="select_all" class="form-checkbox h-5 w-5 text-blue-500">
+                    </th>
+                    <th class="py-2 px-4 border-b">ID</th>
+                    <th class="py-2 px-4 border-b">Name</th>
+                    <th class="py-2 px-4 border-b">Series</th>
+                    <th class="py-2 px-4 border-b">Image</th>
+                    <th class="py-2 px-4 border-b">Details</th>
+                    <th class="py-2 px-4 border-b">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <!-- Product Row (Replace this block for each product) -->
+                {{#each data}}
+                    <tr>
+                        <td class="py-2 px-4 border-b">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-500">
+                        </td>
+                        <td class="py-2 px-4 border-b">{{sum @index 1}}</td>
+                        <td class="py-2 px-4 border-b">{{this.product_name}}</td>
+                        <td class="py-2 px-4 border-b">{{this.series}}</td>
+                        <td class="py-2 px-4 border-b">
+                            <img src={{this.link_image}} alt="Product Image" class="h-16 object-cover rounded-md">
+                        </td>
+                        <td class="py-2 px-4 border-b">
+                            <a href="#" class="text-blue-500">View Details</a>
+                        </td>
+
+                        <td class="py-2 px-4 border-b">
+                            <button class="bg-blue-500 text-white px-4 py-2 rounded-md">Edit</button>
+                            <button class="bg-red-500 text-white ml-2 px-4 py-2 rounded-md">Delete</button>
+                        </td>
+                    </tr>
+                {{/each}}
+                <!-- End Product Row -->
+
+                <!-- Repeat the Product Row block for each product -->
+
+            </tbody>
+        </table>
+        <!-- End Product Table -->
 
 <script>
 document.getElementById('select_all').addEventListener('change', function() {

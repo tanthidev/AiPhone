@@ -5,6 +5,7 @@ require('dotenv').config();
 const EmployeeModel = require('../app/models/employee.model')
 
 const checkLogin = (req, res, next) => {
+    console.log(req.cookies);
   const token = req.cookies.token; // Lấy token từ cookie
 
   if (!token) {
@@ -12,6 +13,8 @@ const checkLogin = (req, res, next) => {
       return res.redirect('/login');
   }
 
+
+  //Có token
   jwt.verify(token, process.env.TOKEN_SECRET_KEY, (err, user) => {
       if (err) {
           // Nếu token không hợp lệ, chuyển hướng về trang đăng nhập

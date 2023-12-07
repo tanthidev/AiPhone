@@ -28,7 +28,7 @@ function route(app) {
     app.use('/admin_invoice', adminInvoiceRouter);
     app.use('/admin_product', adminProductRouter);
     app.get('/logout', logout);
-    app.use('/', homeRouter);
+    app.use('/',homeRouter);
 }
 
 module.exports = route;

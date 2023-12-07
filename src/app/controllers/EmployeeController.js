@@ -1,5 +1,6 @@
 const EmployeeModel = require('../models/employee.model')
 const nodemailer = require('nodemailer');
+const { deleteEmployee } = require('./AdminController');
 require('dotenv').config
 
 class EmployeeController {
@@ -18,8 +19,10 @@ class EmployeeController {
     }
 
 
+
     // Add employee
     createEmployee(req, res) {
+        
         res.render("pages/employee/createEmployee")
     }
 
@@ -49,24 +52,24 @@ class EmployeeController {
             
             // Save to database
             EmployeeModel.createEmployee(employee)
-                .then(async(data) => {
+                .then(async() => {
                     // Config nodemailer
                     const transporter = nodemailer.createTransport({
                         service: 'gmail',
                         auth: {
-                        user: process.env.EMAIL, // your Gmail address
-                        pass: process.env.PASSWORD_EMAIL, // your Gmail app password
+                            user: process.env.EMAIL, // your Gmail address
+                            pass: process.env.PASSWORD_EMAIL, // your Gmail app password
                         },
                     });
-                
+                    
                     // Send email
                     const info = await transporter.sendMail({
                         from: process.env.EMAIL,
-                        to: data.email_address,
+                        to: email_address,
                         subject: 'Account Created',
-                        text: `Dear ${data.full_name},\n\nYour account has been created. Please click on the following link to log in: ${data.loginLink}`,
+                        text: `Dear ${employee_name},\n\nYour account has been created. Please click on the following link to log in: ${loginLink}`,
                     });
-                
+                    
                     // Send result
                     res.status(200).json({
                         success: true,
@@ -78,7 +81,6 @@ class EmployeeController {
                         success: false,
                         message: '',
                       });
-                      console.log(error);
                 })
 
 
@@ -92,6 +94,17 @@ class EmployeeController {
         }
     }
 
+    //Delete Employee
+    deleteEmployee(req, res){
+        const id = req.originalUrl.split('/')[2];
+        EmployeeModel.deleteEmployee(id)
+            .then(data => {
+                res.redirect('/employee')
+            }) 
+            .catch(error =>{
+                // res.redirect('/employee')
+            })
+    }
 
 }
 

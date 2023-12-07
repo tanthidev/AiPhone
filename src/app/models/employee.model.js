@@ -3,7 +3,7 @@ const axios = require('axios');
 
 const CLIENT_APP_ID = process.env.MONGODB_CLIENT_APP_ID; // Replace with your actual Client App ID
 const API_KEY = process.env.MONGODB_API_KEY;
-var requestData = {
+const baseRequestData = {
   "collection": "employees",
   "database": "AiPhoneStore",
   "dataSource": "AiPhone",
@@ -18,7 +18,7 @@ const EmployeeModel = {
       const apiUrl = `https://data.mongodb-api.com/app/${CLIENT_APP_ID}/endpoint/data/v1/action/find`;  
 
       // Add filter
-      requestData.filter = {}
+      const requestData = { ...baseRequestData, filter: {} };
 
       const config = {
         method: 'post',
@@ -49,10 +49,7 @@ const EmployeeModel = {
 
       const regexName = { $regex: name, $options: 'i' }; // 'i' option for case-insensitive search
 
-      requestData.filter= {
-        "employee_name": regexName
-      }
-
+      const requestData = {...baseRequestData, filter:{"employee_name": regexName}}
 
       const config = {
         method: 'post',
@@ -110,11 +107,9 @@ const EmployeeModel = {
     try {
       // API 
       const apiUrl = `https://data.mongodb-api.com/app/${CLIENT_APP_ID}/endpoint/data/v1/action/findOne`;
-      requestData.filter= {
-        "username": username
-      }
-
-
+      
+      const requestData = {...baseRequestData, filter: {"username": username}}
+      
       const config = {
         method: 'post',
         url: apiUrl,
@@ -154,7 +149,7 @@ const EmployeeModel = {
         profile_picture
         } = employee
       
-      requestData.document= {
+      const requestData = {...baseRequestData, document: {
         employee_name,
         employee_phone,
         employee_email,
@@ -165,7 +160,8 @@ const EmployeeModel = {
         username,
         password,
         profile_picture
-      }
+      }}
+
 
 
       const config = {
@@ -251,12 +247,16 @@ const EmployeeModel = {
       // API 
       const apiUrl = `https://data.mongodb-api.com/app/${CLIENT_APP_ID}/endpoint/data/v1/action/deleteOne`;
 
-      requestData.filter= {
-        "_id": employee_id
+      const requestData = {
+        ...baseRequestData, 
+        filter: {
+          "_id": employee_id
+        }
       }
 
+
       const config = {
-        method: 'delete',
+        method: 'post',
         url: apiUrl,
         headers: {
           'Content-Type': 'application/json',
