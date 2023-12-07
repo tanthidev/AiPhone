@@ -128,15 +128,9 @@ class AdminController {
       //GET search Customer
       async searchCustomer(req, res) {
         try {
-            console.log(req.query.customer_search)
             const customer = await Customer.findOne({customer_name: req.query.customer_search});
-            console.log(customer);
-            const employee = await Employee.find();
-            const product = await Product.find();
             const customers =customer;
-            const employees=mulToObject(employee);
-            const products=mulToObject(product);
-            res.render("pages/admin/admin_customer", { customers, employees, products });
+            res.render("pages/admin/admin_customer", { customers});
           } catch (error) {
             res.send("Render Admin Error");
         }
