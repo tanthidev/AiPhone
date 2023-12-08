@@ -22,7 +22,7 @@ const productSchema = new Schema({
   createdAt:{type: Date,default: Date.now},
   colors: {
     type: [String],
-    default: ["Updating", "Updating", "Updating"]
+    default: ['Black', "White", "Gold"]
   },
   link_image: String,
   configuration: {

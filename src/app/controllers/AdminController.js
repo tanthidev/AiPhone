@@ -4,6 +4,7 @@ const ProductModel = require('../models/product.model')
 const Customer = require('../model_mongoose/customer');
 const Employee = require('../model_mongoose/employee');
 const Product = require('../model_mongoose/product');
+const Invoice = require('../model_mongoose/invoice');
 const { render } = require('node-sass');
 const { mulToObject } = require('../util/mongoose');
 const { singleToObject } = require('../util/mongoose');
@@ -48,7 +49,35 @@ class AdminController {
         }
       }
 
-      
+      //Create a Customer
+    async addProduct(req, res) {
+      try {
+      res.render('pages/product/product_add');
+      } catch (error) {
+      res.status(500).json(err);
+      }
+  }
+  storeProduct(req, res) {
+    try {
+        console.log(req.body)
+        const product = new Product(req.body);
+        product.save();
+        res.redirect('/admin_product');
+      } catch (error) {
+        res.status(500).json(err);
+      }
+  }
+    async storeInvoice(req, res) {
+      try {
+          console.log(req.body)
+          const invoices = new Invoice(req.body);
+          invoices.save();
+          const invoice = await Invoice.find();
+          res.render("pages/invoice/invoice", { data: mulToObject(invoice)});
+        } catch (error) {
+          res.send('error storenvoice');
+        }
+    }
     //Create an Employee
     async addEmployee(req, res, next) {
         try {
