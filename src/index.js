@@ -11,7 +11,7 @@ const methodOverride = require('method-override');
 require('dotenv').config();
 
 //Connect database
-// db.connect()
+db.connect()
 
 // app.use(methodOverride('_method'));
 // app.use(cookieParser());

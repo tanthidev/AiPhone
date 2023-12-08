@@ -19,6 +19,17 @@ class PosController {
     show(req, res) {
         res.send('More in pos!!!')
     }
+
+    async cashPayment(req, res) {
+      try {
+          const orders = req.query.orders;
+          const ordersArray = JSON.parse(decodeURIComponent(orders));
+          console.log(ordersArray);
+          res.render('pages/cashPayment', { orders: ordersArray });
+        } catch {
+          res.send('Wrong cashPayment');
+        }
+    }
 }
 
 module.exports = new PosController();

@@ -1,20 +1,14 @@
 <div class = "flex flex-col dark:bg-white px-5 pb-5 pt-1 rounded-lg">
     <div class=" container mx-auto py-4">
-        <form class=" flex group relative" action="/customer/customer_search" method="get">
-                        {{!-- <svg width="20" height="20" fill="currentColor" class="absolute left-3 top-1/2 -mt-2.5 text-slate-400 pointer-events-none group-focus-within:text-gray-500" aria-hidden="true">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
-                        </svg> --}}
-                        <input id="customer_search" name="customer_search" class="focus:ring-2 ml-2 focus:ring-gray-500 focus:outline-none appearance-none w-10/12 text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2  pl-10 pr-4 ring-1 ring-slate-200 shadow-sm truncate" type="text" aria-label="Filter projects" placeholder="Search ...">
-                        <button type="submit" class="font-bold bg-gray-200 w-1/12 mx-2 rounded-lg">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                        {{!-- <button onclick="location.href='/admin/customer_seacrh_{{customer._id}}'" type="button" class=" font-bold bg-gray-200 text-green-600 w-1/12 mx-2 rounded-lg">
-                                 All
-                        </button> --}}
-            </form>
+        <form id="customerSearchForm" class=" flex group relative">
+            <input id="customer_search" name="customer_search" class="focus:ring-2 ml-2 focus:ring-gray-500 focus:outline-none appearance-none w-10/12 text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2  pl-10 pr-4 ring-1 ring-slate-200 shadow-sm truncate" type="text" aria-label="Filter projects" placeholder="Search ...">
+            <button type="submit" class="font-bold bg-gray-200 w-1/12 mx-2 rounded-lg">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
     </div>
     <div class="relative shadow-md sm:rounded-lg  overflow-y-auto dark:bg-white ">
-        <table class="w-full text-left rtl:text-right">
+        <table id="customerTable" class="w-full text-left rtl:text-right">
             <thead class=" text-xm text-gray-700  uppercase bg-gray-200 dark:bg-gray-700 ">
                 <tr>
                     <th scope="col" class="p-4">
@@ -52,24 +46,53 @@
                     </tr>
                 {{/each}}
             </tbody>
-            <tbody>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <td><input type="checkbox"></td>
-                        <td>{{ sum @index 1}}</td>
-                        <td>{{dataSearch.customer_name}}</td>
-                        <td>{{dataSearch.customer_email}}</td>
-                        <td>{{dataSearch.customer_phone}}</td>
-                        <td>{{dataSearch.createdAt}}</td>
-                    </tr>
-            </tbody>
         </table>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 <script>
-document.getElementById('select_all').addEventListener('change', function() {
-const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-for (const checkbox of checkboxes) {
-    checkbox.checked = this.checked;
-    }
-});
+    document.getElementById('select_all').addEventListener('change', function() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    for (const checkbox of checkboxes) {
+        checkbox.checked = this.checked;
+        }
+    });
+
+    $(document).ready(function () {
+        // Function to update the table with data
+        function updateTable(data) {
+            const tableBody = $('#customerTable tbody');
+            tableBody.empty(); // Clear the existing table rows
+            // Handle a single row
+            const newRow = $('<tr>').addClass('bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600');
+            newRow.append('<td><input type="checkbox"></td>');
+            newRow.append('<td>' + 1 + '</td>');
+            newRow.append('<td>' + data.customer_name + '</td>');
+            newRow.append('<td>' + data.customer_email + '</td>');
+            newRow.append('<td>' + data.customer_phone + '</td>');
+            newRow.append('<td>' + data.createdAt + '</td>');
+            tableBody.append(newRow);
+        }
+
+        // Your existing code for handling form submission
+        $('#customerSearchForm').submit(function (e) {
+            e.preventDefault();
+
+            const searchTerm = $('#customer_search').val();
+
+            $.ajax({
+                type: 'GET',
+                url: '/customer/customer_search',
+                data: { customer_search: searchTerm },
+                success: function (data) {
+                    console.log("Received data:", data);
+                    updateTable(data.data);
+                },
+                error: function (error) {
+                    console.log("error");
+                }
+            });
+        });
+    });
 </script>

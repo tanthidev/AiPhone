@@ -1,6 +1,6 @@
 <div class="relative grid grid-cols-3 gap-2 w-full h-full">
     {{!-- Products --}}
-    <div class="col-span-2 bg-white h-full rounded-lg p-2">
+    <div class="col-span-2 bg-white h-full rounded-lg p-2 overflow-scroll">
         {{!-- Category product --}}
         <div>
             <table class="w-full text-base" id="menu_iphone">
@@ -37,13 +37,31 @@
         <div class="overflow-scroll " >
             <div class="grid grid-cols-4 gap-3 ">
                 {{#each data}}
-                    <div class="hover:bg-gray-200 hover:text-black cursor-pointer relative flex justify-center text-left  p-2 border rounded-lg">
-                        <div onclick="addToOrder('{{this.product_name}}', '{{this.retail_price.64GB}}','{{this.link_image}}','{{this.barcode}}','{{@index}}')">
-                            <img src={{this.link_image}} alt="image" style="height: 220px; object-fit: cover;"/>
-                            <h2 class="font-semibold text-xl py-3">{{this.product_name}}</h2>
-                            <p class="py-2 font-semibold text-xl text-green-600">{{this.retail_price.64GB}}$ </p>
+                    {{#each this.retail_price}}
+                        <div class="hover:bg-gray-200 hover:text-black cursor-pointer relative flex justify-center text-left  p-2 border rounded-lg">
+                            <div onclick="addToOrder('{{../this.product_name}}', '{{this}}','{{../this.link_image}}','{{this}}','{{@index}}','{{@key}}')">
+                                <img src={{../this.link_image}} alt="image" style="height: 220px; object-fit: cover;"/>
+                                <h2 class="font-semibold text-xl py-3">{{../this.product_name}} {{@key}}</h2>
+                                <p class="py-2 font-semibold text-xl text-green-600">{{this}}$</p>
+                                {{!-- <div class="flex">
+                                    <div>
+                                        <p class="font-bold">Memory</p>
+                                        {{#each this.retail_price}}
+                                            <input type="radio" id="{{this}}" name="memory" value="HTML">
+                                            <label for="{{this}}">{{@key}}</label><br>
+                                        {{/each}}
+                                    </div>
+                                    <div class="pl-8">
+                                        <p class="font-bold">Color</p>
+                                        {{#each this.colors}}
+                                            <input type="radio" id="{{this}}" name="color" value="HTML">
+                                            <label for="{{this}}">{{this}}</label><br>
+                                        {{/each}}
+                                    </div>
+                                </div> --}}
+                            </div>
                         </div>
-                    </div>
+                    {{/each}}
                 {{/each}}
             </div>
         </div>
@@ -51,38 +69,34 @@
 
 
     {{!-- Order list --}}
-    <div class="bg-white h-full rounded-lg p-3 ">
+    <div class="bg-white  rounded-lg p-3 ">
         
         {{!--  --}}
         <div class="h-4/5 flex flex-col border-b-2 mb-2">
             <h1 class="font-bold text-xl">Customer Information</h1>
-            <form method="post" action="/customer/customer_search_pos" class="bg-gray-200 rounded-lg">
+            <form id="customerSearchForm" class="bg-gray-200 rounded-lg">
+                <div class="form-group">
+                    <label for="customer_phone">Phone</label>
+                    <input type="input" class="bg-gray-200" id="customer_phone" name="customer_phone" placeholder="Phone">
+                </div>
                 <div class="form-group">
                     <label for="customer_name">Name</label>
                     <input type="input" class="bg-gray-200" id="customer_name" name="customer_name" placeholder="Name">
-                </div>
-                    <div class="form-group">
-                    <label for="customer_phone">Phone</label>
-                    <input type="input" class="bg-gray-200" id="customer_phone" name="customer_phone" placeholder="Phone">
                 </div>
                     <div class="form-group">
                     <label for="customer_email">Email</label>
                     <input type="input" class="bg-gray-200" id="customer_email" name="customer_email" placeholder="Email">
                 </div>
                 <div class="flex gap-2">
-                    <button type="submit" class="btn btn-primary bg-green-300 w-full rounded-lg">
+                    <button type="submit" class="btn btn-primary w-full text-black py-2 px-5 hover:bg-green-500 hover:text-black bg-green-200 rounded-lg">
                         <i class="fas fa-plus mr-2"></i>
                         Check 
                     </button>
                 </div>  
             </form>
             <div class="my-2 pb-3 border-b-2 flex justify-between">
-                {{!-- <button class="bg-gray-200 text-black py-2 px-4 rounded flex items-center hover:bg-gray-300">
-                    <i class="fas fa-plus mr-2"></i>
-                    Add Customer
-                </button> --}}
-
                 <div class="flex gap-2">
+
                     {{!-- Barcode --}}
                     <button class="bg-gray-200 text-black py-2 px-4 rounded flex items-center hover:bg-gray-300">
                         <i class="fa-solid fa-barcode"></i>
@@ -122,10 +136,10 @@
                     <div class="flex flex-cols justify-center">
                         <input class="hidden" type="radio" id="cash" name="methodpayment" value="cash">
                         <label for="cash">
-                            <div id="img-area" class="h-14 flex flex-col justify-between text-gray-400 px-5">
+                            <button id="payButton" class="h-14 flex flex-col justify-center text-black py-2 px-5 hover:bg-green-500 hover:text-black bg-green-200 rounded-lg">
                                 <img class="h-6 mt-1" src="/images/cash.png">
-                                <span class="text">Cash</span>
-                            </div>
+                                <span  class="text">Cash</span >
+                            </button>
                         </label>
                     </div>
 
@@ -133,50 +147,32 @@
                     <div class="flex flex-cols justify-center">
                         <input class="hidden" type="radio" id="debit" name="methodpayment" value="debit">
                         <label for="debit">
-                            <div id="img-area" class="h-14 flex flex-col justify-between text-gray-400 py-2 px-5">
+                            <div id="img-area" class="h-14 flex flex-col justify-between text-black py-2 px-5 hover:bg-green-500 hover:text-black bg-green-200 rounded-lg">
                                 <img class="h-6" src="/images/debit.png">
-                                <span class="text">Debit</span>
+                                <button class="text">Debit</button>
                             </div>
                         </label>
                     </div>
-                    {{!-- Scan --}}
-                    {{!-- <div class="flex flex-cols justify-center">
-                        <input class="hidden" type="radio" id="scan" name="methodpayment" value="scan">
-                        <label for="scan">
-                            <div id="img-area" class="h-14 flex flex-col justify-between text-gray-400 py-2 px-5">
-                                <img class="h-6" src="https://dreamspos.dreamguystech.com/html/template/assets/img/icons/scan.svg">
-                                <span class="text">Scan</span>
-                            </div>
-                        </label>
-                    </div> --}}
-                </div>
-            </div>
-
-            {{!-- Button Pay --}}
-            <div class="flex justify-end items-center">
-                <div class="m-3">
-                    <button class="bg-green-500 text-gray-800 font-bold rounded-md border-b-4 border-blue-500 hover:border-blue-600 hover:bg-blue-500 hover:text-white shadow-2xl py-2 px-6 inline-flex items-center ">
-                        <span class="mr-2">Pay</span>
-                        <i class="fa-regular fa-money-bill-1"></i>
-                    </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     function toggleDropdown(n) {
         const dropdown = document.getElementById('dropdown' + n);
         dropdown.classList.toggle('hidden');
     }
 
-    function addToOrder(productName, initialProductPrice, image, barcode, index) {
+    let i = 0;
+    function addToOrder(productName, initialPrice, image, barcode,index ,memory) {
         // Get the order list container
         const orderListContainer = document.querySelector('.order-list');
 
         // Check if the product with the same name already exists in the order list
-        const existingProduct = orderListContainer.querySelector(`[data-product-name="${productName}"]`);
+        {{!-- const existingProduct = orderListContainer.querySelector(`[data-product-name="${productName}"]`); --}}
 
         // Create a unique identifier for the priceItem
         const priceItemId = `priceItem-${index}`;
@@ -184,75 +180,82 @@
         // Declare quantityInput outside the if-else block
         let quantityInput;
 
-        if (existingProduct) {
-            // If the product exists, update its quantity
-            quantityInput = existingProduct.querySelector('.quantity-input');
-            quantityInput.value = parseInt(quantityInput.value) + 1;
-        } else {
-            // If the product doesn't exist, create a new entry for the order list
-            const orderItem = document.createElement('div');
-            orderItem.classList.add('relative', 'px-2', 'rounded', 'my-2', 'py-3', 'bg-gray-100');
-            orderItem.setAttribute('data-product-name', productName);
+        // If the product doesn't exist, create a new entry for the order list
+        const orderItem = document.createElement('div');
+        orderItem.classList.add('relative', 'px-2', 'rounded', 'my-2', 'py-3', 'bg-gray-100');
+        orderItem.setAttribute('data-product-name', productName);
+        orderItem.setAttribute('memory', memory);
+        orderItem.setAttribute('price', initialPrice);
 
-            // Assign the value of quantityInput in the else block
-            quantityInput = document.createElement('input');
-            quantityInput.classList.add('quantity-input', 'border', 'border-gray-300', 'w-16', 'text-center');
+        // Assign the value of quantityInput in the else block
+        quantityInput = document.createElement('input');
+        quantityInput.classList.add('quantity-input', 'border', 'border-gray-300', 'w-16', 'text-center');
 
-            // Add event listener to quantityInput
-            quantityInput.addEventListener('input', function () {
-                updateProductPrice(this, initialProductPrice, priceItemId);
-            });
+        // Add event listener to quantityInput
+        quantityInput.addEventListener('input', function () {
+            updateProductPrice(this, initialPrice, priceItemId);
+        });
 
-            // Fill the content of the order item (customize as needed)
-            orderItem.innerHTML = `
-                <div class="block">
-                    <div onclick="toggleDropdown(${index})" class="flex justify-between items-center cursor-pointer">
-                        <div class="flex gap-4 items-center">
-                            <div>
-                                <i class="fa-solid fa-chevron-right"></i>
-                            </div>
-                            <!-- image -->
-                            <div>
-                                <img class="h-10" src="${image}" />
-                            </div>
-                            <!-- Name -->
-                            <span>${productName}</span>
+        // Fill the content of the order item (customize as needed)
+        orderItem.innerHTML = `
+            <div class="block">
+                <div onclick="toggleDropdown(${i})" class="flex justify-between items-center cursor-pointer">
+                    <div class="flex gap-4 items-center">
+                        <div>
+                            <i class="fa-solid fa-chevron-right"></i>
                         </div>
-
-                        <div id="${priceItemId}" class="flex gap-4">
-                            <!-- price -->
-                            <span id = "finalPrice">${initialProductPrice}$</span>
-                            <!-- Delete product -->
-                            <div class="text-gray-500" onclick="deleteProduct(this, '${productName}')">
-                                <i class="fa-solid fa-circle-xmark"></i>
-                            </div>
+                        <!-- image -->
+                        <div>
+                            <img class="h-10" src="${image}" />
                         </div>
+                        <!-- Name -->
+                        <span>${productName} ${memory}</span>
                     </div>
 
-                    <!-- Dropdown -->
-                    <div id="dropdown${index}" class="hidden bg-transparent mt-2 text-sm px-4 w-full">
-                        <div class="flex justify-between mb-2">
-                            <span>Quantity:</span>
-                            <input class="quantity-input border border-gray-300 w-16 text-center" type="number" value="1" oninput="updateProductPrice(this, '${initialProductPrice}', '${priceItemId}')"/>
-                        </div>
-                        <div class="flex justify-between mb-2">
-                            <span>Product Code:</span>
-                            <span>${barcode}</span>
-                        </div>
-                        <div class="flex justify-between mb-2">
-                            <span>Color:</span>
-                            <span>Blue</span>
+                    <div id="${priceItemId}" class="flex gap-4">
+                        <!-- price -->
+                        <span id = "finalPrice">${initialPrice}$</span>
+                        <!-- Delete product -->
+                        <div class="text-gray-500" onclick="deleteProduct(this, '${productName}')">
+                            <i class="fa-solid fa-circle-xmark"></i>
                         </div>
                     </div>
                 </div>
-            `;
 
-                // Append the new order item to the order list container
-                orderListContainer.appendChild(orderItem);
-            }
+                <!-- Dropdown -->
+                <div id="dropdown${i}" class="hidden bg-transparent mt-2 text-sm px-4 w-full">
+                    <div class="flex justify-between mb-2">
+                        <span>Price:</span>
+                        <span id = "initialPrice">${initialPrice}$</span>
+                    </div>
+                    <div class="flex justify-between mb-2">
+                        <span>Quantity:</span>
+                        <input class="quantity-input border border-gray-300 w-16 text-center" type="number" value="1" oninput="updateProductPrice(this, '${initialPrice}', '${priceItemId}')"/>
+                    </div>
+                    <div class="flex justify-between mb-2">
+                        <span>Memory:</span>
+                        <span id="memory">${memory}</span>
+                    </div>
+                    <div class="flex justify-between mb-2">
+                        <span>Color:</span>
+                        <input type="radio" id="Black" name="corlor${i}" value="Black">
+                        <label for="corlor">Black</label><br>
+                        <input type="radio" id="Black" name="corlor${i}" value="White">
+                        <label for="corlor">White</label><br>
+                        <input type="radio" id="Black" name="corlor${i}" value="Gold">
+                        <label for="corlor">Gold</label>
+                    </div>
+                </div>
+            </div>
+        `;
+
+            // Append the new order item to the order list container
+            orderListContainer.appendChild(orderItem);
+            i = i+1;
             calculateTotalPrice();
-            updateProductPrice(quantityInput, initialProductPrice, priceItemId);
+            updateProductPrice(quantityInput, finalPrice, priceItemId);
         }
+        
 
         // Function to update productPrice based on quantityInput value
         function updateProductPrice(quantityInput, priceItem, priceItemId) {
@@ -260,7 +263,7 @@
             const priceElement = parentContainer.querySelector(`#${priceItemId} span`);
             const newProductPrice = priceItem * parseInt(quantityInput.value);
             priceElement.textContent = newProductPrice + "$";
-
+            calculateTotalPrice();
         }
 
         function calculateTotalPrice() {
@@ -271,7 +274,7 @@
 
             orderItems.forEach((quantityInput) => {
                 const parentContainer = quantityInput.closest('.relative');
-                const priceElement = parentContainer.querySelector('#finalPrice');
+                const priceElement = parentContainer.querySelector('#initialPrice');
                 const priceItemId = parseFloat(priceElement.textContent);
                 const quantity = parseInt(quantityInput.value);
                 totalPrice += priceItemId * quantity;
@@ -293,4 +296,82 @@
             orderListContainer.innerHTML = '';
             calculateTotalPrice();
         }
+        $(document).ready(function () {
+            // Function to update the table with data
+            function fillFormInputs(data) {
+                if(data){
+                    $('#customer_name').val(data.customer_name);
+                    $('#customer_email').val(data.customer_email);
+                }else{
+                    $('#customer_name').val("Customer Not Found");
+                    $('#customer_email').val("Customer Not Found");
+                }
+            }
+
+            // Your existing code for handling form submission
+            $('#customerSearchForm').submit(function (e) {
+                e.preventDefault();
+
+                const searchTerm = $('#customer_phone').val();
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/customer/customer_search',
+                    data: { customer_search: searchTerm },
+                    success: function (data) {
+                        console.log("Received data:", data);
+                        fillFormInputs(data.data);
+                    },
+                    error: function (error) {
+                        console.log("error");
+                    }
+                });
+            });
+        });
+
+            // Add an event listener for the Pay button
+        document.getElementById('payButton').addEventListener('click', function () {
+            // Get the order list container
+            const orderListContainer = document.querySelector('.order-list');
+
+            // Get all order items
+            const orderItems = orderListContainer.querySelectorAll('.order-list > div');
+
+            // Create an array to store order details
+            const orders = [];
+            const totalPrice = document.getElementById('totalPrice').textContent;
+            const customer_name = document.getElementById('customer_name').value;
+            const customer_phone = document.getElementById('customer_phone').value;
+            const customer_email = document.getElementById('customer_email').value;
+
+            // Iterate through each order item
+            let i = 0;
+            orderItems.forEach((orderItem) => {
+                const productName = orderItem.getAttribute('data-product-name');
+                const memory = orderItem.getAttribute('memory');
+                const price = orderItem.getAttribute('price');
+                const quantity = orderItem.querySelector('.quantity-input').value;
+                const color = orderItem.querySelector(`input[name='corlor${i}']:checked`)?.value;
+                i = i+1;
+                // Add order details to the array
+                orders.push({
+                    productName: productName,
+                    memory: memory,
+                    quantity: quantity,
+                    color: color,
+                    price: price
+                });
+            });
+            orders.push({
+                totalPrice: totalPrice,
+                customer_name: customer_name,
+                customer_phone: customer_phone,
+                customer_email: customer_email
+            });
+            // Construct the URL with order details
+            const url = `/pos/cashPayment?orders=${encodeURIComponent(JSON.stringify(orders))}`;
+
+            // Navigate to the cashPayment page
+            window.location.href = url;
+        });
 </script>

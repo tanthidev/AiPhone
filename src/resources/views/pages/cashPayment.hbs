@@ -1,0 +1,83 @@
+<div class="flex">
+            <div class="w-2/3 mx-5 bg-white rounded-lg overflow-scroll">
+                        <table class="min-w-full bg-white border border-gray-300 rounded-md">
+                        <thead>
+                        <tr class="bg-gray-100">
+                                    <th class="py-2 px-4 border-b">Name</th>
+                                    <th class="py-2 px-4 border-b">Memory</th>
+                                    <th class="py-2 px-4 border-b">Color</th>
+                                    <th class="py-2 px-4 border-b">Price</th>
+                                    <th class="py-2 px-4 border-b">Quantity</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <!-- Product Row (Replace this block for each product) -->
+                        {{#each orders}}
+                        <tr>
+                                    <td class="py-2 px-4 border-b">{{this.productName}}</td>
+                                    <td class="py-2 px-4 border-b">{{this.memory}}</td>
+                                    <td class="py-2 px-4 border-b">{{this.color}}</td>
+                                    <td class="py-2 px-4 border-b">{{this.price}}</td>
+                                    <td class="py-2 px-4 border-b">{{this.quantity}}</td>
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                        </table>
+            </div>
+            <div class="w-1/3 mx-5 bg-white rounded-lg">
+                        <p class="p-3">Name:
+                                    {{#each orders}}
+                                    {{#if this.customer_name}}
+                                    {{this.customer_name}}
+                                    {{/if}}
+                                    {{/each}}
+                        </p>
+                        <p class="p-3">Phone:
+                                    {{#each orders}}
+                                    {{#if this.customer_phone}}
+                                    {{this.customer_phone}}
+                                    {{/if}}
+                                    {{/each}}
+                        </p>
+                        <p class="p-3 ">Address:
+                                    {{#each orders}}
+                                    {{#if this.customer_email}}
+                                    {{this.customer_email}}
+                                    {{/if}}
+                                    {{/each}}
+                        </p>
+
+                        <p class="p-3 font-bold">TotalPrice</p>
+                        <p class="p-3">
+                                    {{#each orders}}
+                                    {{#if this.totalPrice}}
+                                    {{this.totalPrice}}
+                                    {{/if}}
+                                    {{/each}}
+                        </p>
+                        <p class="p-3 font-bold">Received</p>
+                                    <input id="recieveInput" type="input" class="p-3 bg-green-100 w-full rounded-lg" placeholder="recieve" oninput="calculateTotalPrice('{{#each orders}}{{#if this.totalPrice}}{{this.totalPrice}}{{/if}}{{/each}}', this.value)">
+                        <p class="p-3 font-bold">Exchange</p>
+                        <p class="p-3" id="exchange">0$</p>
+                        <button class="w-full text-black py-2 px-3 hover:bg-green-500 hover:text-black bg-green-200 rounded-lg">Done</button>
+            </div>
+</div>
+
+<script>
+    function calculateTotalPrice(totalPrice, recieveInputValue) {
+        let exchange = 0;
+
+        const recieveAmount = parseFloat(recieveInputValue);
+        const totalPriceAmount = parseFloat(totalPrice);
+
+        if (!isNaN(recieveAmount) && !isNaN(totalPriceAmount)) {
+            exchange = recieveAmount - totalPriceAmount;
+        }
+
+        // Update the content of the element with id "exchange"
+        const exchangeElement = document.getElementById('exchange');
+        exchangeElement.textContent = exchange.toFixed(2) + "$"; 
+    }
+</script>
+
