@@ -37,19 +37,11 @@
         <div class="overflow-scroll " >
             <div class="grid grid-cols-4 gap-3 ">
                 {{#each data}}
-                    <div class="relative flex justify-center text-left cursor-pointer p-2 border rounded-lg">
-                        <div>
+                    <div class="hover:bg-gray-200 hover:text-black cursor-pointer relative flex justify-center text-left  p-2 border rounded-lg">
+                        <div onclick="addToOrder('{{this.product_name}}', '{{this.retail_price.64GB}}','{{this.link_image}}','{{this.barcode}}','{{@index}}')">
                             <img src={{this.link_image}} alt="image" style="height: 220px; object-fit: cover;"/>
-                            <h2 class="font-semibold text-xl">{{this.product_name}}</h2>
-                            <p class="py-2 font-semibold text-xl text-green-600">{{this.retail_price.64GB}}$</p>
-                            <p class="text-xs font-semibold" style="display: inline;">Screen: <p class="text-xs" style="display: inline;"> {{this.configuration.screen}}</p></p>
-                            <p class="flex text-xs font-semibold" style="display: inline;">Camera font: <p class="text-xs" style="display: inline;"> {{this.configuration.camera_font}}</p></p>
-                            <p class="flex text-xs font-semibold" style="display: inline;">Camera back <p class="text-xs" style="display: inline;"> {{this.configuration.camera_back}}</p></p>
-                            <p class="text-xs font-semibold" style="display: inline;">Chip: <p class="text-xs" style="display: inline;"> {{this.configuration.chip}}</p></p>
-                            <p class="text-xs font-semibold" style="display: inline;">Ram: <p class="text-xs" style="display: inline;"> {{this.configuration.ram}}</p></p>
-                            <p class="text-xs font-semibold" style="display: inline;">Pin: <p class="text-xs" style="display: inline;"> {{this.configuration.pin}}</p></p>
-                        </div>
-                        <div class="absolute w-full h-full opacity-30 top-0 hover:bg-gray-400 rounded-lg">
+                            <h2 class="font-semibold text-xl py-3">{{this.product_name}}</h2>
+                            <p class="py-2 font-semibold text-xl text-green-600">{{this.retail_price.64GB}}$ </p>
                         </div>
                     </div>
                 {{/each}}
@@ -59,16 +51,36 @@
 
 
     {{!-- Order list --}}
-    <div class="bg-white h-full rounded-lg p-3">
+    <div class="bg-white h-full rounded-lg p-3 ">
         
         {{!--  --}}
-        <div class="h-2/3 flex flex-col border-b-2 mb-2">
-            <h1 class="font-bold text-xl">List Order</h1>
+        <div class="h-4/5 flex flex-col border-b-2 mb-2">
+            <h1 class="font-bold text-xl">Customer Information</h1>
+            <form method="post" action="/customer/customer_search_pos" class="bg-gray-200 rounded-lg">
+                <div class="form-group">
+                    <label for="customer_name">Name</label>
+                    <input type="input" class="bg-gray-200" id="customer_name" name="customer_name" placeholder="Name">
+                </div>
+                    <div class="form-group">
+                    <label for="customer_phone">Phone</label>
+                    <input type="input" class="bg-gray-200" id="customer_phone" name="customer_phone" placeholder="Phone">
+                </div>
+                    <div class="form-group">
+                    <label for="customer_email">Email</label>
+                    <input type="input" class="bg-gray-200" id="customer_email" name="customer_email" placeholder="Email">
+                </div>
+                <div class="flex gap-2">
+                    <button type="submit" class="btn btn-primary bg-green-300 w-full rounded-lg">
+                        <i class="fas fa-plus mr-2"></i>
+                        Check 
+                    </button>
+                </div>  
+            </form>
             <div class="my-2 pb-3 border-b-2 flex justify-between">
-                <button class="bg-gray-200 text-black py-2 px-4 rounded flex items-center hover:bg-gray-300">
+                {{!-- <button class="bg-gray-200 text-black py-2 px-4 rounded flex items-center hover:bg-gray-300">
                     <i class="fas fa-plus mr-2"></i>
                     Add Customer
-                </button>
+                </button> --}}
 
                 <div class="flex gap-2">
                     {{!-- Barcode --}}
@@ -77,182 +89,35 @@
                     </button>
 
                     {{!-- remove order --}}
-                    <button class="bg-gray-200 text-red-500 py-2 px-4 rounded flex items-center hover:bg-gray-300">
+                    <button class="bg-gray-200 text-red-500 py-2 px-4 rounded flex items-center hover:bg-gray-300" onclick="removeAllOrders()">
                         <i class="fa-regular fa-trash-can"></i>
                     </button>
                 </div>
-
             </div>
 
             {{!-- List Items --}}
             <div class="flex-1 mt-2 overflow-scroll">
-
                 {{!-- Item --}}
-                <div class="relative px-2 rounded my-2 py-3 bg-gray-100">
-                    <div class="block">
-                        <div onclick="toggleDropdown(1)" class="flex justify-between items-center cursor-pointer">
-                            <div class="flex gap-4 items-center">
-                                <div>
-                                    <i class="fa-solid fa-chevron-right"></i>
-                                </div>
-                                {{!-- image --}}
-                                <div>
-                                    <img 
-                                        class="h-10"
-                                        src="https://www.apple.com/v/iphone/home/bp/images/overview/compare/compare_iphone_15_pro__c344odaqs5qq_large.png"/>
-                                </div>
-                                {{!-- Name --}}
-                                <span>iPhone 15 Pro Max 1TB</span>
-                            </div>
-
-                            <div class="flex gap-4">
-                                {{!-- price --}}
-                                <span>2000$</span>
-                                {{!-- Delete product --}}
-                                <div class="text-gray-500">
-                                    <i class="fa-solid fa-circle-xmark"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        {{!-- Dropdown --}}
-                        <div id="dropdown1" class="hidden bg-transparent mt-2 text-sm px-4 w-full">
-                            <div class="flex justify-between mb-2">
-                                <span>Quantity:</span>
-                                <input type="number" class="border border-gray-300 w-16 text-center" value="1" />
-                            </div>
-                            <div class="flex justify-between mb-2">
-                                <span>Product Code:</span>
-                                <span>ABC123</span>
-                            </div>
-                            <div class="flex justify-between mb-2">
-                                <span>Color:</span>
-                                <span>Blue</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="relative px-2 rounded my-2 py-3 bg-gray-100 order-list">
+                    
                 </div>
-
-                {{!-- Item --}}
-                <div class="relative px-2 rounded my-2 py-3">
-                    <div class="block">
-                        <div onclick="toggleDropdown(2)" class="flex justify-between items-center cursor-pointer">
-                            <div class="flex gap-4 items-center">
-                                <div>
-                                    <i class="fa-solid fa-chevron-right"></i>
-                                </div>
-                                {{!-- image --}}
-                                <div>
-                                    <img 
-                                        class="h-10"
-                                        src="https://www.apple.com/v/iphone/home/bp/images/overview/compare/compare_iphone_15_pro__c344odaqs5qq_large.png"/>
-                                </div>
-                                {{!-- Name --}}
-                                <span>iPhone 15 Pro Max 1TB</span>
-                            </div>
-
-                            <div class="flex gap-4">
-                                {{!-- price --}}
-                                <span>2000$</span>
-                                {{!-- Delete product --}}
-                                <div class="text-gray-500">
-                                    <i class="fa-solid fa-circle-xmark"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        {{!-- Dropdown --}}
-                        <div id="dropdown2" class="hidden bg-white mt-2 text-sm px-4 w-full">
-                            <div class="flex justify-between mb-2">
-                                <span>Quantity:</span>
-                                <input type="number" class="border border-gray-300 w-16" />
-                            </div>
-                            <div class="flex justify-between mb-2">
-                                <span>Product Code:</span>
-                                <span>ABC123</span>
-                            </div>
-                            <div class="flex justify-between mb-2">
-                                <span>Color:</span>
-                                <span>Blue</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {{!-- item --}}
-                <div class="relative px-2 rounded my-2 py-3 bg-gray-100">
-                    <div class="block">
-                        <div onclick="toggleDropdown(3)" class="flex justify-between items-center cursor-pointer">
-                            <div class="flex gap-4 items-center">
-                                <div>
-                                    <i class="fa-solid fa-chevron-right"></i>
-                                </div>
-                                {{!-- image --}}
-                                <div>
-                                    <img 
-                                        class="h-10"
-                                        src="https://www.apple.com/v/iphone/home/bp/images/overview/compare/compare_iphone_15_pro__c344odaqs5qq_large.png"/>
-                                </div>
-                                {{!-- Name --}}
-                                <span>iPhone 15 Pro Max 1TB</span>
-                            </div>
-
-                            <div class="flex gap-4">
-                                {{!-- price --}}
-                                <span>2000$</span>
-                                {{!-- Delete product --}}
-                                <div class="text-gray-500">
-                                    <i class="fa-solid fa-circle-xmark"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        {{!-- Dropdown --}}
-                        <div id="dropdown3" class="hidden bg-white mt-2 text-sm px-4 w-full">
-                            <div class="flex justify-between mb-2">
-                                <span>Quantity:</span>
-                                <input type="number" class="border border-gray-300 w-16" />
-                            </div>
-                            <div class="flex justify-between mb-2">
-                                <span>Product Code:</span>
-                                <span>ABC123</span>
-                            </div>
-                            <div class="flex justify-between mb-2">
-                                <span>Color:</span>
-                                <span>Blue</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                
-
             </div>
         </div>
         
 
         {{!-- Option pay --}}
-        <div class="h-1/3 flex flex-col justify-between">
+        <div class="h-1/5 flex flex-col justify-between">
             <div>
                 {{!-- Price --}}
                 <div class="px-12">
-                    <div class="flex justify-between">
-                        <span>Subtotal:</span>
-                        <span>1500$</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span>Tax</span>
-                        <span>75$</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="font-semibold">Grand Total</span>
-                        <span>1575$</span>
+                    <div class="flex justify-between font-semibold">
+                        <span>Total Price:</span>
+                        <span id="totalPrice">0$</span>
                     </div>
                 </div>
 
                 {{!-- method pay --}}
-                <div class="input-radio image grid grid-cols-3 gap-3 mt-3">
+                <div class="input-radio image grid grid-cols-2 gap-2 mt-5 mx-10">
                     {{!-- Cash --}}
                     <div class="flex flex-cols justify-center">
                         <input class="hidden" type="radio" id="cash" name="methodpayment" value="cash">
@@ -275,7 +140,7 @@
                         </label>
                     </div>
                     {{!-- Scan --}}
-                    <div class="flex flex-cols justify-center">
+                    {{!-- <div class="flex flex-cols justify-center">
                         <input class="hidden" type="radio" id="scan" name="methodpayment" value="scan">
                         <label for="scan">
                             <div id="img-area" class="h-14 flex flex-col justify-between text-gray-400 py-2 px-5">
@@ -283,34 +148,149 @@
                                 <span class="text">Scan</span>
                             </div>
                         </label>
-                    </div>
-
-                    
-
+                    </div> --}}
                 </div>
             </div>
 
             {{!-- Button Pay --}}
             <div class="flex justify-end items-center">
                 <div class="m-3">
-                    <button class="bg-white text-gray-800 font-bold rounded-md border-b-4 border-blue-500 hover:border-blue-600 hover:bg-blue-500 hover:text-white shadow-2xl py-2 px-6 inline-flex items-center ">
+                    <button class="bg-green-500 text-gray-800 font-bold rounded-md border-b-4 border-blue-500 hover:border-blue-600 hover:bg-blue-500 hover:text-white shadow-2xl py-2 px-6 inline-flex items-center ">
                         <span class="mr-2">Pay</span>
                         <i class="fa-regular fa-money-bill-1"></i>
                     </button>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>
 
 <script>
     function toggleDropdown(n) {
-        const dropdown = document.getElementById('dropdown'+n);
+        const dropdown = document.getElementById('dropdown' + n);
         dropdown.classList.toggle('hidden');
     }
 
+    function addToOrder(productName, initialProductPrice, image, barcode, index) {
+        // Get the order list container
+        const orderListContainer = document.querySelector('.order-list');
 
+        // Check if the product with the same name already exists in the order list
+        const existingProduct = orderListContainer.querySelector(`[data-product-name="${productName}"]`);
 
+        // Create a unique identifier for the priceItem
+        const priceItemId = `priceItem-${index}`;
+
+        // Declare quantityInput outside the if-else block
+        let quantityInput;
+
+        if (existingProduct) {
+            // If the product exists, update its quantity
+            quantityInput = existingProduct.querySelector('.quantity-input');
+            quantityInput.value = parseInt(quantityInput.value) + 1;
+        } else {
+            // If the product doesn't exist, create a new entry for the order list
+            const orderItem = document.createElement('div');
+            orderItem.classList.add('relative', 'px-2', 'rounded', 'my-2', 'py-3', 'bg-gray-100');
+            orderItem.setAttribute('data-product-name', productName);
+
+            // Assign the value of quantityInput in the else block
+            quantityInput = document.createElement('input');
+            quantityInput.classList.add('quantity-input', 'border', 'border-gray-300', 'w-16', 'text-center');
+
+            // Add event listener to quantityInput
+            quantityInput.addEventListener('input', function () {
+                updateProductPrice(this, initialProductPrice, priceItemId);
+            });
+
+            // Fill the content of the order item (customize as needed)
+            orderItem.innerHTML = `
+                <div class="block">
+                    <div onclick="toggleDropdown(${index})" class="flex justify-between items-center cursor-pointer">
+                        <div class="flex gap-4 items-center">
+                            <div>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </div>
+                            <!-- image -->
+                            <div>
+                                <img class="h-10" src="${image}" />
+                            </div>
+                            <!-- Name -->
+                            <span>${productName}</span>
+                        </div>
+
+                        <div id="${priceItemId}" class="flex gap-4">
+                            <!-- price -->
+                            <span id = "finalPrice">${initialProductPrice}$</span>
+                            <!-- Delete product -->
+                            <div class="text-gray-500" onclick="deleteProduct(this, '${productName}')">
+                                <i class="fa-solid fa-circle-xmark"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dropdown -->
+                    <div id="dropdown${index}" class="hidden bg-transparent mt-2 text-sm px-4 w-full">
+                        <div class="flex justify-between mb-2">
+                            <span>Quantity:</span>
+                            <input class="quantity-input border border-gray-300 w-16 text-center" type="number" value="1" oninput="updateProductPrice(this, '${initialProductPrice}', '${priceItemId}')"/>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span>Product Code:</span>
+                            <span>${barcode}</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span>Color:</span>
+                            <span>Blue</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+                // Append the new order item to the order list container
+                orderListContainer.appendChild(orderItem);
+            }
+            calculateTotalPrice();
+            updateProductPrice(quantityInput, initialProductPrice, priceItemId);
+        }
+
+        // Function to update productPrice based on quantityInput value
+        function updateProductPrice(quantityInput, priceItem, priceItemId) {
+            const parentContainer = quantityInput.closest('.relative');
+            const priceElement = parentContainer.querySelector(`#${priceItemId} span`);
+            const newProductPrice = priceItem * parseInt(quantityInput.value);
+            priceElement.textContent = newProductPrice + "$";
+
+        }
+
+        function calculateTotalPrice() {
+            const orderListContainer = document.querySelector('.order-list');
+            const orderItems = orderListContainer.querySelectorAll('.quantity-input');
+
+            let totalPrice = 0;
+
+            orderItems.forEach((quantityInput) => {
+                const parentContainer = quantityInput.closest('.relative');
+                const priceElement = parentContainer.querySelector('#finalPrice');
+                const priceItemId = parseFloat(priceElement.textContent);
+                const quantity = parseInt(quantityInput.value);
+                totalPrice += priceItemId * quantity;
+            });
+
+            // Update the total price in the span with the id "totalPrice"
+            const totalPriceSpan = document.getElementById('totalPrice');
+            totalPriceSpan.textContent = totalPrice + "$";
+        }
+
+        function deleteProduct(deleteButton, productName) {
+            const orderItem = deleteButton.closest('.order-list div[data-product-name="' + productName + '"]');
+            orderItem.remove();
+            calculateTotalPrice();
+        }
+
+        function removeAllOrders() {
+            const orderListContainer = document.querySelector('.order-list');
+            orderListContainer.innerHTML = '';
+            calculateTotalPrice();
+        }
 </script>

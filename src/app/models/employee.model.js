@@ -1,12 +1,12 @@
 require('dotenv').config();
 const axios = require('axios');
 
-const CLIENT_APP_ID = process.env.MONGODB_CLIENT_APP_ID; // Replace with your actual Client App ID
+const CLIENT_APP_ID = process.env.MONGODB_CLIENT_APP_ID; 
 const API_KEY = process.env.MONGODB_API_KEY;
 var requestData = {
   "collection": "employees",
   "database": "AiPhoneStore",
-  "dataSource": "AiPhone",
+  "dataSource": "AiPhone"
 };
 
 const EmployeeModel = {
