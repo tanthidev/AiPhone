@@ -1,19 +1,15 @@
-const ProductModel = require('../models/product.model')
+const Product = require('../model_mongoose/product');
+const { mulToObject,singleToObject } = require('../util/mongoose');
 
 class ProductController {
-    //GET /home
-    product(req, res) {
-        ProductModel.getProducts()
-            .then(data =>{
-                // res.send(data)
-                res.render("pages/product/productlist", {data})
-                
-            })
-            .catch(error =>{
 
-            })
+        async product(req, res) {
+            try {
+                const products = await Product.find();
+                res.render("pages/product/productlist", { data: mulToObject(products)});
+            } catch {
+                res.send('Error');
+            }
+        }
     }
-}
-
 module.exports = new ProductController();
- 

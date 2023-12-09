@@ -19,7 +19,7 @@ const productSchema = new Schema({
     256: String,
     512: String
   },
-  createdAt:{type: Date,default: Date.now},
+  created_at:{type: Date,default: Date.now},
   colors: {
     type: [String],
     default: ['Black', "White", "Gold"]

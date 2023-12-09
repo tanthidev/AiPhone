@@ -1,22 +1,32 @@
 const EmployeeModel = require('../models/employee.model')
 const nodemailer = require('nodemailer');
 const { deleteEmployee } = require('./AdminController');
+const Employee = require('../model_mongoose/employee');
+const { mulToObject,singleToObject } = require('../util/mongoose');
 require('dotenv').config
 
 class EmployeeController {
-    //GET /home
-    employee(req, res) {
-        EmployeeModel.getEmployees()
-            .then(data =>{
-                // res.send(data)
-                res.render("pages/employee/listEmployee", {data})
-
-            })
-            .catch(error =>{
-
-            })
-        // res.render("pages/employee/listEmployee")
+    async employee(req, res) {
+        try {
+            const employees = await Employee.find();
+            res.render("pages/employee/listemployee", { data: mulToObject(employees)});
+        } catch {
+            res.send('Error');
+        }
     }
+    // //GET /home
+    // employee(req, res) {
+    //     EmployeeModel.getEmployees()
+    //         .then(data =>{
+    //             // res.send(data)
+    //             res.render("pages/employee/listEmployee", {data})
+
+    //         })
+    //         .catch(error =>{
+
+    //         })
+    //     // res.render("pages/employee/listEmployee")
+    // }
 
 
 

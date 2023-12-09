@@ -1,3 +1,5 @@
+
+
 <div class="w-64 bg-white h-screen pt-2 text-base pl-2 flex flex-col">
     {{!-- Logo --}}
     <div class="sticky">
@@ -68,17 +70,7 @@
                         <span>Customers</span>
                     </a>
                 </li>
-
-                {{!-- Admin Manage --}}
-                {{!-- <li class="pl-3 py-2 font-normal cursor-pointer rounded-sm hover:bg-gray-400 hover:text-white">
-                    <a href="/admin" class="flex">
-                        <div class="w-1/5 text-xl">
-                            <i class="fa-solid fa-users"></i>
-                        </div>
-                        <span>Admin Manage</span>
-                    </a>
-                </li> --}}
-                <li class="pl-3 py-2 font-normal cursor-pointer rounded-sm hover:bg-gray-400 hover:text-white relative">
+                <div class="pl-3 py-2 font-normal cursor-pointer rounded-sm hover:bg-gray-400 hover:text-white relative">
                     <a href="#" class="flex items-center" onclick="toggleAdminMenu(event)">
                         <div class="w-1/5 text-xl">
                             <i class="fa-solid fa-users"></i>
@@ -87,28 +79,32 @@
                     </a>
                     
                     <!-- Drop-down content -->
-                    <ul id="adminMenu" class="absolute hidden bg-white border rounded-sm mt-2 space-y-1">
+                    <div id="adminMenu" class="hidden bg-gray-200 border rounded-sm mt-2 space-y-1">
                         <!-- Employee -->
-                        <li class="pl-3 py-2 hover:bg-gray-400 hover:text-white">
+                        <div class="pl-3 py-2 hover:bg-gray-400 hover:text-black">
+                            <i class="fa-solid fa-diamond-turn-right"></i>
                             <a href="/admin_employee">Employee</a>
-                        </li>
+                        </div>
                         
                         <!-- Customer -->
-                        <li class="pl-3 py-2 hover:bg-gray-400 hover:text-white">
+                        <div class="pl-3 py-2 hover:bg-gray-400 hover:text-black">
+                            <i class="fa-solid fa-diamond-turn-right"></i>
                             <a href="/admin_customer">Customer</a>
-                        </li>
+                        </div>
                         
                         <!-- Invoice -->
-                        <li class="pl-3 py-2 hover:bg-gray-400 hover:text-white">
+                        <div class="pl-3 py-2 hover:bg-gray-400 hover:text-black">
+                            <i class="fa-solid fa-diamond-turn-right"></i>
                             <a href="/admin_invoice">Invoice</a>
-                        </li>
+                        </div>
                         
                         <!-- Product -->
-                        <li class="pl-3 py-2 hover:bg-gray-400 hover:text-white">
+                        <div class="pl-3 py-2 hover:bg-gray-400 hover:text-black">
+                            <i class="fa-solid fa-diamond-turn-right"></i>
                             <a href="/admin_product">Product</a>
-                        </li>
-                    </ul>
-                </li>
+                        </div>
+                    </div>
+                </div>
 
                 {{!-- Employees --}}
                 <li class="pl-3 py-2 font-normal cursor-pointer rounded-sm hover:bg-gray-400 hover:text-white">
@@ -189,5 +185,9 @@
         event.preventDefault();
         var adminMenu = document.getElementById("adminMenu");
         adminMenu.classList.toggle("hidden");
+
+        // Insert adminMenu after the "Admin Manage" link
+        var adminManageLink = event.currentTarget.parentNode;
+        adminManageLink.parentNode.insertBefore(adminMenu, adminManageLink.nextSibling);
     }
 </script>

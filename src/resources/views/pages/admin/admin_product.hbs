@@ -9,7 +9,7 @@
                         <button onclick="location.href='/admin_product/product_add'" type="button" class="bg-green-200 w-2/12 mx-2 rounded-lg"><i class="fa-solid fa-add"></i></button>
             </form>
             </div>
-            <div class="relative  shadow-md sm:rounded-lg overflow-auto dark:bg-white "  style="height:500px;" >
+            <div class="relative  shadow-md sm:rounded-lg overflow-auto dark:bg-white " >
             <table class=" text-left rtl:text-right">
                         <thead class="text-xm text-gray-700 uppercase bg-gray-200 dark:bg-gray-700">
                         <tr >
@@ -75,7 +75,7 @@
                                     {{this}},
                                     {{/each}}
                                     </td>
-                                    <td><img class=" object h-48 w-30" src={{this.link_image}}></td>
+                                    <td><img class=" object h-20 w-16" src={{this.link_image}}></td>
                                     <td>{{this.inventory_quantity}}</td>
                                     <td>{{this.link_product}}</td>
                                     <td>{{this.barcode}}</td>
@@ -91,12 +91,14 @@
                                     </td>
                                     <td>{{this.created_at}}</td>
                                     <td class="flex gap-2">
-                                    <button onclick="location.href='/admin/product_delete'" type="button" class="bg-gray-200 text-red-500 py-2 px-4 rounded flex items-center hover:bg-gray-300">
-                                        <i class="fa-regular fa-trash-can"></i>                                    
-                                    </button>
-                                    <button onclick="location.href='/admin/product_update'" type="button" class="bg-gray-200 text-green-500 py-2 px-4 rounded flex items-center hover:bg-gray-300">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
+                                        <form method="post" action="/admin_product/product_delete/{{this._id}}?_method=DELETE">
+                                                <button type="submit" class="bg-gray-200 text-red-500 w-full mx-3 rounded-lg" data-toggle="modal" data-target="#deleteModal">
+                                                        <i class="fa-regular fa-trash-can"></i>
+                                                </button>
+                                        </form>
+                                        <button onclick="location.href='/admin_product/product_{{this._id}}'" type="button" class="bg-gray-200 text-yellow-500 w-full mx-2 rounded-lg">
+                                                <i class="fa-solid fa-pen"></i>
+                                        </button>
                                     </td>
                         </tr>
                         {{/each}}

@@ -1,10 +1,16 @@
 <div class = "flex flex-col dark:bg-white px-5 pb-5 pt-1 rounded-lg">
-    <div class=" container mx-auto py-4">
-        <form id="customerSearchForm" class=" flex group relative">
-            <input id="customer_search" name="customer_search" class="focus:ring-2 ml-2 focus:ring-gray-500 focus:outline-none appearance-none w-10/12 text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2  pl-10 pr-4 ring-1 ring-slate-200 shadow-sm truncate" type="text" aria-label="Filter projects" placeholder="Search ...">
-            <button type="submit" class="font-bold bg-gray-200 w-1/12 mx-2 rounded-lg">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
+        <div class=" container mx-auto py-4">
+        <form class=" flex group relative">
+            <svg width="20" height="20" fill="currentColor" class="absolute left-3 top-1/2 -mt-2.5 text-slate-400 pointer-events-none group-focus-within:text-gray-500" aria-hidden="true">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
+            </svg>
+            <input class="focus:ring-2 focus:ring-gray-500 focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2  pl-10 pr-4 ring-1 ring-slate-200 shadow-sm truncate" type="text" aria-label="Filter projects" placeholder="Search ...">
+                <button type="submit" class="font-bold bg-gray-200 w-1/12 mx-2 rounded-lg">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <button onclick="location.href='/admin_customer/customer_seacrh_{{customer._id}}'" type="button" class=" font-bold bg-gray-200 text-green-600 w-1/12 mx-2 rounded-lg">
+                                All
+                </button>
         </form>
     </div>
     <div class="relative shadow-md sm:rounded-lg  overflow-y-auto dark:bg-white ">

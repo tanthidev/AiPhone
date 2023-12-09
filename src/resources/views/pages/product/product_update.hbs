@@ -1,0 +1,49 @@
+<h1 class="font-bold text-2xl text-center">Add a Product</h1>
+<div class="">
+            <div class="m-5">
+            <form method="post" action="/admin_product/product_updateOne_{{product._id}}">
+            <div class="form-group bg-white m-5 p-3 rounded-lg">
+            <label for="product_name" class="font-bold">Name: </label>
+            <input type="input" class="form-control" value="{{product.product_name}}" id="product_name" name="product_name" placeholder="Name">
+            </div>
+            <div class="form-group bg-white m-5 p-3 rounded-lg">
+            <label for="series" class="font-bold">Series: </label>
+            <input type="input" class="form-control" id="series" value="{{product.series}}" name="series" placeholder="Series">
+            </div>
+            <div class="form-group bg-white m-5 p-3 rounded-lg">
+            <label for="inventory_quantity" class="font-bold">Quantity: </label>
+            <input type="input" class="form-control" value="{{product.inventory_quantity}}" id="inventory_quantity" name="inventory_quantity" placeholder="Quantity">
+            </div>
+            <div class="form-group bg-white m-5 p-3 rounded-lg">
+            <label for="link_product" class="font-bold">Link Product: </label>
+            <input type="input" class="form-control" value="{{product.link_product}}" id="link_product" name="link_product" placeholder="Link Product">
+            </div>
+            <div class="form-group bg-white m-5 p-3 rounded-lg">
+            <label for="barcode" class="font-bold">Barcode: </label>
+            <input type="input" class="form-control" value="{{product.barcode}}" id="barcode" name="barcode" placeholder="Barcode">
+            </div>
+            {{#each product.import_price}}
+                    <div class="form-group bg-white m-5 p-3 rounded-lg">
+                    <label for="importPrice{{@key}}" class="font-bold uppercase">Import Price {{@key}}:</label>
+                    <input type="text" id="importPrice{{@key}}" value="{{this}}" name="import_price[{{@key}}]" placeholder="Text">
+                    </div>
+            {{/each}}
+
+            {{#each product.retail_price}}
+                    <div class="form-group bg-white m-5 p-3 rounded-lg">
+                    <label for="retailPrice{{@key}}" class="font-bold uppercase">Retail Price {{@key}}:</label>
+                    <input type="text" id="retailPrice{{@key}}" value="{{this}}" name="retail_price[{{@key}}]" placeholder="Text">
+                    </div>
+            {{/each}}
+
+            {{#each product.configuration}}
+                    <div class="form-group bg-white m-5 p-3 rounded-lg">
+                    <label for="configuration" class="font-bold uppercase">{{@key}}:</label>
+                    <input type="text" id="configuration{{@key}}" value="{{this}}" name="configuration[{{@key}}]" placeholder="Text">
+                    </div>
+            {{/each}}
+            
+            <button type="submit" class="btn btn-primary w-full h-18 hover:bg-green-500 hover:text-black bg-green-200 rounded-lg text-xl">Submit</button>
+            </form>
+            </div>
+</div>
