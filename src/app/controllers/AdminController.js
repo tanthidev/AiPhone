@@ -60,6 +60,10 @@ class AdminController {
         try {
             console.log(req.body)
             const product = new Product(req.body);
+            if (req.file) {
+              product.link_image = req.file.filename;
+           }
+           console.log(product.link_image)
             product.save();
             res.redirect('/admin_product');
           } catch (error) {
@@ -114,17 +118,42 @@ class AdminController {
               res.status(500).json(err);
             }
       }
+      // storeEmployee(req, res) {
+      //     try {
+      //         console.log(req.body)
+      //         const employee = new Employee(req.body);
+      //         if(req.file)
+      //         {
+      //           console.log(req.file.path);
+      //           employee.profile_picture = req.file.path;
+      //         }
+      //         console.log(req.body)
+      //         employee.save();
+      //         res.redirect('/admin_employee');
+      //       } catch (error) {
+      //         console.error(error); // Log the error to the console
+      //         res.status(500).json(error);
+      //     }
+      // }
       storeEmployee(req, res) {
-          try {
-              console.log(req.body)
-              const employee = new Employee(req.body);
-              employee.save();
-              res.redirect('/admin_employee');
-            } catch (error) {
-              res.status(500).json(err);
+        try {
+            console.log(req.body);
+            const employee = new Employee(req.body);
+            
+            if (req.file) {
+                employee.profile_picture = req.file.filename;
             }
-      }
-
+            
+            console.log(employee.profile_picture);
+            employee.save();
+            res.redirect('/admin_employee');
+        } catch (error) {
+            console.error(error);
+            res.status(500).json(error);
+        }
+    }
+    
+      
       async updateEmployee(req, res, next) {
         try{
           const employee = await Employee.findById(req.params.id)
@@ -139,12 +168,16 @@ class AdminController {
         try{
           console.log(req.params.id)
           console.log(req.body)
+          
+          if (req.file) {
+            req.body.profile_picture = req.file.filename;
+          }
           await Employee.updateOne({ _id: req.params.id }, req.body)
           res.redirect('/admin_employee');
-        }catch{
-          res.status(500).json(err);
+          }catch{
+            res.status(500).json(err);
+          }
         }
-      }
 
       async updateProduct(req, res, next) {
         try{
@@ -160,6 +193,9 @@ class AdminController {
         try{
           console.log(req.params.id)
           console.log(req.body)
+          if (req.file) {
+            req.body.link_image = req.file.filename;
+          }
           await Product.updateOne({ _id: req.params.id }, req.body)
           res.redirect('/admin_product');
         }catch{

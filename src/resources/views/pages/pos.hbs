@@ -40,7 +40,7 @@
                     {{#each this.retail_price}}
                         <div class="hover:bg-gray-200 hover:text-black cursor-pointer relative flex justify-center text-left  p-2 border rounded-lg">
                             <div onclick="addToOrder('{{../this.product_name}}', '{{this}}','{{../this.link_image}}','{{this}}','{{@index}}','{{@key}}')">
-                                <img src={{../this.link_image}} alt="image" style="height: 220px; object-fit: cover;"/>
+                                <img src="/uploads/{{../this.link_image}}" alt="image" style="height: 220px; object-fit: cover;"/>
                                 <h2 class="font-semibold text-xl py-3">{{../this.product_name}} {{@key}}</h2>
                                 <p class="py-2 font-semibold text-xl text-green-600">{{this}}$</p>
                             </div>
@@ -199,7 +199,7 @@
                         </div>
                         <!-- image -->
                         <div>
-                            <img class="h-10" src="${image}" />
+                            <img class="h-10" src="/uploads/${image}" />
                         </div>
                         <!-- Name -->
                         <span>${productName} ${memory}</span>
@@ -402,7 +402,7 @@
                             {{#each this.retail_price}}
                                     <div class="hover:bg-gray-200 hover:text-black cursor-pointer relative flex justify-center text-left p-2 border rounded-lg">
                                         <div onclick="addToOrder('{{../this.product_name}}', '{{this}}','{{../this.link_image}}','{{this}}','{{@index}}','{{@key}}')">
-                                            <img src={{../this.link_image}} alt="image" style="height: 220px; object-fit: cover;"/>
+                                            <img src="/uploads/{{../this.link_image}}" alt="image" style="height: 220px; object-fit: cover;"/>
                                             <h2 class="font-semibold text-xl py-3">{{../this.product_name}} {{@key}}</h2>
                                             <p class="py-2 font-semibold text-xl text-green-600">{{this}}$</p>
                                         </div>
@@ -419,7 +419,7 @@
                             {{#each this.retail_price}}
                                     <div class="hover:bg-gray-200 hover:text-black cursor-pointer relative flex justify-center text-left p-2 border rounded-lg">
                                         <div onclick="addToOrder('{{../this.product_name}}', '{{this}}','{{../this.link_image}}','{{this}}','{{@index}}','{{@key}}')">
-                                            <img src={{../this.link_image}} alt="image" style="height: 220px; object-fit: cover;"/>
+                                            <img src="/uploads/{{../this.link_image}}" alt="image" style="height: 220px; object-fit: cover;"/>
                                             <h2 class="font-semibold text-xl py-3">{{../this.product_name}} {{@key}}</h2>
                                             <p class="py-2 font-semibold text-xl text-green-600">{{this}}$</p>
                                         </div>
@@ -436,7 +436,7 @@
                             {{#each this.retail_price}}
                                     <div class="hover:bg-gray-200 hover:text-black cursor-pointer relative flex justify-center text-left p-2 border rounded-lg">
                                         <div onclick="addToOrder('{{../this.product_name}}', '{{this}}','{{../this.link_image}}','{{this}}','{{@index}}','{{@key}}')">
-                                            <img src={{../this.link_image}} alt="image" style="height: 220px; object-fit: cover;"/>
+                                            <img src="/uploads/{{../this.link_image}}" alt="image" style="height: 220px; object-fit: cover;"/>
                                             <h2 class="font-semibold text-xl py-3">{{../this.product_name}} {{@key}}</h2>
                                             <p class="py-2 font-semibold text-xl text-green-600">{{this}}$</p>
                                         </div>
@@ -453,7 +453,7 @@
                             {{#each this.retail_price}}
                                     <div class="hover:bg-gray-200 hover:text-black cursor-pointer relative flex justify-center text-left p-2 border rounded-lg">
                                         <div onclick="addToOrder('{{../this.product_name}}', '{{this}}','{{../this.link_image}}','{{this}}','{{@index}}','{{@key}}')">
-                                            <img src={{../this.link_image}} alt="image" style="height: 220px; object-fit: cover;"/>
+                                            <img src="/uploads/{{../this.link_image}}" alt="image" style="height: 220px; object-fit: cover;"/>
                                             <h2 class="font-semibold text-xl py-3">{{../this.product_name}} {{@key}}</h2>
                                             <p class="py-2 font-semibold text-xl text-green-600">{{this}}$</p>
                                         </div>
@@ -470,7 +470,7 @@
                             {{#each this.retail_price}}
                                     <div class="hover:bg-gray-200 hover:text-black cursor-pointer relative flex justify-center text-left p-2 border rounded-lg">
                                         <div onclick="addToOrder('{{../this.product_name}}', '{{this}}','{{../this.link_image}}','{{this}}','{{@index}}','{{@key}}')">
-                                            <img src={{../this.link_image}} alt="image" style="height: 220px; object-fit: cover;"/>
+                                            <img src="/uploads/{{../this.link_image}}" alt="image" style="height: 220px; object-fit: cover;"/>
                                             <h2 class="font-semibold text-xl py-3">{{../this.product_name}} {{@key}}</h2>
                                             <p class="py-2 font-semibold text-xl text-green-600">{{this}}$</p>
                                         </div>
@@ -487,7 +487,7 @@
                             {{#each this.retail_price}}
                                     <div class="hover:bg-gray-200 hover:text-black cursor-pointer relative flex justify-center text-left p-2 border rounded-lg">
                                         <div onclick="addToOrder('{{../this.product_name}}', '{{this}}','{{../this.link_image}}','{{this}}','{{@index}}','{{@key}}')">
-                                            <img src={{../this.link_image}} alt="image" style="height: 220px; object-fit: cover;"/>
+                                            <img src="/uploads/{{../this.link_image}}" alt="image" style="height: 220px; object-fit: cover;"/>
                                             <h2 class="font-semibold text-xl py-3">{{../this.product_name}} {{@key}}</h2>
                                             <p class="py-2 font-semibold text-xl text-green-600">{{this}}$</p>
                                         </div>
@@ -504,7 +504,7 @@
                             {{#each this.retail_price}}
                                     <div class="hover:bg-gray-200 hover:text-black cursor-pointer relative flex justify-center text-left p-2 border rounded-lg">
                                         <div onclick="addToOrder('{{../this.product_name}}', '{{this}}','{{../this.link_image}}','{{this}}','{{@index}}','{{@key}}')">
-                                            <img src={{../this.link_image}} alt="image" style="height: 220px; object-fit: cover;"/>
+                                            <img src="/uploads/{{../this.link_image}}" alt="image" style="height: 220px; object-fit: cover;"/>
                                             <h2 class="font-semibold text-xl py-3">{{../this.product_name}} {{@key}}</h2>
                                             <p class="py-2 font-semibold text-xl text-green-600">{{this}}$</p>
                                         </div>
@@ -521,7 +521,7 @@
                             {{#each this.retail_price}}
                                     <div class="hover:bg-gray-200 hover:text-black cursor-pointer relative flex justify-center text-left p-2 border rounded-lg">
                                         <div onclick="addToOrder('{{../this.product_name}}', '{{this}}','{{../this.link_image}}','{{this}}','{{@index}}','{{@key}}')">
-                                            <img src={{../this.link_image}} alt="image" style="height: 220px; object-fit: cover;"/>
+                                            <img src="/uploads/{{../this.link_image}}" alt="image" style="height: 220px; object-fit: cover;"/>
                                             <h2 class="font-semibold text-xl py-3">{{../this.product_name}} {{@key}}</h2>
                                             <p class="py-2 font-semibold text-xl text-green-600">{{this}}$</p>
                                         </div>

@@ -42,6 +42,7 @@ app.engine('hbs', handlebars.engine({
 
 //config source static
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static(path.join(__dirname, 'middlewares', 'uploads')));
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources', 'views'));
