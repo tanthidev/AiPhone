@@ -80,14 +80,22 @@
             </form>
             <div class="my-2 pb-3 border-b-2 flex justify-between">
                 <div class="flex gap-2">
+                    <input 
+                    id="barcodeInput"
+                    type="text" 
+                    class="bg-gray-100 h-10 w-full min-w-fit border-none ml-2 outline-none text-base px-5 rounded-lg" 
+                    placeholder="Choose by barcode..."/>
 
                     {{!-- Barcode --}}
-                    <button class="bg-gray-200 text-black py-2 px-4 rounded flex items-center hover:bg-gray-300">
+                    <button id="btnBarcode"
+                            class="bg-gray-200 text-black py-2 px-4 rounded flex items-center hover:bg-gray-300"
+                            onclick="chooseProductByBarcode()">
                         <i class="fa-solid fa-barcode"></i>
                     </button>
 
                     {{!-- remove order --}}
-                    <button class="bg-gray-200 text-red-500 py-2 px-4 rounded flex items-center hover:bg-gray-300" onclick="removeAllOrders()">
+                    <button class="bg-gray-200 text-red-500 py-2 px-4 rounded flex items-center hover:bg-gray-300" 
+                            onclick="removeAllOrders()">
                         <i class="fa-regular fa-trash-can"></i>
                     </button>
                 </div>
@@ -120,7 +128,8 @@
                     <div class="flex flex-cols justify-center">
                         <input class="hidden" type="radio" id="cash" name="methodpayment" value="cash">
                         <label for="cash">
-                            <button id="payButton" class="h-14 flex flex-col justify-center text-black py-2 px-5 hover:bg-green-500 hover:text-black bg-green-200 rounded-lg">
+                            <button id="payButton" 
+                                    class="h-14 flex flex-col justify-center text-black py-2 px-5 hover:bg-green-500 hover:text-black bg-green-200 rounded-lg">
                                 <img class="h-6 mt-1" src="/images/cash.png">
                                 <span  class="text">Cash</span >
                             </button>
@@ -131,7 +140,7 @@
                     <div class="flex flex-cols justify-center">
                         <input class="hidden" type="radio" id="debit" name="methodpayment" value="debit">
                         <label for="debit">
-                            <div id="img-area" class="h-14 flex flex-col justify-between text-black py-2 px-5 hover:bg-green-500 hover:text-black bg-green-200 rounded-lg">
+                            <div id="img-area" class="h-14 flex flex-col justify-between text-black py-2 px-5 bg-gray-200 rounded-lg">
                                 <img class="h-6" src="/images/debit.png">
                                 <button class="text">Debit</button>
                             </div>
@@ -279,6 +288,23 @@
             const orderListContainer = document.querySelector('.order-list');
             orderListContainer.innerHTML = '';
             calculateTotalPrice();
+        }
+        function chooseProductByBarcode() {
+            const barcode = document.getElementById('barcodeInput').value;
+            console.log(barcode);
+            $.ajax({
+                type: 'GET',
+                url: '/productlist/product_search',
+                data: { barcode: barcode },
+                success: function (data) {
+                    console.log("Received data:", data);
+                    // Call addToOrder with the retrieved data
+                    addToOrder(data.data.product_name, '850', data.data.link_image, data.barcode, data.index, '64GB');
+                },
+                error: function (error) {
+                    console.log('Error fetching product details');
+                }
+            });
         }
         $(document).ready(function () {
             // Function to update the table with data
