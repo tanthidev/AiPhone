@@ -35,8 +35,10 @@ app.engine('hbs', handlebars.engine({
     extname: 'hbs',
     helpers: {
       sum: (a, b) => a + b,
+      eq: (a, b) => a === b,
     },
 }));
+
 
 //config source static
 app.use(express.static(path.join(__dirname, 'public')));
