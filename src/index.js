@@ -47,9 +47,15 @@ app.use('/uploads', express.static(path.join(__dirname, 'middlewares', 'uploads'
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources', 'views'));
 
+
 //Routes 
 route(app);
-
+// Handle 404 - Not Found
+app.use((req, res, next) => {
+  res.status(404).render('pages/error/404', { layout:'sub', pageTitle: 'Page Not Found' });
+  // In this example, '404' is the name of the Handlebars template to render
+  // You can adjust the name and path to your template as needed
+});
 
 
 app.listen(port, () => {

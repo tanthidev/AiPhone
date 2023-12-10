@@ -1,32 +1,29 @@
-<h1>Add an Employee</h1>
-<form method="post" action="/admin_employee/updateOne-employee-{{employee._id}}" enctype="multipart/form-data">
-  <div class="form-group">          
-    <label for="employee_name">Name</label>
-    <input type="input" class="form-control" value="{{employee.employee_name}}" id="employee_name" name="employee_name" placeholder="Name">
-  </div>
-    <div class="form-group">
-    <label for="employee_phone">Phone</label>
-    <input type="input" class="form-control" value="{{employee.employee_phone}}" id="employee_phone" name="employee_phone" placeholder="Phone">
-  </div>
-  <div class="form-group">
-    <label for="employee_email">Email</label>
-    <input type="input" class="form-control" value="{{employee.employee_email}}" id="employee_email" name="employee_email" placeholder="Email">
-  </div>
-   <div class="form-group">
-    <label for="account_status">Status</label>
-    <input type="input" class="form-control" value="{{employee.account_status}}" id="account_status" name="account_status" placeholder="Status">
-  </div>
-  <div class="form-group">
-    <label for="username">User Name</label>
-    <input type="input" class="form-control" value="{{employee.username}}" id="username" name="username" placeholder="username">
-  </div>
-{{!-- <div class="form-group">
-    <label for="password">Password</label>
-    <input type="input" class="form-control" value="{{employee.password}}" id="password" name="password" placeholder="password">
-  </div> --}}
-  <div class="form-group">
-    <label for="profile_picture">Avatar</label>
-    <input type="file" class="form-control" value="{{employee.profile_picture}}" id="profile_picture" name="profile_picture" placeholder="Avatar">
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+
+    <div class="max-w-md mx-auto bg-white shadow-md p-8 rounded-md">
+        <h1 class="text-2xl font-bold mb-6">Edit User</h1>
+        <form method="post" action="/admin_employee/updateOne-employee-{{employee._id}}">
+            <div class="mb-4">
+                <label for="name" class="block text-sm font-semibold mb-2">Name</label>
+                <input value="{{employee.employee_name}}" type="text" id="name" name="employee_name" class="w-full px-4 py-2 rounded-md border focus:outline-none focus:border-blue-500" placeholder="Enter Name">
+            </div>
+            <div class="mb-4">
+                <label for="phone" class="block text-sm font-semibold mb-2">Phone</label>
+                <input type="text" value="{{employee.employee_phone}}" id="phone" name="employee_phone" class="w-full px-4 py-2 rounded-md border focus:outline-none focus:border-blue-500" placeholder="Enter Phone">
+            </div>
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-semibold mb-2">Email</label>
+                <input type="email" id="email" value="{{employee.employee_email}}" name="employee_email" class="w-full px-4 py-2 rounded-md border focus:outline-none focus:border-blue-500" placeholder="Enter Email">
+            </div>
+            <div class="mb-4">
+                <label for="status" class="block text-sm font-semibold mb-2">Status</label>
+                <select id="status" value="{{employee.account_status}}" name="account_status" class="w-full px-4 py-2 rounded-md border focus:outline-none focus:border-blue-500">
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                    <option value="block">Block</option>
+                </select>
+            </div>
+            <div class="mt-6">
+                <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:bg-blue-600">Save Changes</button>
+            </div>
+        </form>
+    </div>

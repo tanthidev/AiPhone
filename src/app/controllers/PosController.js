@@ -10,8 +10,8 @@ class PosController {
         try {
             const products =  await Product.find();
             res.render('pages/pos', { data: mulToObject(products)});
-          } catch {
-            res.send('Error');
+          } catch(error) {
+            res.render('pages/error/error',{layout:'sub'});
           }
     }
 
@@ -25,7 +25,7 @@ class PosController {
           const orders = req.query.orders;
           const ordersArray = JSON.parse(decodeURIComponent(orders));
           console.log(ordersArray);
-          res.render('pages/cashPayment', { orders: ordersArray });
+          res.render('pages/cashPayment', { orders: ordersArray, user: req.user.user });
         } catch {
           res.send('Wrong cashPayment');
         }

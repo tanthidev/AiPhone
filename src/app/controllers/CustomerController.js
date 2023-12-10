@@ -7,7 +7,7 @@ class CustomerController {
     async customer(req, res) {
       try {
           const customers = await Customer.find();
-          res.render('pages/customer/customer', { data: mulToObject(customers)});
+          res.render('pages/customer/customer', { data: mulToObject(customers), user: req.user.user});
         } catch {
           res.send('Error');
         }

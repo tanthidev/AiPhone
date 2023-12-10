@@ -247,7 +247,7 @@ class AdminController {
             const customer = await Customer.findOne({ customer_name: req.params.customer_name });
             res.render('pages/customer/customer_detail', { data: singleToObject(customer) });
           } catch {
-            res.status(500).json(err);
+            res.render('pages/error/error', {layout: 'sub'})
           }
       }
 
@@ -256,7 +256,7 @@ class AdminController {
           const customer = await Customer.findById(req.params.id)
           res.render('pages/customer/customer_update', {customer: singleToObject(customer)});
         }catch {
-          res.status(500).json(err);
+          res.render('pages/error/error', {layout: 'sub'})
         }
       }  
 

@@ -32,20 +32,16 @@ const checkLogin = (req, res, next) => {
 };
 
 const checkAdmin = (req, res, next) => {
-    //Get user from database
-    EmployeeModel.findByEmployeeId(req.user.userId)
-        .then(data =>{
-            if(!data[0].is_admin){
-                return res.status(403).send('Access Denied');
-            } else {
-                next()
-            }
-        })
-        .catch(error => {
+    try {
+        if(req.user.user.is_admin){
+            next()
+        } else{
             return res.status(403).send('Access Denied');
-        })
+        }
+    } catch (error) {
+        res.render('pages/error/error', {layout: 'sub', error})
+    }
     
-
 }
   
 const logout = (req, res, next) => {

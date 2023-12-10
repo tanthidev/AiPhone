@@ -1,1 +1,58 @@
-sale_report
+
+  <canvas id="turnoverByDayChart" width="800" height="400"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Fetch data from the Node.js server
+    fetch('http://localhost:3000/report/data')
+      .then(response => response.json())
+      .then(data => {
+        // Group data by day and calculate turnover for each day
+        const groupedData = {};
+        data.forEach(item => {
+          const day = item.createdAt.split('T')[0]; // Extracting day from createdAt field
+          if (!groupedData[day]) {
+            groupedData[day] = parseFloat(item.total_price.replace('$', ''));
+          } else {
+            groupedData[day] += parseFloat(item.total_price.replace('$', ''));
+          }
+        });
+
+        // Extracting labels (days) and values (turnover) for chart
+        const labels = Object.keys(groupedData);
+        const turnoverValues = Object.values(groupedData);
+
+        // Creating the Line Chart for Turnover by Day
+        const ctx = document.getElementById('turnoverByDayChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Turnover by Day ($)',
+              data: turnoverValues,
+              borderColor: 'rgba(54, 162, 235, 1)',
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+                title: {
+                  display: true,
+                  text: 'Turnover ($)'
+                }
+              },
+              x: {
+                title: {
+                  display: true,
+                  text: 'Day'
+                }
+              }
+            }
+          }
+        });
+      })
+      .catch(error => console.error('Error fetching data:', error));
+  </script>

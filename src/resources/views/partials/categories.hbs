@@ -124,7 +124,7 @@
             <ul>
                 {{!-- Sales report --}}
                 <li class="pl-3 py-2 font-normal cursor-pointer rounded-sm hover:bg-gray-400 hover:text-white">
-                    <a href="/sale_report" class="flex">
+                    <a href="/report/sale" class="flex">
                         <div class="w-1/5 text-xl">
                             <i class="fa-solid fa-chart-simple"></i>
                         </div>
@@ -132,15 +132,7 @@
                     </a>
                 </li>
 
-                {{!-- Invoice Report --}}
-                <li class="pl-3 py-2 font-normal cursor-pointer rounded-sm hover:bg-gray-400 hover:text-white">
-                    <a href="/invoice_report" class="flex">
-                        <div class="w-1/5 text-xl">
-                            <i class="fa-regular fa-file-lines"></i>
-                        </div>
-                        <span>Invoice Report</span>
-                    </a>
-                </li>
+                
             </ul>
         </div>
         
@@ -155,12 +147,12 @@
             <ul>
                 {{!-- Setting --}}
                 <li class="pl-3 py-2 font-normal cursor-pointer rounded-sm hover:bg-gray-400 hover:text-white">
-                    <div class="flex">
+                    <a href="/setting" class="flex">
                         <div class="w-1/5 text-xl">
                             <i class="fa-solid fa-gear"></i>
                         </div>
                         <span>Setting</span>
-                    </div>
+                    </a>
                 </li>
                 
                 {{!-- Logout --}}

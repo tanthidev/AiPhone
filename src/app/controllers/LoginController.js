@@ -79,6 +79,26 @@ class LoginController {
             }
         });
     }
+
+    async handleChangePassword(req, res){
+        const employee = await Employee.findOne({ _id: req.body._id});
+            if (employee && bcrypt.compareSync(req.body.currentPassword, employee.password)) {
+                //Hash password
+                bcrypt.hash(req.body.newPassword, 10, async (err, hash) => {
+                    if (err) {
+                        res.render('pages/error/error', {layout: 'sub', error})
+                    } else {
+                    //Save password to database
+                    try {
+                        const result = await Employee.updateOne({_id: req.body._id}, {password: hash})
+                        res.redirect('/setting?message=Update Success!')
+                    } catch (error) {
+                        res.render('pages/error/erorr', { layout:'sub', erorr})
+                    }
+                    }
+                });
+            }
+    }
 }
 
 module.exports = new LoginController();

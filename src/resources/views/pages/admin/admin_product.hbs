@@ -11,11 +11,11 @@
             </div>
             <div class="relative  shadow-md sm:rounded-lg overflow-auto dark:bg-white " >
             <table class=" text-left rtl:text-right">
-                        <thead class="text-xm text-gray-700 uppercase bg-gray-200 dark:bg-gray-700">
+                        <thead class="text-xm text-gray-700 uppercase  dark:">
                         <tr >
                         <th scope="col" class="p-4" >
                                     <div class="flex items-center">
-                                    <input id="select_all" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    <input id="select_all" type="checkbox" class="w-4 h-4 text-blue-600  border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark: dark:border-gray-600">
                                     <label for="checkbox-all-search" class="sr-only">checkbox</label>
                                     </div>
                         </th>
@@ -61,7 +61,7 @@
                         </thead>
                         <tbody>
                         {{#each products}}
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <tr class="bg-white border-b dark: dark:border-gray-700 hover:dark:hover:">
                                     <td><input type="checkbox"></td>
                                     <td>{{sum @index 1}}</td>
                                     <td>
@@ -91,12 +91,12 @@
                                     </td>
                                     <td>{{this.created_at}}</td>
                                     <td class="flex gap-2">
-                                        <form method="post" action="/admin_product/product_delete/{{this._id}}?_method=DELETE">
-                                                <button type="submit" class="bg-gray-200 text-red-500 w-full mx-3 rounded-lg" data-toggle="modal" data-target="#deleteModal">
+                                        <form method="post" action="/admin_product/product_delete/{{this._id}}?_method=DELETE" onsubmit="return confirmDelete()"">
+                                                <button type="submit" class=" text-red-500 w-full mx-3 rounded-lg" data-toggle="modal" data-target="#deleteModal">
                                                         <i class="fa-regular fa-trash-can"></i>
                                                 </button>
                                         </form>
-                                        <button onclick="location.href='/admin_product/product_{{this._id}}'" type="button" class="bg-gray-200 text-yellow-500 w-full mx-2 rounded-lg">
+                                        <button onclick="location.href='/admin_product/product_{{this._id}}'" type="button" class=" text-yellow-500 w-full mx-2 rounded-lg">
                                                 <i class="fa-solid fa-pen"></i>
                                         </button>
                                     </td>
@@ -109,10 +109,14 @@
 
  
 <script>
+        function confirmDelete() {
+        return confirm('Are you sure you want to delete this item?'); // Displays the confirmation dialog
+        }
         document.getElementById('select_all').addEventListener('change', function() {
         const checkboxes = document.querySelectorAll('input[type="checkbox"]');
         for (const checkbox of checkboxes) {
         checkbox.checked = this.checked;
         }
         });
+
 </script>

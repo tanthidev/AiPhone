@@ -5,21 +5,21 @@
             <path fill-rule="evenodd" clip-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
             </svg>
             <input class="focus:ring-2 focus:ring-gray-500 focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2  pl-10 pr-4 ring-1 ring-slate-200 shadow-sm truncate" type="text" aria-label="Filter projects" placeholder="Search ...">
-                <button type="submit" class="font-bold bg-gray-200 w-1/12 mx-2 rounded-lg">
+                <button type="submit" class="font-bold  w-1/12 mx-2 rounded-lg">
                         <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
-                <button onclick="location.href='/admin_customer/customer_seacrh_{{customer._id}}'" type="button" class=" font-bold bg-gray-200 text-green-600 w-1/12 mx-2 rounded-lg">
+                <button onclick="location.href='/admin_customer/customer_seacrh_{{customer._id}}'" type="button" class=" font-bold  text-green-600 w-1/12 mx-2 rounded-lg">
                                 All
                 </button>
         </form>
     </div>
     <div class="relative shadow-md sm:rounded-lg  overflow-y-auto dark:bg-white ">
         <table id="customerTable" class="w-full text-left rtl:text-right">
-            <thead class=" text-xm text-gray-700  uppercase bg-gray-200 dark:bg-gray-700 ">
+            <thead class=" text-xm text-gray-700  uppercase  dark: ">
                 <tr>
                     <th scope="col" class="p-4">
                         <div class="flex items-center">
-                            <input id="select_all" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <input id="select_all" type="checkbox" class="w-4 h-4 text-blue-600  border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark: dark:border-gray-600">
                             <label for="checkbox-all-search" class="sr-only">checkbox</label>
                         </div>
                     </th>
@@ -42,7 +42,7 @@
             </thead>
             <tbody>
                 {{#each data}}
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <tr class="bg-white border-b dark: dark:border-gray-700 hover:dark:hover:">
                         <td><input type="checkbox"></td>
                         <td>{{ sum @index 1}}</td>
                         <td>{{this.customer_name}}</td>
@@ -71,7 +71,7 @@
             const tableBody = $('#customerTable tbody');
             tableBody.empty(); // Clear the existing table rows
             // Handle a single row
-            const newRow = $('<tr>').addClass('bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600');
+            const newRow = $('<tr>').addClass('bg-white border-b dark: dark:border-gray-700 hover:dark:hover:');
             newRow.append('<td><input type="checkbox"></td>');
             newRow.append('<td>' + 1 + '</td>');
             newRow.append('<td>' + data.customer_name + '</td>');

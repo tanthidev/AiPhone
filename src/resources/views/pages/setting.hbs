@@ -1,0 +1,96 @@
+
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6">User Settings</h1>
+
+    <!-- Change Password Section -->
+    <div class="bg-white rounded-md shadow-md p-6 mb-8">
+      <h2 class="text-xl font-bold mb-4 cursor-pointer" onclick="toggleSection('passwordSection')">Change Password</h2>
+ <form id="passwordSection" method="POST" action="/setting/edit-password" class="hidden">
+  <input name="_id" value="{{user._id}}" class="hidden"/>
+  <div class="mb-4">
+    <label for="currentPassword" class="block text-gray-700 font-semibold mb-2">Current Password</label>
+    <input type="password" id="currentPassword" name="currentPassword" class="w-full border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" placeholder="Enter Current Password">
+  </div>
+  <div class="mb-4">
+    <label for="newPassword" class="block text-gray-700 font-semibold mb-2">New Password</label>
+    <input type="password" id="newPassword" name="newPassword" class="w-full border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" placeholder="Enter new Password">
+  </div>
+  <div class="mb-6">
+    <label for="confirmPassword" class="block text-gray-700 font-semibold mb-2">Confirm New Password</label>
+    <input type="password" id="confirmPassword" name="confirmPassword" class="w-full border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" placeholder="Confirm New Password">
+  </div>
+  <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Change Password</button>
+  
+</form>
+<span>{{message}}</span>
+    </div>
+    <!-- View Information Section -->
+     <!-- View Information Section -->
+    <div class="bg-white rounded-md shadow-md p-6 mb-8">
+      <h2 class="text-xl font-bold mb-4 cursor-pointer" onclick="toggleSection('infoSection')">View Information</h2>
+      <div id="infoSection" class="hidden">
+        
+        <div class="mb-4">
+          <label for="profilePicture" class="block text-gray-700 font-semibold mb-2">Profile Picture</label>
+          <img src={{user.profile_picture}} alt="Profile Picture" class="w-24 h-24 rounded-full object-cover">
+        </div>
+        <div class="mb-4">
+          <label for="employeeID" class="block text-gray-700 font-semibold mb-2">Employee ID</label>
+          <input type="text" id="employeeID" name="_id" value='{{user._id}}' class="w-full border-gray-300 rounded-md py-2 px-3 bg-gray-100 cursor-not-allowed" readonly>
+        </div>
+        <div class="mb-4">
+          <label for="employeeName" class="block text-gray-700 font-semibold mb-2">Employee Name</label>
+          <input type="text" id="employeeName" name="employeeName" value='{{user.employee_name}}' class="w-full border-gray-300 rounded-md py-2 px-3 bg-gray-100 cursor-not-allowed" readonly>
+        </div>
+        <div class="mb-4">
+          <label for="employeePhone" class="block text-gray-700 font-semibold mb-2">Employee Phone</label>
+          <input type="text" id="employeePhone" name="employeePhone" value={{user.employee_phone}} class="w-full border-gray-300 rounded-md py-2 px-3 bg-gray-100 cursor-not-allowed" readonly>
+        </div>
+        <div class="mb-4">
+          <label for="employeeEmail" class="block text-gray-700 font-semibold mb-2">Employee Email</label>
+          <input type="email" id="employeeEmail" name="employeeEmail" value={{user.employee_email}} class="w-full border-gray-300 rounded-md py-2 px-3 bg-gray-100 cursor-not-allowed" readonly>
+        </div>
+        <div class="mb-4">
+          <label for="accountStatus" class="block text-gray-700 font-semibold mb-2">Account Status</label>
+          <input type="text" id="accountStatus" name="accountStatus" value={{user.account_status}} class="w-full border-gray-300 rounded-md py-2 px-3 bg-gray-100 cursor-not-allowed" readonly>
+        </div>
+        <div class="mb-4">
+          <label for="username" class="block text-gray-700 font-semibold mb-2">Username</label>
+          <input type="text" id="username" name="username" value={{user.username}} class="w-full border-gray-300 rounded-md py-2 px-3 bg-gray-100 cursor-not-allowed" readonly>
+        </div>
+        <div class="mb-4">
+          <label for="hireDate" class="block text-gray-700 font-semibold mb-2">Hire Date</label>
+          <input type="text" id="hireDate" name="hireDate" value={{user.hire_date}} class="w-full border-gray-300 rounded-md py-2 px-3 bg-gray-100 cursor-not-allowed" readonly>
+        </div>
+        <a href="/setting/edit" class="text-blue-500 hover:underline">Edit Information</a>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script>
+    function toggleSection(sectionId) {
+      const section = document.getElementById(sectionId);
+      section.classList.toggle('hidden');
+    }
+  document.getElementById('passwordSection').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevents the form from submitting initially
+
+    // Get the values of the new password and confirm password fields
+    var newPassword = document.getElementById('newPassword').value;
+    var confirmPassword = document.getElementById('confirmPassword').value;
+
+    // Check if the passwords match
+    if (newPassword !== confirmPassword) {
+      alert("Passwords do not match. Please re-enter.");
+      return; // Prevents form submission if passwords don't match
+    }
+   this.submit();
+    // If passwords match, continue with form submission
+    // You can add your code here to handle form submission via AJAX or other methods
+    // For example: this.submit(); // Submit the form
+  });
+    
+
+  </script>
+
