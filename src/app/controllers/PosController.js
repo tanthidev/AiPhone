@@ -1,4 +1,4 @@
-const ProductModel = require('../models/product.model')
+
 const Product = require('../model_mongoose/product');
 const { mulToObject, singleToObject } = require('../util/mongoose');
 

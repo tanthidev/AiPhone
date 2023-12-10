@@ -1,4 +1,4 @@
-const CustomerModel = require('../models/customer.model')
+
 const Customer = require('../model_mongoose/customer');
 const { mulToObject,singleToObject } = require('../util/mongoose');
 

@@ -1,5 +1,4 @@
 require('dotenv').config();
-const EmployeeModel = require('../models/employee.model')
 const Employee = require('../model_mongoose/employee');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');

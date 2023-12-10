@@ -1,4 +1,4 @@
-const EmployeeModel = require('../models/employee.model')
+
 const nodemailer = require('nodemailer');
 const { deleteEmployee } = require('./AdminController');
 const Employee = require('../model_mongoose/employee');

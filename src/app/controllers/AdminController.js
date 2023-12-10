@@ -1,6 +1,4 @@
-const CustomerModel = require('../models/customer.model')
-const EmployeeModel = require('../models/employee.model')
-const ProductModel = require('../models/product.model')
+
 const Customer = require('../model_mongoose/customer');
 const Employee = require('../model_mongoose/employee');
 const Product = require('../model_mongoose/product');
