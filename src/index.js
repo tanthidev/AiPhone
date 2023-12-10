@@ -14,12 +14,12 @@ require('dotenv').config();
 db.connect()
 app.use(methodOverride('_method'));
 
-// app.use(cookieParser());
-// app.use(session({
-//   secret: 'aiphone',
-//   resave: false,
-//   saveUninitialized: true,
-// }));
+app.use(cookieParser());
+app.use(session({
+  secret: 'aiphone',
+  resave: false,
+  saveUninitialized: true,
+}));
 
 
 

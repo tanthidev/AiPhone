@@ -6,19 +6,19 @@
                                     <svg width="20" height="20" fill="currentColor" class="absolute left-3 top-1/2 -mt-2.5 text-slate-400 pointer-events-none group-focus-within:text-gray-500" aria-hidden="true">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
                                     </svg>
-                                    <input class="focus:ring-2 focus:ring-gray-500 focus:outline-none appearance-none w-10/12 text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2  pl-10 pr-4 ring-1 ring-slate-200 shadow-sm truncate" type="text" aria-label="Filter projects" placeholder="Search ...">
+                                    <input class="focus:ring-2  focus:outline-none appearance-none w-10/12 text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2  pl-10 pr-4 ring-1 ring-slate-200 shadow-sm truncate" type="text" aria-label="Filter projects" placeholder="Search ...">
                                     <button onclick="location.href='/admin_employee/employee_add'" type="button" class="bg-green-200 w-2/12 mx-2 rounded-lg"><i class="fa-solid fa-add"></i></button>
 
                         </form>
             </div>
             <div class="relative shadow-md sm:rounded-lg  overflow-auto" >
                         <table class="w-full text-left">
-                                    <thead class="text-xm text-gray-700  uppercase bg-gray-200 dark:bg-gray-700 ">
+                                    <thead class="text-xm text-gray-700  uppercase ">
                                     <tr>
                                     <tr>
                                     <th scope="col" class="p-4">
                                                 <div class="flex items-center">
-                                                <input id="select_all" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                <input id="select_all" type="checkbox" class="w-4 h-4 text-blue-600  border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:border-gray-600">
                                                 <label for="checkbox-all-search" class="sr-only">checkbox</label>
                                                 </div>
                                     </th>
@@ -53,8 +53,8 @@
                                     </thead>
                                     <tbody >
                                     {{#each employees}}
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                                <td><input type="checkbox"></td>
+                                    <tr class="bg-white border-bdark:border-gray-700">
+                                                <td class="p-4"><input type="checkbox" class="h-4 w-4"></td>
                                                 <td>{{sum @index 1}}</td>
                                                 <td>{{this.employee_name}}</td>
                                                 <td>{{this.employee_email}}</td>
@@ -64,12 +64,12 @@
                                                 <td><img class=" object h-20 w-16" src={{this.profile_picture}}></td>
                                                 <td>{{this.username}}</td>
                                                 <td class="flex gap-2">
-                                                        <form action="/admin_employee/delete-employee-{{this._id}}" method="post">
-                                                                <button class="bg-gray-200 text-red-500 py-2 px-4 rounded flex items-center hover:bg-gray-300">
+                                                        <form action="/admin_employee/delete-employee-{{this._id}}" method="post" onsubmit="return confirmDelete('{{this.is_admin}}')">
+                                                                <button class=" text-red-500 py-2 px-4 rounded flex items-center hover:">
                                                                         <i class="fa-regular fa-trash-can"></i>
                                                                 </button>
                                                         </form>
-                                                        <button onclick="location.href='/admin_employee/update-employee-{{this._id}}'" class="bg-gray-200 text-green-500 py-2 px-4 rounded flex items-center hover:bg-gray-300">
+                                                        <button onclick="location.href='/admin_employee/update-employee-{{this._id}}'" class=" text-green-500 py-2 px-4 rounded flex items-center hover:">
                                                                 <i class="fa-solid fa-pen"></i>
                                                         </button>
                                                 </td>
@@ -80,10 +80,23 @@
             </div>
     </div>
 <script>
+       function confirmDelete(isAdmin) {
+                if (isAdmin == 'true') {
+                // Display a message indicating admin users cannot be deleted
+                        window.alert('Admin users cannot be deleted.');
+                        return false; // Prevent form submission
+                } else {
+                // Display a confirmation dialog for non-admin users
+                const result = window.confirm('Are you sure you want to delete this employee?');
+                return result; // Return true/false based on user confirmation
+                }
+        }
         document.getElementById('select_all').addEventListener('change', function() {
         const checkboxes = document.querySelectorAll('input[type="checkbox"]');
         for (const checkbox of checkboxes) {
         checkbox.checked = this.checked;
         }
         });
+
+
 </script>

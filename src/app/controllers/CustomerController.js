@@ -16,8 +16,7 @@ class CustomerController {
     async searchCustomer(req, res) {
       try {
           const customer = await Customer.findOne({ customer_phone: req.query.customer_search });
-          console.log(req.query.customer_search);
-          console.log(customer);
+
           res.status(200).json({ data: customer });
         } catch (error) {
           res.send("Render Admin Error");

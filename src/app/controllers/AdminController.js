@@ -26,7 +26,7 @@ class AdminController {
               const employees=mulToObject(employee);
               res.render("pages/admin/admin_employee",{employees});
           } catch (error) {
-              res.send("Render Admin Error");
+              res.send(error.message);
           }
       }
       async adminInvoice(req, res) {
@@ -58,7 +58,6 @@ class AdminController {
 
       storeProduct(req, res) {
         try {
-            console.log(req.body)
             const product = new Product(req.body);
             product.save();
             res.redirect('/admin_product');
@@ -81,10 +80,12 @@ class AdminController {
 
       async addEmployee(req, res, next) {
           try {
-              res.render('pages/employee/employee_add');
-              } catch (error) {
+              const message = req.query.message;
+              res.render('pages/employee/createEmployee', { message });
+          } catch (error) {
               res.status(500).json(err);
-              }
+              res.render('pages/employee/createEmployee', { message: error.message });
+          }
       }
 
       async deleteEmployee(req, res, next) {
@@ -252,6 +253,15 @@ class AdminController {
             res.send("Render Admin Error");
         }
       } 
+
+      formattedDate(data){
+        const day = String(data.getDate()).padStart(2, '0'); // Get day and pad with leading zero if necessary
+        const month = String(data.getMonth() + 1).padStart(2, '0'); // Get month (zero-based) and pad with leading zero if necessary
+        const year = data.getFullYear(); // Get full year
+
+        const formattedDate = `${day}/${month}/${year}`;
+        return formattedDate;
+      }
 }
 
 module.exports = new AdminController();
