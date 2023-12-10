@@ -2,7 +2,6 @@
 const jwt = require('jsonwebtoken');
 const { ObjectId } = require('mongodb');
 require('dotenv').config();
-const EmployeeModel = require('../app/models/employee.model')
 
 const checkLogin = (req, res, next) => {
     try {
