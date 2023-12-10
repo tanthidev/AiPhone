@@ -73,9 +73,13 @@ npm start
 
 Để truy cập quyền quản trị, bạn có thể sử dụng tài khoản admin sau:
 
-- **Tên đăng nhập:** admin
-- **Mật khẩu:** admin
+- Tên đăng nhập: admin
+- Mật khẩu: admin
+
+Tài khoản user khác:
+- Tên đăng nhập: lenguyentanthi2002
+- Mật khẩu: 123
 
 ### Video Demo và Báo Cáo
-Bạn có thể tìm thấy video demo, báo cáo và các tài liệu khác tại thư mục sau:
-[Link đến thư mục tài liệu](https://drive.google.com/drive/folders/1w3DvrUESIh_SdGvNl4WjvFWVk1Sux1RT?usp=sharing)
+Có thể tìm thấy video demo, báo cáo và các tài liệu khác tại thư mục sau:
+https://drive.google.com/drive/folders/1w3DvrUESIh_SdGvNl4WjvFWVk1Sux1RT?usp=sharing
