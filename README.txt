@@ -1,7 +1,13 @@
 # Tên Dự Án
+Mobile Sale Website
 
 
-## Cài Đặt
+## Giới thiệu
+
+- Dự án website Point of sales System
+- Được thực hiện bởi: 
++ Sinh viên: Lê Nguyễn Tấn Thi - 52000806   
++ Sinh viên: Nguyễn Đức Minh Thuận - 52000809
 
 ### Yêu Cầu
 
