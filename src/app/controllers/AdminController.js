@@ -52,7 +52,7 @@ class AdminController {
           try {
           res.render('pages/product/product_add');
           } catch (error) {
-          res.status(500).json(err);
+          res.render('pages/error/error', {layout: 'sub'})
           }
       }
 
@@ -66,7 +66,7 @@ class AdminController {
             product.save();
             res.redirect('/admin_product');
           } catch (error) {
-            res.status(500).json(err);
+            res.render('pages/error/error', {layout: 'sub'})
           }
       }
 
@@ -87,7 +87,7 @@ class AdminController {
               const message = req.query.message;
               res.render('pages/employee/createEmployee', { message });
           } catch (error) {
-              res.status(500).json(err);
+              res.render('pages/error/error', {layout: 'sub'})
               res.render('pages/employee/createEmployee', { message: error.message });
           }
       }
@@ -97,7 +97,7 @@ class AdminController {
           await Employee.deleteOne({_id: req.params.id})
           res.redirect('/admin_employee');
         }catch{
-          res.status(500).json(err);
+          res.render('pages/error/error', {layout: 'sub'})
         }
       }
 
@@ -105,7 +105,7 @@ class AdminController {
           try {
           res.render('pages/customer/customer_add');
           } catch (error) {
-          res.status(500).json(err);
+          res.render('pages/error/error', {layout: 'sub'})
           }
       }
 
@@ -116,7 +116,7 @@ class AdminController {
               customer.save();
               res.redirect('/admin_customer');
             } catch (error) {
-              res.status(500).json(err);
+              res.render('pages/error/error', {layout: 'sub'})
             }
       }
       // storeEmployee(req, res) {
@@ -160,7 +160,7 @@ class AdminController {
           const employee = await Employee.findById(req.params.id)
           res.render('pages/employee/employee_update', {employee: singleToObject(employee)});
         }catch {
-          res.status(500).json(err);
+          res.render('pages/error/error', {layout: 'sub'})
         }
       }  
 
@@ -176,7 +176,7 @@ class AdminController {
           await Employee.updateOne({ _id: req.params.id }, req.body)
           res.redirect('/admin_employee');
           }catch{
-            res.status(500).json(err);
+            res.render('pages/error/error', {layout: 'sub'})
           }
         }
 
@@ -185,7 +185,7 @@ class AdminController {
           const product = await Product.findById(req.params.id)
           res.render('pages/product/product_update', {product: singleToObject(product)});
         }catch {
-          res.status(500).json(err);
+          res.render('pages/error/error', {layout: 'sub'})
         }
       }  
 
@@ -200,7 +200,7 @@ class AdminController {
           await Product.updateOne({ _id: req.params.id }, req.body)
           res.redirect('/admin_product');
         }catch{
-          res.status(500).json(err);
+          res.render('pages/error/error', {layout: 'sub'})
         }
       }
       
@@ -209,7 +209,7 @@ class AdminController {
           await Product.deleteOne({_id: req.params.id})
           res.redirect('/admin_product');
         }catch{
-          res.status(500).json(err);
+          res.render('pages/error/error', {layout: 'sub'})
         }
       } 
 
@@ -218,7 +218,7 @@ class AdminController {
           const invoice = await Invoice.findById(req.params.id)
           res.render('pages/invoice/invoice_update', {product: singleToObject(invoice)});
         }catch {
-          res.status(500).json(err);
+          res.render('pages/error/error', {layout: 'sub'})
         }
       }  
 
@@ -230,7 +230,7 @@ class AdminController {
           await Invoice.updateOne({ _id: req.params.id }, req.body)
           res.redirect('/admin_invoice');
         }catch{
-          res.status(500).json(err);
+          res.render('pages/error/error', {layout: 'sub'})
         }
       }
       
@@ -239,7 +239,7 @@ class AdminController {
           await Invoice.deleteOne({_id: req.params.id})
           res.redirect('/admin_invoice');
         }catch{
-          res.status(500).json(err);
+          res.render('pages/error/error', {layout: 'sub'})
         }
       } 
       async getDetailCustomer(req, res) {
@@ -267,7 +267,7 @@ class AdminController {
           await Customer.updateOne({ _id: req.params.id }, req.body)
           res.redirect('/admin_customer');
         }catch{
-          res.status(500).json(err);
+          res.render('pages/error/error', {layout: 'sub'})
         }
       }
       
@@ -276,7 +276,7 @@ class AdminController {
           await Customer.deleteOne({_id: req.params.id})
           res.redirect('/admin_customer');
         }catch{
-          res.status(500).json(err);
+          res.render('pages/error/error', {layout: 'sub'})
         }
       } 
 

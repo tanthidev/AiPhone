@@ -21,7 +21,7 @@ function route(app) {
     app.use('/productlist',checkLogin, productsRouter);
     app.use('/pos', checkLogin, posRouter);
     app.use('/login' ,loginRouter);
-    app.use('/invoice', checkLogin,checkAdmin, invoiceRouter);
+    app.use('/invoice', checkLogin, invoiceRouter);
     app.use('/customer', checkLogin, customerRouter);
     app.use('/employee',checkLogin, checkAdmin, employeeRouter);
     app.use('/report',checkLogin, reportRouter);
