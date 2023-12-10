@@ -5,29 +5,29 @@
         <div>
             <table class="w-full text-base" id="menu_iphone">
                 <tr class="grid grid-cols-4">
-                    <td class="hover:bg-gray-400 hover:text-white cursor-pointer">
-                        Iphone 15 Series
+                    <td class="hover:bg-gray-400 hover:text-white cursor-pointer" onclick="loadProducts(this)">
+                        Iphone 15
                     </td>
-                    <td class="hover:bg-gray-400 hover:text-white cursor-pointer">
-                        Iphone 14 Series
+                    <td class="hover:bg-gray-400 hover:text-white cursor-pointer" onclick="loadProducts(this)">
+                        Iphone 14
                     </td>
-                    <td class="hover:bg-gray-400 hover:text-white cursor-pointer">
-                        Iphone 13 Series
+                    <td class="hover:bg-gray-400 hover:text-white cursor-pointer" onclick="loadProducts(this)">
+                        Iphone 13
                     </td>
-                    <td class="hover:bg-gray-400 hover:text-white cursor-pointer">
-                        Iphone 12 Series
+                    <td class="hover:bg-gray-400 hover:text-white cursor-pointer" onclick="loadProducts(this)">
+                        Iphone 12
                     </td>
-                    <td class="hover:bg-gray-400 hover:text-white cursor-pointer">
-                        Iphone 11 Series
+                    <td class="hover:bg-gray-400 hover:text-white cursor-pointer" onclick="loadProducts(this)">
+                        Iphone 11
                     </td>
-                    <td class="hover:bg-gray-400 hover:text-white cursor-pointer">
-                        Iphone XS | XSMax
+                    <td class="hover:bg-gray-400 hover:text-white cursor-pointer" onclick="loadProducts(this)">
+                        Iphone X
                     </td>
-                    <td class="hover:bg-gray-400 hover:text-white cursor-pointer">
-                        Iphone X | XR
+                    <td class="hover:bg-gray-400 hover:text-white cursor-pointer" onclick="loadProducts(this)">
+                        Iphone 8
                     </td>
-                    <td class="hover:bg-gray-400 hover:text-white cursor-pointer">
-                        Iphone 7 | 8 Series
+                    <td class="hover:bg-gray-400 hover:text-white cursor-pointer" onclick="loadProducts(this)">
+                        Iphone 7
                     </td>
                 </tr>
             </table>
@@ -35,30 +35,14 @@
         <br>
         {{!-- Items --}}
         <div class="overflow-scroll " >
-            <div class="grid grid-cols-4 gap-3 ">
+            <div id="productDiv" class="grid grid-cols-4 gap-3 ">
                 {{#each data}}
                     {{#each this.retail_price}}
                         <div class="hover:bg-gray-200 hover:text-black cursor-pointer relative flex justify-center text-left  p-2 border rounded-lg">
                             <div onclick="addToOrder('{{../this.product_name}}', '{{this}}','{{../this.link_image}}','{{this}}','{{@index}}','{{@key}}')">
-                                <img src={{../this.link_image}} alt="image" style="height: 220px; object-fit: cover;"/>
+                                <img src="/uploads/{{../this.link_image}}" alt="image" style="height: 220px; object-fit: cover;"/>
                                 <h2 class="font-semibold text-xl py-3">{{../this.product_name}} {{@key}}</h2>
                                 <p class="py-2 font-semibold text-xl text-green-600">{{this}}$</p>
-                                {{!-- <div class="flex">
-                                    <div>
-                                        <p class="font-bold">Memory</p>
-                                        {{#each this.retail_price}}
-                                            <input type="radio" id="{{this}}" name="memory" value="HTML">
-                                            <label for="{{this}}">{{@key}}</label><br>
-                                        {{/each}}
-                                    </div>
-                                    <div class="pl-8">
-                                        <p class="font-bold">Color</p>
-                                        {{#each this.colors}}
-                                            <input type="radio" id="{{this}}" name="color" value="HTML">
-                                            <label for="{{this}}">{{this}}</label><br>
-                                        {{/each}}
-                                    </div>
-                                </div> --}}
                             </div>
                         </div>
                     {{/each}}
@@ -96,14 +80,22 @@
             </form>
             <div class="my-2 pb-3 border-b-2 flex justify-between">
                 <div class="flex gap-2">
+                    <input 
+                    id="barcodeInput"
+                    type="text" 
+                    class="bg-gray-100 h-10 w-full min-w-fit border-none ml-2 outline-none text-base px-5 rounded-lg" 
+                    placeholder="Choose by barcode..."/>
 
                     {{!-- Barcode --}}
-                    <button class="bg-gray-200 text-black py-2 px-4 rounded flex items-center hover:bg-gray-300">
+                    <button id="btnBarcode"
+                            class="bg-gray-200 text-black py-2 px-4 rounded flex items-center hover:bg-gray-300"
+                            onclick="chooseProductByBarcode()">
                         <i class="fa-solid fa-barcode"></i>
                     </button>
 
                     {{!-- remove order --}}
-                    <button class="bg-gray-200 text-red-500 py-2 px-4 rounded flex items-center hover:bg-gray-300" onclick="removeAllOrders()">
+                    <button class="bg-gray-200 text-red-500 py-2 px-4 rounded flex items-center hover:bg-gray-300" 
+                            onclick="removeAllOrders()">
                         <i class="fa-regular fa-trash-can"></i>
                     </button>
                 </div>
@@ -136,7 +128,8 @@
                     <div class="flex flex-cols justify-center">
                         <input class="hidden" type="radio" id="cash" name="methodpayment" value="cash">
                         <label for="cash">
-                            <button id="payButton" class="h-14 flex flex-col justify-center text-black py-2 px-5 hover:bg-green-500 hover:text-black bg-green-200 rounded-lg">
+                            <button id="payButton" 
+                                    class="h-14 flex flex-col justify-center text-black py-2 px-5 hover:bg-green-500 hover:text-black bg-green-200 rounded-lg">
                                 <img class="h-6 mt-1" src="/images/cash.png">
                                 <span  class="text">Cash</span >
                             </button>
@@ -147,7 +140,7 @@
                     <div class="flex flex-cols justify-center">
                         <input class="hidden" type="radio" id="debit" name="methodpayment" value="debit">
                         <label for="debit">
-                            <div id="img-area" class="h-14 flex flex-col justify-between text-black py-2 px-5 hover:bg-green-500 hover:text-black bg-green-200 rounded-lg">
+                            <div id="img-area" class="h-14 flex flex-col justify-between text-black py-2 px-5 bg-gray-200 rounded-lg">
                                 <img class="h-6" src="/images/debit.png">
                                 <button class="text">Debit</button>
                             </div>
@@ -206,7 +199,7 @@
                         </div>
                         <!-- image -->
                         <div>
-                            <img class="h-10" src="${image}" />
+                            <img class="h-10" src="/uploads/${image}" />
                         </div>
                         <!-- Name -->
                         <span>${productName} ${memory}</span>
@@ -296,6 +289,23 @@
             orderListContainer.innerHTML = '';
             calculateTotalPrice();
         }
+        function chooseProductByBarcode() {
+            const barcode = document.getElementById('barcodeInput').value;
+            console.log(barcode);
+            $.ajax({
+                type: 'GET',
+                url: '/productlist/product_search',
+                data: { barcode: barcode },
+                success: function (data) {
+                    console.log("Received data:", data);
+                    // Call addToOrder with the retrieved data
+                    addToOrder(data.data.product_name, '850', data.data.link_image, data.barcode, data.index, '64GB');
+                },
+                error: function (error) {
+                    console.log('Error fetching product details');
+                }
+            });
+        }
         $(document).ready(function () {
             // Function to update the table with data
             function fillFormInputs(data) {
@@ -374,4 +384,155 @@
             // Navigate to the cashPayment page
             window.location.href = url;
         });
+
+
+        function loadProducts(clickedElement) {
+            // Retrieve the series text from the clicked element
+            var series = clickedElement.textContent.trim();
+            console.log(series);
+            
+            // Update the product grid with the new data
+            var productDiv = document.querySelector('#productDiv');
+            productDiv.innerHTML = '';
+            
+            if(series == 'Iphone 15'){
+                var html = `
+                    {{#each data}}
+                        {{#if (eq this.series 'Iphone 15')}}
+                            {{#each this.retail_price}}
+                                    <div class="hover:bg-gray-200 hover:text-black cursor-pointer relative flex justify-center text-left p-2 border rounded-lg">
+                                        <div onclick="addToOrder('{{../this.product_name}}', '{{this}}','{{../this.link_image}}','{{this}}','{{@index}}','{{@key}}')">
+                                            <img src="/uploads/{{../this.link_image}}" alt="image" style="height: 220px; object-fit: cover;"/>
+                                            <h2 class="font-semibold text-xl py-3">{{../this.product_name}} {{@key}}</h2>
+                                            <p class="py-2 font-semibold text-xl text-green-600">{{this}}$</p>
+                                        </div>
+                                    </div>
+                            {{/each}}
+                        {{/if}}
+                    {{/each}}
+                `;
+            }
+            if(series == 'Iphone 14'){
+                var html = `
+                    {{#each data}}
+                        {{#if (eq this.series 'Iphone 14')}}
+                            {{#each this.retail_price}}
+                                    <div class="hover:bg-gray-200 hover:text-black cursor-pointer relative flex justify-center text-left p-2 border rounded-lg">
+                                        <div onclick="addToOrder('{{../this.product_name}}', '{{this}}','{{../this.link_image}}','{{this}}','{{@index}}','{{@key}}')">
+                                            <img src="/uploads/{{../this.link_image}}" alt="image" style="height: 220px; object-fit: cover;"/>
+                                            <h2 class="font-semibold text-xl py-3">{{../this.product_name}} {{@key}}</h2>
+                                            <p class="py-2 font-semibold text-xl text-green-600">{{this}}$</p>
+                                        </div>
+                                    </div>
+                            {{/each}}
+                        {{/if}}
+                    {{/each}}
+                `;
+            }
+            if(series == 'Iphone 13'){
+                var html = `
+                    {{#each data}}
+                        {{#if (eq this.series 'Iphone 13')}}
+                            {{#each this.retail_price}}
+                                    <div class="hover:bg-gray-200 hover:text-black cursor-pointer relative flex justify-center text-left p-2 border rounded-lg">
+                                        <div onclick="addToOrder('{{../this.product_name}}', '{{this}}','{{../this.link_image}}','{{this}}','{{@index}}','{{@key}}')">
+                                            <img src="/uploads/{{../this.link_image}}" alt="image" style="height: 220px; object-fit: cover;"/>
+                                            <h2 class="font-semibold text-xl py-3">{{../this.product_name}} {{@key}}</h2>
+                                            <p class="py-2 font-semibold text-xl text-green-600">{{this}}$</p>
+                                        </div>
+                                    </div>
+                            {{/each}}
+                        {{/if}}
+                    {{/each}}
+                `;
+            }
+            if(series == 'Iphone 12'){
+                var html = `
+                    {{#each data}}
+                        {{#if (eq this.series 'Iphone 12')}}
+                            {{#each this.retail_price}}
+                                    <div class="hover:bg-gray-200 hover:text-black cursor-pointer relative flex justify-center text-left p-2 border rounded-lg">
+                                        <div onclick="addToOrder('{{../this.product_name}}', '{{this}}','{{../this.link_image}}','{{this}}','{{@index}}','{{@key}}')">
+                                            <img src="/uploads/{{../this.link_image}}" alt="image" style="height: 220px; object-fit: cover;"/>
+                                            <h2 class="font-semibold text-xl py-3">{{../this.product_name}} {{@key}}</h2>
+                                            <p class="py-2 font-semibold text-xl text-green-600">{{this}}$</p>
+                                        </div>
+                                    </div>
+                            {{/each}}
+                        {{/if}}
+                    {{/each}}
+                `;
+            }
+            if(series == 'Iphone 11'){
+                var html = `
+                    {{#each data}}
+                        {{#if (eq this.series 'Iphone 11')}}
+                            {{#each this.retail_price}}
+                                    <div class="hover:bg-gray-200 hover:text-black cursor-pointer relative flex justify-center text-left p-2 border rounded-lg">
+                                        <div onclick="addToOrder('{{../this.product_name}}', '{{this}}','{{../this.link_image}}','{{this}}','{{@index}}','{{@key}}')">
+                                            <img src="/uploads/{{../this.link_image}}" alt="image" style="height: 220px; object-fit: cover;"/>
+                                            <h2 class="font-semibold text-xl py-3">{{../this.product_name}} {{@key}}</h2>
+                                            <p class="py-2 font-semibold text-xl text-green-600">{{this}}$</p>
+                                        </div>
+                                    </div>
+                            {{/each}}
+                        {{/if}}
+                    {{/each}}
+                `;
+            }
+            if(series == 'Iphone X'){
+                var html = `
+                    {{#each data}}
+                        {{#if (eq this.series 'Iphone X')}}
+                            {{#each this.retail_price}}
+                                    <div class="hover:bg-gray-200 hover:text-black cursor-pointer relative flex justify-center text-left p-2 border rounded-lg">
+                                        <div onclick="addToOrder('{{../this.product_name}}', '{{this}}','{{../this.link_image}}','{{this}}','{{@index}}','{{@key}}')">
+                                            <img src="/uploads/{{../this.link_image}}" alt="image" style="height: 220px; object-fit: cover;"/>
+                                            <h2 class="font-semibold text-xl py-3">{{../this.product_name}} {{@key}}</h2>
+                                            <p class="py-2 font-semibold text-xl text-green-600">{{this}}$</p>
+                                        </div>
+                                    </div>
+                            {{/each}}
+                        {{/if}}
+                    {{/each}}
+                `;
+            }
+            if(series == 'Iphone 8'){
+                var html = `
+                    {{#each data}}
+                        {{#if (eq this.series 'Iphone 8')}}
+                            {{#each this.retail_price}}
+                                    <div class="hover:bg-gray-200 hover:text-black cursor-pointer relative flex justify-center text-left p-2 border rounded-lg">
+                                        <div onclick="addToOrder('{{../this.product_name}}', '{{this}}','{{../this.link_image}}','{{this}}','{{@index}}','{{@key}}')">
+                                            <img src="/uploads/{{../this.link_image}}" alt="image" style="height: 220px; object-fit: cover;"/>
+                                            <h2 class="font-semibold text-xl py-3">{{../this.product_name}} {{@key}}</h2>
+                                            <p class="py-2 font-semibold text-xl text-green-600">{{this}}$</p>
+                                        </div>
+                                    </div>
+                            {{/each}}
+                        {{/if}}
+                    {{/each}}
+                `;
+            }
+            if(series == 'Iphone 7'){
+                var html = `
+                    {{#each data}}
+                        {{#if (eq this.series 'Iphone 7')}}
+                            {{#each this.retail_price}}
+                                    <div class="hover:bg-gray-200 hover:text-black cursor-pointer relative flex justify-center text-left p-2 border rounded-lg">
+                                        <div onclick="addToOrder('{{../this.product_name}}', '{{this}}','{{../this.link_image}}','{{this}}','{{@index}}','{{@key}}')">
+                                            <img src="/uploads/{{../this.link_image}}" alt="image" style="height: 220px; object-fit: cover;"/>
+                                            <h2 class="font-semibold text-xl py-3">{{../this.product_name}} {{@key}}</h2>
+                                            <p class="py-2 font-semibold text-xl text-green-600">{{this}}$</p>
+                                        </div>
+                                    </div>
+                            {{/each}}
+                        {{/if}}
+                    {{/each}}
+                `;
+            }
+
+            productDiv.innerHTML = html;
+        }
+
 </script>

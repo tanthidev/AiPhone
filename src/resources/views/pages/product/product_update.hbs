@@ -1,7 +1,7 @@
 <h1 class="font-bold text-2xl text-center">Add a Product</h1>
 <div class="">
             <div class="m-5">
-            <form method="post" action="/admin_product/product_updateOne_{{product._id}}">
+            <form method="post" action="/admin_product/product_updateOne_{{product._id}}" enctype="multipart/form-data">
             <div class="form-group bg-white m-5 p-3 rounded-lg">
             <label for="product_name" class="font-bold">Name: </label>
             <input type="input" class="form-control" value="{{product.product_name}}" id="product_name" name="product_name" placeholder="Name">
@@ -42,7 +42,10 @@
                     <input type="text" id="configuration{{@key}}" value="{{this}}" name="configuration[{{@key}}]" placeholder="Text">
                     </div>
             {{/each}}
-            
+            <div class="form-group bg-white m-5 p-3 rounded-lg" placeholder="Text">
+            <label for="link_image">Image</label>
+            <input type="file" class="form-control" id="link_image" name="link_image" placeholder="Image">
+            </div>
             <button type="submit" class="btn btn-primary w-full h-18 hover:bg-green-500 hover:text-black bg-green-200 rounded-lg text-xl">Submit</button>
             </form>
             </div>

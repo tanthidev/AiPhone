@@ -11,5 +11,16 @@ class ProductController {
                 res.send('Error');
             }
         }
+
+        async searchProduct(req, res) {
+            try {
+                const product = await Product.findOne({ barcode: req.query.barcode });
+                console.log(req.query.barcode);
+                console.log(product);
+                res.status(200).json({ data: product });
+            } catch (error) {
+                res.send("Render Admin Error");
+            }
+        } 
     }
 module.exports = new ProductController();
