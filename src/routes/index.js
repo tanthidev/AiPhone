@@ -27,7 +27,7 @@ function route(app) {
     app.use('/report',checkLogin, reportRouter);
     app.use('/admin_employee',checkLogin, checkAdmin, adminEmployeeRouter);
     app.use('/admin_customer',checkLogin, checkAdmin, adminCustomerRouter);
-    app.use('/admin_invoice',checkLogin, checkAdmin, adminInvoiceRouter);
+    app.use('/admin_invoice',checkLogin, adminInvoiceRouter);
     app.use('/admin_product',checkLogin, checkAdmin, adminProductRouter);
     app.get('/logout', logout);
     app.use('/',checkLogin, homeRouter);

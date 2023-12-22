@@ -1,0 +1,162 @@
+<div class="flex">
+            <div class="w-2/3 mx-5 bg-white rounded-lg overflow-scroll">
+            <form method="post" action="/admin_invoice/invoice_store">
+                        <table class="min-w-full bg-white border border-gray-300 rounded-md">
+                        <thead>
+                        <tr class="bg-gray-100">
+                                    <th class="py-2 px-4 border-b">Name</th>
+                                    <th class="py-2 px-4 border-b">Memory</th>
+                                    <th class="py-2 px-4 border-b">Color</th>
+                                    <th class="py-2 px-4 border-b">Price</th>
+                                    <th class="py-2 px-4 border-b">Quantity</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <!-- Product Row (Replace this block for each product) -->
+                        {{#each orders}}
+                        <tr>
+                                    <td class="py-2 px-4 border-b">{{this.productName}}</td>
+                                    <td class="py-2 px-4 border-b">{{this.memory}}</td>
+                                    <td class="py-2 px-4 border-b">{{this.color}}</td>
+                                    <td class="py-2 px-4 border-b">{{this.price}}</td>
+                                    <td class="py-2 px-4 border-b">{{this.quantity}}</td>
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                        </table>
+            </div>
+            <div class="w-1/3 mx-5 bg-white rounded-lg">
+                        <p class="p-3" id="customer_name">Name:
+                                    {{#each orders}}
+                                    {{#if this.customer_name}}
+                                    {{this.customer_name}}
+                                    {{/if}}
+                                    {{/each}}
+                        </p>
+                        <p class="p-3">Phone:
+                                    {{#each orders}}
+                                    {{#if this.customer_phone}}
+                                    {{this.customer_phone}}
+                                    {{/if}}
+                                    {{/each}}
+                        </p>
+                        <p class="p-3 ">Address:
+                                    {{#each orders}}
+                                    {{#if this.customer_email}}
+                                    {{this.customer_email}}
+                                    {{/if}}
+                                    {{/each}}
+                        </p>
+
+                        <p class="p-3 font-bold">Total Price</p>
+                        <div class="mb-5 flex">
+                            <span class="px-3 py-1 text-xl" id="total_USD">
+                                        {{#each orders}}
+                                        {{#if this.totalPrice}}
+                                        {{this.totalPrice}}
+                                        {{/if}}
+                                        {{/each}}
+                            </span>
+
+                            <div id="btn_convert" class="inline-block px-2 py-2 text-sm text-green-500 font-semibold border-2 border-green-500 rounded-md hover:bg-green-700 hover:text-white hover:border-green-700 focus:outline-none focus:ring focus:ring-green-100">
+                                    <span>USD</span>
+                                    <i class="fa-solid fa-arrow-right-arrow-left mx-1"></i>
+                                    <span>ETH</span>
+                            </div>
+
+                            <input name="total_ETH" id="total_ETH" class="bg-transparent w-32 ml-2 text-xl" type="text" readonly required>
+
+                        </div>
+
+                        {{!-- Information Wallet --}}
+                        <div id="addressWallet" class=" justify-between px-5 hidden ">
+                            <span class="flex items-center">Address Wallet:</span>
+                            <input name="addressWallet"  type="text" class="bg-white border border-gray-300 p-2 mt-2" autocomplete="off" required>
+                        </div>
+                        <div id="pin" class=" justify-between px-5 hidden ">
+                            <span class="flex items-center">PIN:</span>
+                            <input name="pin"  type="password" class=" bg-white border border-gray-300 p-2 mt-2" autocomplete="off" required>
+                        </div>
+
+                        {{!-- End Information Wallet --}}
+                        {{#each orders}}
+                                    <input type="hidden" name="product_name[]" value="{{this.productName}}">
+                        {{/each}}
+                        <input type="hidden" name="customer_name" value='{{#each orders}}{{#if this.customer_name}}{{this.customer_name}}{{/if}}{{/each}}'>
+                        <input type="hidden" name="customer_phone" value='{{#each orders}}{{#if this.customer_phone}}{{this.customer_phone}}{{/if}}{{/each}}'>
+                        <input type="hidden" name="customer_address" value='{{#each orders}}{{#if this.customer_email}}{{this.customer_email}}{{/if}}{{/each}}'>
+                        <input type="hidden" name="total_price" value='{{#each orders}}{{#if this.totalPrice}}{{this.totalPrice}}{{/if}}{{/each}}'>
+                        <input type="hidden" name="payment_method" value="ethereum">
+
+
+                        <button type="submit" id="submitBtn" class="w-full mt-5 text-black py-2 px-3 hover:bg-green-500 hover:text-black bg-green-200 rounded-lg">Pay</button>
+            </form>
+            </div>
+</div>
+
+<div id="loadingSpinner" class="hidden fixed top-0 left-0 w-full h-full bg-black opacity-50 justify-center items-center">
+  <div class="spinner-border text-white" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+
+    const btn_convert = document.getElementById('btn_convert')
+    
+    function calculateTotalPrice(totalPrice, recievedValue) {
+        let exchange = 0;
+
+        const recieveAmount = parseFloat(recievedValue);
+        const totalPriceAmount = parseFloat(totalPrice);
+
+        if (!isNaN(recieveAmount) && !isNaN(totalPriceAmount)) {
+            exchange = recieveAmount - totalPriceAmount;
+        }
+
+        // Update the content of the element with id "exchange"
+        const exchangeElement = document.getElementById('exchange');
+        exchangeElement.value  = exchange.toFixed(2) + "$"; 
+    }
+    
+    //Convert USD to ETH
+
+    btn_convert.addEventListener('click', async function() {
+        //API
+        const apiEndpoint = 'https://api.pro.coinbase.com';
+        const convertEndpoint = '/products/eth-usd/ticker';
+
+        const total_ETH = document.getElementById('total_ETH')
+        const USD = parseFloat(document.getElementById('total_USD').innerHTML);
+
+        const addressWallet = document.getElementById('addressWallet')
+        const pin = document.getElementById('pin')
+
+        try{
+            const response = await axios.get(apiEndpoint + convertEndpoint);
+            const ethPrice = parseFloat(response.data.price);
+            const ETH = USD / ethPrice;
+            total_ETH.value = ETH.toFixed(3) + ' ETH'
+
+            addressWallet.classList.remove('hidden');
+            addressWallet.classList.add('flex');
+            pin.classList.remove('hidden');
+            pin.classList.add('flex');
+        } catch (error) {
+            console.log(error)
+        }
+
+        
+    });
+
+    const btn_submit = document.getElementById('submitBtn')
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    btn_submit.addEventListener('click', async function() {
+         // Show loading spinner
+        loadingSpinner.classList.remove('hidden');
+        loadingSpinner.classList.add('flex');
+    })
+</script>
+

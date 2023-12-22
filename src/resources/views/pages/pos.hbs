@@ -140,10 +140,15 @@
                     <div class="flex flex-cols justify-center">
                         <input class="hidden" type="radio" id="debit" name="methodpayment" value="debit">
                         <label for="debit">
-                            <div id="img-area" class="h-14 flex flex-col justify-between text-black py-2 px-5 bg-gray-200 rounded-lg">
+                            {{!-- <div id="img-area" class="h-14 flex flex-col justify-between text-black py-2 px-5 bg-gray-200 rounded-lg">
                                 <img class="h-6" src="/images/debit.png">
                                 <button class="text">Debit</button>
-                            </div>
+                            </div> --}}
+                            <button id="payButtonETH" 
+                                    class="h-14 flex flex-col justify-center text-black py-2 px-5 hover:bg-green-500 hover:text-black bg-green-200 rounded-lg">
+                                <img class="h-6 mt-1" src="/images/debit.png">
+                                <span  class="text">Debit</span >
+                            </button>
                         </label>
                     </div>
                 </div>
@@ -339,7 +344,7 @@
             });
         });
 
-            // Add an event listener for the Pay button
+        // Add an event listener for the Pay button
         document.getElementById('payButton').addEventListener('click', function () {
             // Get the order list container
             const orderListContainer = document.querySelector('.order-list');
@@ -380,6 +385,53 @@
             });
             // Construct the URL with order details
             const url = `/pos/cashPayment?orders=${encodeURIComponent(JSON.stringify(orders))}`;
+
+            // Navigate to the cashPayment page
+            window.location.href = url;
+        });
+
+
+        //Add avent listener for the pay ETH
+        document.getElementById('payButtonETH').addEventListener('click', function () {
+            // Get the order list container
+            const orderListContainer = document.querySelector('.order-list');
+
+            // Get all order items
+            const orderItems = orderListContainer.querySelectorAll('.order-list > div');
+
+            // Create an array to store order details
+            const orders = [];
+            const totalPrice = document.getElementById('totalPrice').textContent;
+            const customer_name = document.getElementById('customer_name').value;
+            const customer_phone = document.getElementById('customer_phone').value;
+            const customer_email = document.getElementById('customer_email').value;
+
+            // Iterate through each order item
+            let i = 0;
+            orderItems.forEach((orderItem) => {
+                const productName = orderItem.getAttribute('data-product-name');
+                const memory = orderItem.getAttribute('memory');
+                const price = orderItem.getAttribute('price');
+                const quantity = orderItem.querySelector('.quantity-input').value;
+                const color = orderItem.querySelector(`input[name='corlor${i}']:checked`)?.value;
+                i = i+1;
+                // Add order details to the array
+                orders.push({
+                    productName: productName,
+                    memory: memory,
+                    quantity: quantity,
+                    color: color,
+                    price: price
+                });
+            });
+            orders.push({
+                totalPrice: totalPrice,
+                customer_name: customer_name,
+                customer_phone: customer_phone,
+                customer_email: customer_email
+            });
+            // Construct the URL with order details
+            const url = `/pos/payWithETH?orders=${encodeURIComponent(JSON.stringify(orders))}`;
 
             // Navigate to the cashPayment page
             window.location.href = url;

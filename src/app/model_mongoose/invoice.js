@@ -9,6 +9,8 @@ const invoiceSchema = new Schema({
             type: [String],
             default: []
           },
+  payment_method: String,
+  total_ETH: String,
   total_price: String,
   recieved: String,
   exchange: String,
