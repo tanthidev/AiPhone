@@ -30,15 +30,15 @@ async function makePayment(address, privateKey, amount) {
 
         const signedTransaction = await web3.eth.accounts.signTransaction(transaction, privateKey);
         const receipt = await web3.eth.sendSignedTransaction(signedTransaction.rawTransaction);
-        // Check transaction status and return appropriate information
+        // Kiểm tra trạng thái giao dịch và trả lại thông tin thích hợp
         if (receipt.status) {
           return { success: true, transactionHash: receipt.transactionHash };
         } else {
-          // Handle unsuccessful transaction
+          // Xử lý giao dịch không thành công
           return { success: false, error: 'Transaction failed' };
         }
   } catch (error) {
-      // Log or handle errors appropriately
+      // Ghi hoặc xử lý lỗi
       return { success: false, error: error.message };
   }
 }

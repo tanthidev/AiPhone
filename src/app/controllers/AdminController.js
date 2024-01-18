@@ -76,9 +76,7 @@ class AdminController {
               const addressWallet = req.body.addressWallet;
               const pin = req.body.pin;
               const total_ETH = parseFloat(req.body.total_ETH).toString();
-              const address = '0x159d924C54aD0ed3a7c252D441b4E8C146237FC7'
-              const privateKey = 'd752c386c88b5bbb08d50fd9a447237c943909364206dbb362503d6d9a80e72f'
-              const amount = '0.01'
+              
               makePayment(addressWallet, pin, total_ETH)
                 .then(result => {
                   if(result.success){
