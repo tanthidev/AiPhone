@@ -28,7 +28,9 @@ async function makePayment(address, privateKey, amount) {
         
         // Theo dõi sự kiện PaymentReceived
 
+        //Gửi giao dịch
         const signedTransaction = await web3.eth.accounts.signTransaction(transaction, privateKey);
+
         const receipt = await web3.eth.sendSignedTransaction(signedTransaction.rawTransaction);
         // Kiểm tra trạng thái giao dịch và trả lại thông tin thích hợp
         if (receipt.status) {

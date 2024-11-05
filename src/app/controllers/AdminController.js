@@ -72,11 +72,14 @@ class AdminController {
       async storeInvoice(req, res) {
         try {
             const invoices = new Invoice(req.body);
+
+            //Thanh toan bang ETH
             if(req.body.payment_method == 'ethereum'){
               const addressWallet = req.body.addressWallet;
               const pin = req.body.pin;
               const total_ETH = parseFloat(req.body.total_ETH).toString();
               
+
               makePayment(addressWallet, pin, total_ETH)
                 .then(result => {
                   if(result.success){
